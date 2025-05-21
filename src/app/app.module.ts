@@ -3,10 +3,16 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CabeceraComponent } from './componentes/container/cabecera/cabecera.component';
+import { InicioComponent } from './componentes/container/inicio/inicio.component';
+import { OperacionesComponent } from './componentes/container/operaciones/operaciones.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CabeceraComponent,
+    InicioComponent,
+    OperacionesComponent
   ],
   imports: [
     BrowserModule,
