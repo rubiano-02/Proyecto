@@ -9,4 +9,11 @@ ng g c componentes/container/operaciones --skip-tests
 
 -------------------------------------------------------
 
+ng g c componentes/container/registrarse --skip-tests
+ng g c componentes/container/iniciar_sesion --skip-tests
+ng g c componentes/container/eleccion --skip-tests
+ng g c componentes/container/principal --skip-tests
+ng g c componentes/container/foro --skip-tests
+ng g c componentes/container/perfil --skip-tests
+ng g c componentes/container/configuracion --skip-tests
 

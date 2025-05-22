@@ -1,0 +1,180 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #f5f4f2;
+}
+
+.contenedor {
+  display: flex;
+  height: 100vh;
+}
+
+/* Barra lateral */
+.sidebar {
+  width: 200px;
+  background-color: #f3f3f3;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 24px;
+  color: #00c2ff;
+  margin-bottom: 30px;
+}
+
+.menu {
+  list-style: none;
+}
+
+.menu li {
+  margin: 20px 0;
+  font-weight: bold;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.menu li.activo {
+  border: 2px solid #00c2ff;
+  border-radius: 8px;
+  padding: 5px;
+  color: #333;
+}
+
+/* Contenido del perfil */
+.perfil-contenido {
+  flex: 1;
+  padding: 40px;
+}
+
+.perfil-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  align-items: center;
+  height: 400px;
+  justify-content: space-between;
+}
+
+.banner {
+  position: absolute;
+  width: 350px;
+  height: 120px;
+  background-color: #fdfbf4;
+  border: 2px solid #ffe985;
+  border-radius: 10px;
+  margin-top: -90px;
+  margin-left: 40px;
+}
+
+.usuario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33%;
+  position: relative;
+  z-index: 1;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid #cbd2e0;
+  margin-top: 30px;
+}
+
+.usuario-id {
+  color: #777;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.fecha {
+  color: #aaa;
+  font-size: 13px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.libro-icono {
+  font-size: 30px;
+  color: #054c4f;
+}
+
+/* Línea divisoria */
+.linea {
+  width: 1px;
+  background-color: #ccc;
+  height: 100%;
+}
+
+/* Logros */
+.logros {
+  width: 33%;
+  padding: 10px 20px;
+}
+
+.logros h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.logro {
+  background: #fff8e7;
+  border: 1px solid #ffd981;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: #555;
+  position: relative;
+}
+
+.logro i {
+  margin-right: 8px;
+}
+
+.barra {
+  background: #eee;
+  height: 6px;
+  border-radius: 4px;
+  margin: 6px 0;
+}
+
+.progreso {
+  background: #f00;
+  height: 6px;
+  border-radius: 4px;
+}
+
+.progreso.azul {
+  background: #00bfff;
+}
+
+.progreso.naranja {
+  background: orange;
+}
+
+.logro span {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-weight: bold;
+}
+
+/* Colores */
+.rojo { color: red; }
+.azul { color: #00bfff; }
+.naranja { color: orange; }

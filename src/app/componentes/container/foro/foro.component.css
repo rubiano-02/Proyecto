@@ -1,0 +1,317 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f6f6f6;
+  padding-top: 60px;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo-header {
+  height: 40px;
+  margin: 0 10px;
+}
+
+/* Botón Hamburguesa */
+.menu-toggle {
+  display: none;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+  color: #333;
+  padding: 5px;
+}
+
+/* Sidebar */
+/* Sidebar - Versión corregida */
+.sidebar {
+  width: 240px; /* Ancho original que tenías */
+  background-color: #fff;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  height: calc(100vh - 60px);
+  transition: transform 0.3s ease;
+  z-index: 900;
+  padding: 20px 0;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  transform: translateX(-100%);
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+/* Contenido principal - Ajuste de margen */
+.contenido {
+  flex: 1;
+  padding: 20px;
+  margin-left: 0; /* Inicialmente sin margen */
+  transition: margin-left 0.3s ease;
+}
+
+/* Cuando el menú está activo en desktop */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+  
+  .contenido {
+    margin-left: 240px; /* Igual al ancho del menú */
+  }
+}
+
+/* === ANIMACIONES DEL MENÚ (sin cambiar el ancho) === */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px; /* Un poco menos de padding */
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.menu-item:hover {
+  background-color: #f0f0f0;
+  transform: translateX(5px); /* Menos desplazamiento */
+  border-left: 4px solid #00B7FF;
+}
+
+.menu-item.activo {
+  background-color: #e6f7ff;
+  border-left: 4px solid #00B7FF;
+}
+
+.menu-item img {
+  width: 32px; /* Tamaño original */
+  height: 32px;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover img {
+  transform: scale(1.1); /* Animación más sutil */
+}
+
+.menu-item span {
+  font-size: 20px; /* Tamaño original */
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* Contenido Foro */
+.foro-contenido {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  padding: 20px;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+.compartir-experiencia,
+.pregunta,
+.forista-mes {
+  background-color: #fff;
+  border: 3px solid #fddc57;
+  border-radius: 15px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.compartir-experiencia,
+.pregunta {
+  grid-column: 1 / 2;
+}
+
+.forista-mes {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+textarea {
+  resize: none;
+  border: none;
+  outline: none;
+  background-color: #f6f6f6;
+  padding: 15px;
+  font-size: 14px;
+  border-radius: 10px;
+  height: 120px;
+  font-family: 'Poppins', sans-serif;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.enviar-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #00B7FF;
+  border: none;
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.enviar-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+.mensaje {
+  background-color: #fffbe5;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.ranking {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.puesto {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.numero {
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.puesto1 .numero {
+  background-color: #ff5e5e;
+}
+
+.puesto2 .numero {
+  background-color: #ffc057;
+}
+
+.puesto3 .numero {
+  background-color: #5f8bff;
+}
+
+.nombre {
+  flex: 1;
+  height: 32px;
+  background-color: #e6f7ff;
+  border: 2px solid #00B7FF;
+  border-radius: 10px;
+}
+
+/* Responsive: Desktop */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+  
+  .foro-contenido {
+    margin-left: 240px;
+  }
+  
+  .menu-toggle {
+    display: none;
+  }
+}
+
+/* Responsive: Tablet y móvil */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+  
+  .foro-contenido {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+  
+  .compartir-experiencia,
+  .pregunta,
+  .forista-mes {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  
+  textarea {
+    height: 100px;
+  }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .menu-item span {
+    font-size: 16px;
+  }
+  
+  .menu-item img {
+    width: 25px;
+    height: 25px;
+  }
+  
+  h2 {
+    font-size: 18px;
+  }
+  
+  textarea {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+

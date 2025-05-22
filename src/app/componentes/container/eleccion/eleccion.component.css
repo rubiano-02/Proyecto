@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f3f1;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 15px 5%;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+  transform: scale(1.05);
+}
+
+.opciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 20px;
+  gap: 40px;
+}
+
+.titulo {
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #4D4C4C;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.boton {
+  width: 250px;
+  height: 250px;
+  background-color: white;
+  border: 2px solid #D9D9D9;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Animaciones al hover */
+.boton:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+  border-color: #00B7FF;
+}
+
+.boton:hover .imagen-boton {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.boton:hover span {
+  color: #00B7FF;
+}
+
+/* Efecto de onda al hacer clic */
+.boton:active::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle, rgba(0,183,255,0.2) 0%, transparent 70%);
+  animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.imagen-boton {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+  transition: all 0.4s ease;
+}
+
+.boton span {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  color: #4D4C4C;
+  transition: color 0.3s ease;
+}
+
+/* Estilos específicos para cada botón */
+.boton.lectura:hover {
+  border-color: #4CAF50;
+}
+.boton.lectura:hover span {
+  color: #4CAF50;
+}
+
+.boton.matematicas:hover {
+  border-color: #FF9800;
+}
+.boton.matematicas:hover span {
+  color: #FF9800;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .botones {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .boton {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .imagen-boton {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 15px 20px;
+  }
+  
+  .logo img {
+    height: 35px;
+  }
+  
+  .opciones {
+    gap: 30px;
+    padding: 20px 15px;
+  }
+  
+  .boton {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .imagen-boton {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+  }
+  
+  .boton span {
+    font-size: 24px;
+  }
+}

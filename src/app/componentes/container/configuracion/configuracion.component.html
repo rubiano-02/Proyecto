@@ -1,0 +1,96 @@
+<p>configuracion works!</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Más</title>
+  <link rel="stylesheet" href="configuracion.component.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <button class="menu-toggle" id="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="logo-center">
+      <img src="Images/Koala_VSRSF.png" alt="Logo DIJU" class="logo-header">
+      <img src="Images/Diju Logo.png" alt="DIJU" class="logo-header">
+    </div>
+  </header>
+  
+  <div class="container">
+    <aside class="sidebar" id="sidebar">
+      <nav class="menu">
+        <a href="#" class="menu-item">
+          <img src="Images/Casa.jpeg" alt="Inicio">
+          <span>Inicio</span>
+        </a>
+        <a href="#" class="menu-item">
+          <img src="Images/Ejercicios.png" alt="Ejercicios">
+          <span>Ejercicios</span>
+        </a>
+        <a href="#" class="menu-item">
+          <img src="Images/Foro.jpeg" alt="Foro">
+          <span>Foro</span>
+        </a>
+        <a href="#" class="menu-item">
+          <img src="Images/Perfil.jpeg" alt="Perfil">
+          <span>Perfil</span>
+        </a>
+        <a href="#" class="menu-item active">
+          <img src="Images/Mas.jpeg" alt="Más">
+          <span>Más</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="contenido">
+      <div class="tarjeta-opciones">
+        <a href="#" class="opcion configuracion">
+          <h3>CONFIGURACIÓN</h3>
+          <img src="Images/Configuración.png" alt="Configuración">
+        </a>
+        <a href="#" class="opcion cerrar-sesion">
+          <h3>CERRAR SESIÓN</h3>
+          <img src="Images/Cerrar sesión.png" alt="Cerrar sesión">
+        </a>
+        <a href="#" class="opcion ayuda">
+          <h3>AYUDA</h3>
+          <img src="Images/Ayuda.png" alt="Ayuda">
+        </a>
+        <a href="#" class="opcion calificanos">
+          <h3>CALIFÍCANOS</h3>
+          <img src="Images/Calificanos.png" alt="Califícanos">
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.getElementById('menu-toggle');
+      const sidebar = document.getElementById('sidebar');
+      
+      // Solo activar el toggle en móviles
+      function updateMenu() {
+        if (window.innerWidth <= 992) {
+          menuToggle.addEventListener('click', toggleMenu);
+        } else {
+          menuToggle.removeEventListener('click', toggleMenu);
+          sidebar.classList.remove('active');
+        }
+      }
+      
+      function toggleMenu() {
+        sidebar.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+      }
+      
+      // Ejecutar al cargar y al cambiar tamaño
+      updateMenu();
+      window.addEventListener('resize', updateMenu);
+    });
+  </script>
+</body>
+</html>

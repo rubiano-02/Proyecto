@@ -1,0 +1,339 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f6f6f4;
+  overflow-x: hidden;
+}
+
+/* Header centrado */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.menu-toggle {
+  position: absolute;
+  left: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  display: none;
+}
+
+.menu-toggle.active {
+  color: #00B7FF;
+}
+
+.logo-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-header {
+  height: 45px;
+  margin: 0 10px;
+}
+
+/* Layout principal */
+.container {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 70px;
+}
+
+/* Sidebar - Visible en desktop */
+/* Sidebar - Versión corregida */
+.sidebar {
+  width: 240px; /* Ancho original que tenías */
+  background-color: #fff;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  height: calc(100vh - 60px);
+  transition: transform 0.3s ease;
+  z-index: 900;
+  padding: 20px 0;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  transform: translateX(-100%);
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+/* Contenido principal - Ajuste de margen */
+.contenido {
+  flex: 1;
+  padding: 20px;
+  margin-left: 0; /* Inicialmente sin margen */
+  transition: margin-left 0.3s ease;
+}
+
+/* Cuando el menú está activo en desktop */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+  
+  .contenido {
+    margin-left: 240px; /* Igual al ancho del menú */
+  }
+}
+
+/* === ANIMACIONES DEL MENÚ (sin cambiar el ancho) === */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px; /* Un poco menos de padding */
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.menu-item:hover {
+  background-color: #f0f0f0;
+  transform: translateX(5px); /* Menos desplazamiento */
+  border-left: 4px solid #00B7FF;
+}
+
+.menu-item.activo {
+  background-color: #e6f7ff;
+  border-left: 4px solid #00B7FF;
+}
+
+.menu-item img {
+  width: 32px; /* Tamaño original */
+  height: 32px;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover img {
+  transform: scale(1.1); /* Animación más sutil */
+}
+
+.menu-item span {
+  font-size: 20px; /* Tamaño original */
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* Contenido principal - Cuadros con animaciones */
+.contenido {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tarjeta-opciones {
+  display: grid;
+  grid-template-columns: repeat(2, 280px);
+  grid-template-rows: repeat(2, 280px);
+  gap: 30px;
+  width: 100%;
+  max-width: 675px;
+  padding: 40px;
+  border: 3px solid #f7d85a;
+  border-radius: 25px;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.opcion {
+  border: 2px solid #00b4f1;
+  border-radius: 20px;
+  text-align: center;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.opcion:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0,180,241,0.25);
+  background-color: #f8fdff;
+}
+
+.opcion h3 {
+  font-size: 18px;
+  color: #00b4f1;
+  margin-bottom: 20px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.opcion:hover h3 {
+  color: #0088cc;
+}
+
+.opcion img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  margin: 0 auto;
+  transition: transform 0.3s;
+}
+
+.opcion:hover img {
+  transform: scale(1.1);
+}
+
+/* Estilos específicos para cada opción */
+.opcion.configuracion {
+  border-color: #00b4f1;
+}
+.opcion.configuracion h3 {
+  color: #00b4f1;
+}
+
+.opcion.cerrar-sesion {
+  border-color: #00b4f1;
+}
+.opcion.cerrar-sesion h3 {
+  color: #00b4f1;
+}
+
+.opcion.ayuda {
+  border-color: #00b4f1;
+}
+.opcion.ayuda h3 {
+  color: #00b4f1;
+}
+
+.opcion.calificanos {
+  border-color:#00b4f1;
+}
+.opcion.calificanos h3 {
+  color: #00b4f1;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .menu-toggle {
+    display: block;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    height: calc(100vh - 70px);
+    transform: translateX(-100%);
+    z-index: 999;
+  }
+  
+  .sidebar.active {
+    transform: translateX(0);
+  }
+  
+  .contenido {
+    padding: 30px 20px;
+  }
+  
+  .tarjeta-opciones {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 240px);
+    gap: 20px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tarjeta-opciones {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 200px);
+    max-width: 500px;
+  }
+  
+  .logo-header {
+    height: 40px;
+  }
+  
+  .menu-item {
+    padding: 15px 25px;
+  }
+  
+  .menu-item img {
+    width: 32px;
+    height: 32px;
+    margin-right: 15px;
+  }
+  
+  .menu-item span {
+    font-size: 18px;
+  }
+  .opcion img {
+    max-width: 80px; /* Ajusta este valor para cambiar el tamaño en móvil */
+    height: auto; /* Mantiene la proporción */
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 60px;
+  }
+  
+  .container {
+    padding-top: 60px;
+  }
+  
+  .sidebar {
+    top: 60px;
+    height: calc(100vh - 60px);
+  }
+  
+  .logo-header {
+    height: 35px;
+  }
+  
+  .tarjeta-opciones {
+    padding: 20px;
+  }
+  
+  .opcion {
+    padding: 20px;
+  }
+  
+  .opcion h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  .opcion img {
+    max-width: 120px;
+  }
+}
+
