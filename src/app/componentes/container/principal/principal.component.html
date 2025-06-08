@@ -1,48 +1,43 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DIJU - Lectura</title>
-  <link rel="stylesheet" href="principal.component.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-<button id="menu-toggle" class="menu-toggle" (click)="toggleSidebar()">☰</button>
-
+<button class="menu-toggle" (click)="toggleSidebar()" [class.active]="isSidebarActive" aria-label="Abrir menú">
+  <i class="fa-solid fa-bars"></i>
+</button>
 <div class="container">
   <!-- Menú lateral -->
-  <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
+ <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
     <div class="menu">
-      <div class="menu-item activo">
-        <img src="assets/Images/Libro.png" alt="Inicio" />
+      <div class="menu-item" routerLink="/principal" routerLinkActive="activo">
+        <img src="assets/Images/Casa.jpeg" alt="Inicio" />
         <span>Inicio</span>
       </div>
-      <div class="menu-item">
+
+      <div class="menu-item" routerLink="/matematicas-1" routerLinkActive="activo">
         <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
         <span>Ejercicios</span>
       </div>
-      <div class="menu-item">
+
+      <div class="menu-item" routerLink="/foro" routerLinkActive="activo">
         <img src="assets/Images/Foro.jpeg" alt="Foro" />
         <span>Foro</span>
       </div>
-      <div class="menu-item">
+
+      <div class="menu-item" routerLink="/perfil" routerLinkActive="activo">
         <img src="assets/Images/Perfil.jpeg" alt="Perfil" />
         <span>Perfil</span>
       </div>
-      <div class="menu-item">
+
+      <div class="menu-item" routerLink="/configuracion" routerLinkActive="activo">
         <img src="assets/Images/Mas.jpeg" alt="Más" />
         <span>Más</span>
       </div>
     </div>
   </aside>
 
+
   <!-- Contenido principal -->
   <main class="contenido">
     <!-- Sección superior -->
     <div class="seccion-superior">
-      <div class="dropdown"> 
+      <div class="dropdown">
         <img src="assets/Images/Libro.png" alt="Lectura" />
         <span>Lectura</span>
         <img src="assets/Images/Flecha.jpeg" alt="Flecha" />
@@ -89,17 +84,23 @@
             <h3>📊 Estadísticas</h3>
             <div class="estadistica">
               <span class="etiqueta">Progreso general</span>
-              <div class="progreso azul"><div style="width: 60%"></div></div>
+              <div class="progreso azul">
+                <div style="width: 60%"></div>
+              </div>
               <span class="porcentaje">60%</span>
             </div>
             <div class="estadistica">
               <span class="etiqueta">Puntaje</span>
-              <div class="progreso amarillo"><div style="width: 45%"></div></div>
+              <div class="progreso amarillo">
+                <div style="width: 45%"></div>
+              </div>
               <span class="porcentaje">45%</span>
             </div>
             <div class="estadistica">
               <span class="etiqueta">Tiempo dedicado</span>
-              <div class="progreso naranja"><div style="width: 75%"></div></div>
+              <div class="progreso naranja">
+                <div style="width: 75%"></div>
+              </div>
               <span class="porcentaje">75%</span>
             </div>
           </div>
@@ -126,5 +127,3 @@
     </div>
   </main>
 </div>
-</body>
-</html>

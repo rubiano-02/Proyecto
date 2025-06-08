@@ -1,0 +1,68 @@
+.contenedor {
+  text-align: center;
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #fff3e0);
+  min-height: 100vh;
+}
+
+.tarjeta, .resultado {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  display: inline-block;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  animation: aparecer 0.5s ease-in-out;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.pregunta {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+input {
+  padding: 12px;
+  font-size: 24px;
+  width: 120px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 2px solid #0077ff;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 20px;
+  background-color: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005fcc;
+}
+
+.mensaje {
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.calificacion {
+  font-size: 28px;
+  color: #ff9800;
+  font-weight: bold;
+  margin: 15px 0;
+}

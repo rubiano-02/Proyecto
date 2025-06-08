@@ -7,7 +7,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrl: './principal.component.css'
 })
 export class PrincipalComponent {
-  isSidebarActive = false;
+ isSidebarActive = false;
 
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;

@@ -1,0 +1,64 @@
+<main class="registro-container" data-aos="fade-up" data-aos-duration="1000">
+  <h2 data-aos="zoom-in" data-aos-delay="100">Crear una cuenta</h2>
+
+  <form class="registro-form" (ngSubmit)="registrar()" #formRegistro="ngForm">
+  <input
+    type="number"
+    placeholder="Edad"
+    required
+    data-aos="fade-right"
+    data-aos-delay="200"
+    [(ngModel)]="edad"
+    name="edad"
+    #edadInput="ngModel"
+  >
+  <input
+    type="text"
+    placeholder="Nombre"
+    required
+    data-aos="fade-right"
+    data-aos-delay="250"
+    [(ngModel)]="nombre"
+    name="nombre"
+    #nombreInput="ngModel"
+  >
+  <input
+    type="email"
+    placeholder="Correo"
+    required
+    data-aos="fade-right"
+    data-aos-delay="300"
+    [(ngModel)]="email"
+    name="email"
+    #emailInput="ngModel"
+  >
+
+  <div class="input-password" data-aos="fade-right" data-aos-delay="350">
+    <input
+      [type]="tipoContrasena"
+      placeholder="Contraseña"
+      required
+      [(ngModel)]="contrasena"
+      name="contraseña"
+      #contraseñaInput="ngModel"
+    >
+    <span class="ojo" (click)="toggleContrasena()">{{ iconoOjo }}</span>
+  </div>
+
+  <button
+    class="crear-cuenta"
+    data-aos="zoom-in-up"
+    data-aos-delay="400"
+    [disabled]="formRegistro.invalid"
+    type="submit"
+  >
+    <strong>Crear cuenta</strong>
+  </button>
+</form>
+
+
+  <p class="terminos" data-aos="fade-in" data-aos-delay="500">
+    Al registrarte en DIJU, aceptas nuestros<br>
+    <strong>Términos</strong> y <strong>Política de privacidad.</strong>
+  </p>
+</main>

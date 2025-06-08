@@ -4,8 +4,12 @@ import { Component } from '@angular/core';
   selector: 'app-configuracion',
   standalone: false,
   templateUrl: './configuracion.component.html',
-  styleUrl: './configuracion.component.css'
+  styleUrls: ['./configuracion.component.css'],
 })
 export class ConfiguracionComponent {
+  isSidebarActive = false;
 
+  toggleSidebar() {
+    this.isSidebarActive = !this.isSidebarActive;
+  }
 }

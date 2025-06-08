@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-cabecera',
-  standalone: false,
+  standalone:false,
   templateUrl: './cabecera.component.html',
-  styleUrl: './cabecera.component.css'
+  styleUrls: ['./cabecera.component.css']
 })
 export class CabeceraComponent {
 

@@ -1,86 +1,38 @@
-<p>iniciar-sesion works!</p>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Crear cuenta - DIJU</title>
-  <link rel="stylesheet" href="iniciar-sesion.component.css" />
-  <!-- AOS CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <style>
-    /* Animación suave en hover de botones */
-    .login, .signup {
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .login:hover, .signup:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4);
-    }
-
-    /* Animación sutil al enfocar input */
-    .registro-form input:focus {
-      border-color: #00bfff;
-      box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
-      transition: 0.3s;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Header animado -->
-  <header class="header" data-aos="fade-down" data-aos-duration="800">
-    <div class="logo" data-aos="zoom-in-right" data-aos-delay="200">
-      <img src="../2/Images/Koala_VSRSF.png" alt="Logo DIJU">
-      <img src="../2/Images/Diju Logo.png" alt="DIJU">
+<main class="login-container" data-aos="fade-up" data-aos-duration="1000">
+  <h2 data-aos="zoom-in" data-aos-delay="100">Iniciar Sesión</h2>
+  
+  <form class="login-form" (ngSubmit)="iniciarSesion()" #form="ngForm">
+    <input type="text" [(ngModel)]="email" name="email" placeholder="Correo o usuario" required data-aos="fade-right" data-aos-delay="200" />
+    
+    <div class="input-password" data-aos="fade-right" data-aos-delay="300">
+      <input type="password" [(ngModel)]="contrasena" name="contrasena" placeholder="Contraseña" required />
+      <span class="olvido">¿Se te olvidó?</span>
     </div>
-    <div class="buttons" data-aos="fade-left" data-aos-delay="400">
-      <button class="login" onclick="window.location.href='../3/Index 3.html'">
-        <strong>Ingresar</strong>
+
+    <div class="separador" data-aos="zoom-in" data-aos-delay="400">
+      <div class="linea"></div>
+      <div class="circulo"></div>
+      <div class="linea"></div>
+    </div>
+
+    <div class="redes" data-aos="fade-up" data-aos-delay="500">
+      <button class="facebook" type="button">
+        <img src="assets/Images/Facebook.png" alt="" />
+        FACEBOOK
+      </button>
+      <button class="google" type="button">
+        <img src="assets/Images/Google.png" alt="" />
+        GOOGLE
       </button>
     </div>
-  </header>
 
-  <!-- Formulario animado -->
-  <main class="registro-container" data-aos="fade-up" data-aos-duration="1000">
-    <h2 data-aos="zoom-in" data-aos-duration="900">Crear una cuenta</h2>
+    <button class="ingresar" type="submit" data-aos="zoom-in-up" data-aos-delay="600">
+      <strong>Ingresar</strong>
+    </button>
+  </form>
 
-    <form class="registro-form">
-      <input type="number" placeholder="Edad" required min="5" max="99" data-aos="fade-right" data-aos-delay="100">
-      <input type="text" placeholder="Nombre completo" required data-aos="fade-right" data-aos-delay="200">
-      <input type="email" placeholder="Correo electrónico" required data-aos="fade-right" data-aos-delay="300">
-      
-      <div class="input-password" data-aos="fade-right" data-aos-delay="400">
-        <input type="password" placeholder="Contraseña" required minlength="6">
-        <span class="ojo">👁️</span>
-      </div>
-
-      <button type="submit" class="signup" data-aos="zoom-in-up" data-aos-delay="500">
-        <strong>Crear cuenta</strong>
-      </button>
-    </form>
-
-    <p class="terminos" data-aos="fade-in" data-aos-delay="700">
-      Al registrarte en DIJU, aceptas nuestros<br>
-      <a href="#" class="enlace-terminos"><strong>Términos</strong></a> y 
-      <a href="#" class="enlace-terminos"><strong>Política de privacidad</strong></a>.
-    </p>
-  </main>
-
-  <!-- Mostrar/ocultar contraseña -->
-  <script>
-    document.querySelector('.ojo').addEventListener('click', function() {
-      const passwordInput = this.previousElementSibling;
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-    });
-  </script>
-
-  <!-- AOS JS -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
-</body>
-</html>
+  <p class="terminos" data-aos="fade-in" data-aos-delay="700">
+    Al registrarte en DIJU, aceptas nuestros<br />
+    <strong>Términos</strong> y <strong>Política de privacidad.</strong>
+  </p>
+</main>

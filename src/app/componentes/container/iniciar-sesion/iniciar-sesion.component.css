@@ -16,7 +16,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
+  padding: 15px 40px;
 }
 
 .logo {
@@ -26,7 +26,7 @@ body {
 }
 
 .logo img {
-  height: 70px;
+  height: 50px; /* Ajusté el tamaño */
 }
 
 .buttons {
@@ -34,7 +34,7 @@ body {
 }
 
 .login {
-  padding: 10px 25px;
+  padding: 8px 20px;
   font-size: 16px;
   border-radius: 20px;
   cursor: pointer;
@@ -43,51 +43,102 @@ body {
   color: #00bfff;
 }
 
-.registro-container {
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
 }
 
-.registro-container h2 {
+.login-container h2 {
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 25px;
-  color: #333;
 }
 
-.registro-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: 300px;
+  width: 320px; /* Ajusté el ancho del formulario */
 }
 
-.registro-form input {
+.login-form input {
   padding: 12px 15px;
   font-size: 16px;
   border: 2px solid #ccc;
   border-radius: 20px;
   outline: none;
-  width: 100%;
 }
 
 .input-password {
   position: relative;
 }
 
-.input-password .ojo {
+.input-password input {
+  width: 100%; /* Asegura que el input sea del tamaño correcto */
+}
+
+.input-password .olvido {
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
+  font-size: 12px;
+  color: #777;
   cursor: pointer;
-  color: #555;
 }
 
-.signup {
-  margin-top: 10px;
+.separador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.linea {
+  height: 1px;
+  background-color: #ccc;
+  width: 100px;
+}
+
+.circulo {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.redes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.redes button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid #00bfff;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: white; /* Fondo blanco para los botones */
+  color: #00bfff;
+  cursor: pointer;
+  font-weight: 600;
+  width: 140px; /* Ajustado el tamaño para que no sea tan grande */
+}
+
+.redes button img {
+  height: 18px;
+  margin-right: 8px; /* Espacio para agregar la imagen */
+}
+
+.ingresar {
+  margin-top: 15px;
   background-color: #00bfff;
   color: white;
   border: none;
@@ -95,7 +146,10 @@ body {
   font-size: 16px;
   border-radius: 20px;
   cursor: pointer;
-  width: 100%;
+  width: 230px; /* Botón ajustado para no ser tan largo */
+  display: block; /* Hace que el botón sea un bloque */
+  margin-left: auto;
+  margin-right: auto; /* Centra el botón */
 }
 
 .terminos {

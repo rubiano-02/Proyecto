@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background-color: #f6f6f6;
-  padding-top: 60px;
+  padding-top: 70px;
 }
 
 .container {
@@ -16,35 +16,44 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 70px;
   background-color: white;
   z-index: 1000;
+
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 0 60px; /* Para que el botón tenga espacio sin romper el centrado */
+  position: relative;
+}
+
+.menu-toggle {
+  position: absolute;
+  left: 15px; /* A la izquierda, fijo */
+  top: 6%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+  z-index: 1100;
+}
+.menu-toggle.active {
+  color: #00B7FF;
+}
+
+.logo-center {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  gap: 10px; /* Espacio entre los logos */
 }
 
 .logo-header {
-  height: 40px;
-  margin: 0 10px;
+  height: 45px;
 }
-
-/* Botón Hamburguesa */
-.menu-toggle {
-  display: none;
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  font-size: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1100;
-  color: #333;
-  padding: 5px;
-}
-
 /* Sidebar */
 /* Sidebar - Versión corregida */
 .sidebar {

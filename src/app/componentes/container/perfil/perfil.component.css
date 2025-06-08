@@ -1,180 +1,569 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-  background: #f5f4f2;
+    background-color: #f6f6f4; /* Fondo de Estilos 8 */
+    overflow-x: hidden;
 }
 
-.contenedor {
+/* HEADER - Tomado y ajustado de Estilos 8.css */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  z-index: 1000;
   display: flex;
-  height: 100vh;
-}
-
-/* Barra lateral */
-.sidebar {
-  width: 200px;
-  background-color: #f3f3f3;
-  padding: 20px;
-  border-right: 1px solid #ccc;
-}
-
-.logo {
-  font-weight: bold;
-  font-size: 24px;
-  color: #00c2ff;
-  margin-bottom: 30px;
-}
-
-.menu {
-  list-style: none;
-}
-
-.menu li {
-  margin: 20px 0;
-  font-weight: bold;
-  color: #666;
-  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-
-.menu li.activo {
-  border: 2px solid #00c2ff;
-  border-radius: 8px;
-  padding: 5px;
-  color: #333;
-}
-
-/* Contenido del perfil */
-.perfil-contenido {
-  flex: 1;
-  padding: 40px;
-}
-
-.perfil-card {
-  display: flex;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  align-items: center;
-  height: 400px;
-  justify-content: space-between;
-}
-
-.banner {
-  position: absolute;
-  width: 350px;
-  height: 120px;
-  background-color: #fdfbf4;
-  border: 2px solid #ffe985;
-  border-radius: 10px;
-  margin-top: -90px;
-  margin-left: 40px;
-}
-
-.usuario {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 33%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 0 60px;
   position: relative;
-  z-index: 1;
+}
+
+.menu-toggle {
+  display: none; /* Oculto por defecto */
+  position: absolute;
+  left: 15px;
+  top: 6%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+  z-index: 1100;
+}
+@media (max-width: 992px) {
+  .menu-toggle {
+    display: block;
+  }
+}
+.menu-toggle.active {
+  color: #00B7FF;
+}@media (max-width: 992px) {
+  .menu-toggle {
+    display: block;
+  }
+}
+.menu-toggle.active {
+  color: #00B7FF;
+}
+
+
+.logo-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-header {
+    height: 45px;
+    margin: 0 10px;
+}
+
+/* Layout principal - Tomado de Estilos 8.css */
+.container {
+    display: flex;
+    min-height: 100vh;
+    padding-top: 70px; /* Espacio para el header fijo */
+}
+
+/* SIDEBAR - Tomado y ajustado de Estilos 8.css */
+.sidebar {
+    width: 240px;
+    background-color: #fff;
+    position: fixed;
+    top: 70px; /* Ajusta la posición para estar debajo del header */
+    left: 0;
+    height: calc(100vh - 70px);
+    transition: transform 0.3s ease;
+    z-index: 900;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transform: translateX(-100%); /* Oculto por defecto en móvil */
+}
+
+.sidebar.active {
+    transform: translateX(0); /* Visible cuando está activo (en móvil) */
+}
+
+/* CONTENIDO PRINCIPAL - Ajuste de margen para dejar espacio a la sidebar */
+.contenido {
+    flex: 1;
+    padding: 20px;
+    margin-left: 0; /* Inicialmente sin margen */
+    transition: margin-left 0.3s ease;
+    display: flex; /* Para centrar el perfil-card */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Cuando el menú está visible en desktop */
+@media (min-width: 993px) { /* Usamos 993px para coincidir con la lógica del JS de Estilos 8 */
+    .sidebar {
+        transform: translateX(0); /* Siempre visible en desktop */
+    }
+    
+    .contenido {
+        margin-left: 240px; /* Igual al ancho del menú */
+    }
+}
+
+/* Estilos de los elementos del menú (sidebar) - Tomados de Estilos 8.css */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.menu-item:hover {
+    background-color: #f0f0f0;
+    transform: translateX(5px);
+    border-left: 4px solid #00B7FF;
+}
+
+/* Estilo para el ítem activo en la barra lateral (AHORA EN PERFIL) */
+.menu-item.active { /* Cambiado de 'activo' a 'active' para consistencia con Estilos 8 */
+    background-color: #e6f7ff;
+    border-left: 4px solid #00B7FF;
+    color: #00B7FF; /* Asegura que el texto también cambie de color */
+    font-weight: bold; /* Hacer el texto más notable */
+}
+
+.menu-item img {
+    width: 32px;
+    height: 32px;
+    margin-right: 15px;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover img {
+    transform: scale(1.1);
+}
+
+.menu-item span {
+    font-size: 20px;
+    color: #333; /* El color se ajustará si el item está activo */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* PERFIL CARD - REESTRUCTURACIÓN Y AJUSTES PARA COINCIDIR LA IMAGEN DE PERFIL */
+.perfil-card {
+    position: relative;
+    background-color: #fff; /* Fondo blanco */
+    border: 3px solid #f7d85a; /* Borde amarillo de la referencia */
+    border-radius: 25px; /* Más redondeado como en la referencia */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08); /* Sombra más fuerte y suave */
+    width: 900px; /* Ancho fijo para coincidir con la sensación espaciosa de la imagen */
+    min-height: 550px; /* Altura mínima, permitiendo que crezca */
+    padding-top: 170px; /* Espacio para el banner y el avatar solapado */
+    overflow: hidden; /* Asegura que nada se salga de las esquinas redondeadas */
+    display: flex; /* Para organizar el contenido interno */
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+}
+
+/* Banner decorativo */
+.banner {
+    position: absolute; /* Absoluto con respecto a .perfil-card */
+    width: calc(100% - 40px); /* 100% del ancho de la card menos 20px de padding a cada lado */
+    height: 150px; /* Taller banner */
+    background-color: #fdfbf4; /* Color de fondo del banner */
+    border: 2px solid #ffe985; /* Borde amarillo del banner */
+    border-radius: 10px; /* Esquinas del banner */
+    top: 20px; /* Posicionado desde la parte superior de .perfil-card */
+    left: 20px; /* Posicionado desde la izquierda de .perfil-card */
+    z-index: 0; /* Lo mantiene detrás de otro contenido */
+}
+
+/* Contenedor para el usuario y los logros */
+.perfil-main-content {
+    display: flex; /* Para poner usuario y logros uno al lado del otro */
+    width: calc(100% - 40px); /* Ocupa el ancho restante de la tarjeta */
+    flex-grow: 1; /* Permite que ocupe el espacio disponible */
+    padding-top: 20px; /* Un poco de padding superior para separar del avatar si es necesario */
+    position: relative; /* Para asegurar z-index */
+    z-index: 1; /* Asegura que esté por encima del banner */
+}
+
+/* Usuario */
+.usuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%; /* Ajusta el ancho para dar espacio a los logros */
+    padding: 0 30px; /* Añade un buen padding horizontal */
+    text-align: center;
 }
 
 .avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 4px solid #cbd2e0;
-  margin-top: 30px;
+    width: 120px; /* Avatar más grande */
+    height: 120px; /* Avatar más grande */
+    border-radius: 50%;
+    border: 5px solid #00B7FF; /* Borde azul del avatar */
+    margin-top: -80px; /* Margen negativo para solapar el banner */
+    background-color: white; /* Asegura un fondo blanco si la imagen de placeholder tiene transparencia */
+    object-fit: cover; /* Asegura que la imagen cubra el círculo */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Sombra sutil para profundidad */
+}
+
+.usuario h2 {
+    margin-top: 15px; /* Espacio desde el avatar */
+    font-size: 28px; /* Nombre más grande */
+    color: #333;
+    font-weight: 600;
 }
 
 .usuario-id {
-  color: #777;
-  font-size: 14px;
-  margin-top: 5px;
+    color: #777;
+    font-size: 16px; /* Ligeramente más grande */
+    margin-top: 5px;
 }
 
 .fecha {
-  color: #aaa;
-  font-size: 13px;
-  text-align: center;
-  margin: 10px 0;
+    color: #aaa;
+    font-size: 14px; /* Ligeramente más grande */
+    margin: 15px 0 20px 0; /* Más espacio alrededor de la fecha */
+    line-height: 1.4;
 }
 
+/* Ícono de libro - Ahora es una imagen */
 .libro-icono {
-  font-size: 30px;
-  color: #054c4f;
+    width: 45px; /* Ajusta el tamaño de la imagen del libro */
+    height: auto;
+    margin-top: 20px;
 }
 
 /* Línea divisoria */
 .linea {
-  width: 1px;
-  background-color: #ccc;
-  height: 100%;
+    width: 1px;
+    background-color: #e0e0e0; /* Línea más clara */
+    height: 80%; /* Línea más corta y centrada */
+    align-self: center; /* Centrarla verticalmente dentro del contenedor flex */
+    margin: 0 40px; /* Espacio alrededor de la línea */
 }
 
 /* Logros */
 .logros {
-  width: 33%;
-  padding: 10px 20px;
+    width: 60%; /* Ocupa más espacio */
+    padding: 20px 30px; /* Más padding */
 }
 
 .logros h3 {
-  margin-bottom: 15px;
-  color: #333;
+    margin-bottom: 25px; /* Más espacio debajo del título */
+    color: #333;
+    font-size: 24px; /* Título más grande */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el texto y el ícono del trofeo */
+}
+
+/* Ícono del trofeo en el título de logros - Ahora es una imagen */
+.icono-titulo-logros {
+    width: 30px; /* Tamaño del icono del trofeo */
+    height: auto;
 }
 
 .logro {
-  background: #fff8e7;
-  border: 1px solid #ffd981;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 15px;
-  font-size: 13px;
-  color: #555;
-  position: relative;
+    background: #fff; /* Fondo blanco para cada bloque de logro */
+    border: 1px solid #ffe985; /* Borde amarillo para cada logro */
+    border-radius: 10px;
+    padding: 15px; /* Más padding */
+    margin-bottom: 18px; /* Más espacio entre logros */
+    font-size: 14px; /* Fuente ligeramente más grande */
+    color: #555;
+    display: flex;
+    flex-direction: column; /* Apila el texto y la barra de progreso */
+    gap: 8px; /* Espacio entre el texto y la barra */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra sutil para cada logro */
+    position: relative; /* Para los iconos de logro */
+    padding-left: 50px; /* Espacio para el ícono de logro al principio */
 }
 
-.logro i {
-  margin-right: 8px;
+/* Íconos de logro - Ahora son imágenes */
+.icono-logro {
+    position: absolute;
+    left: 15px; /* Posiciona el ícono a la izquierda del padding */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px; /* Tamaño de los íconos de logro */
+    height: auto;
 }
 
 .barra {
-  background: #eee;
-  height: 6px;
-  border-radius: 4px;
-  margin: 6px 0;
+    background: #e0e0e0; /* Fondo más claro para la barra vacía */
+    height: 10px; /* Barra más gruesa */
+    border-radius: 5px; /* Esquinas más redondeadas */
+    overflow: hidden; /* Oculta cualquier desbordamiento del progreso */
+    position: relative; /* Para posicionar el porcentaje dentro */
+    width: 100%; /* Asegura que la barra ocupe el ancho completo */
 }
 
 .progreso {
-  background: #f00;
-  height: 6px;
-  border-radius: 4px;
+    height: 100%; /* Llena la altura del padre */
+    border-radius: 5px; /* Hereda el border-radius */
+    display: flex;
+    align-items: center; /* Centra el texto verticalmente */
+    justify-content: flex-end; /* Alinea el porcentaje al final de la barra */
+    padding-right: 8px; /* Espacio para el texto del porcentaje */
+    transition: width 0.5s ease-in-out; /* Transición suave para la actualización del progreso */
+}
+
+/* Estilo para el texto del porcentaje dentro de la barra */
+.progreso span {
+    color: white; /* Color blanco para el texto, para que contraste */
+    font-weight: bold;
+    font-size: 12px; /* Fuente más pequeña para el porcentaje */
+    text-shadow: 0px 0px 3px rgba(0,0,0,0.5); /* Sombra para mejorar la visibilidad */
+}
+
+/* Colores específicos para las barras de progreso */
+.progreso.rojo {
+    background: #ff6b6b; /* Rojo para "Obtén 90%..." */
 }
 
 .progreso.azul {
-  background: #00bfff;
+    background: #6bbaff; /* Azul para "Juega 10 días..." */
 }
 
 .progreso.naranja {
-  background: orange;
+    background: #ffaf6b; /* Naranja para "Constancia imparable" */
 }
 
-.logro span {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  font-weight: bold;
+
+/* Colores para los íconos de logro (Estos ya no se usan directamente con Font Awesome, pero los dejo comentados si vuelven a ser necesarios) */
+/* .rojo { color: #ff6b6b; } */
+/* .azul { color: #6bbaff; } */
+/* .naranja { color: #ffaf6b; } */
+
+
+/* RESPONSIVO (Ajustes para pantallas más pequeñas) - Fusionado de ambos estilos */
+
+/* MEDIA QUERIES GENERALES (adaptados de Estilos 8) */
+@media (min-width: 993px) { /* Esto es para pantallas de escritorio, solo para asegurarnos */
+    .menu-toggle {
+        display: none; /* Oculta el botón de menú en desktop */
+    }
 }
 
-/* Colores */
-.rojo { color: red; }
-.azul { color: #00bfff; }
-.naranja { color: orange; }
+@media (max-width: 992px) { /* Para tablets y pantallas un poco más pequeñas que desktop */
+    .menu-toggle {
+        display: block; /* Muestra el botón de menú en móviles */
+    }
+    
+    .sidebar {
+        position: fixed; /* Asegura que sea fijo en móvil */
+        top: 70px; /* Debajo del header */
+        left: 0;
+        height: calc(100vh - 70px);
+        transform: translateX(-100%); /* Oculto por defecto */
+        z-index: 999;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0); /* Visible cuando se activa */
+    }
+    
+    .contenido {
+        margin-left: 0; /* No hay margen izquierdo en móvil */
+        padding: 30px 20px; /* Ajusta el padding general del contenido */
+    }
+
+    /* AJUSTES ESPECÍFICOS PARA PERFIL CARD EN TABLET */
+    .perfil-card {
+        width: 95%; /* Toma más ancho */
+        min-height: auto; /* Altura auto */
+        padding-top: 100px; /* Menos espacio superior para el banner */
+        flex-direction: column; /* Apila el contenido verticalmente */
+        align-items: center;
+    }
+
+    .banner {
+        width: calc(100% - 30px); /* Ajuste del banner */
+        top: 15px;
+        left: 15px;
+        height: 120px; /* Banner un poco más corto */
+    }
+
+    .perfil-main-content {
+        flex-direction: column; /* Apila usuario y logros */
+        width: 100%; /* Ocupa todo el ancho disponible */
+        padding-top: 0; /* No necesita padding superior adicional */
+        align-items: center; /* Centra los elementos */
+    }
+
+    .usuario, .logros {
+        width: 100%; /* Ocupan todo el ancho */
+        margin-bottom: 30px; /* Espacio entre secciones */
+        padding: 0 10px; /* Reduce padding horizontal */
+    }
+
+    .linea {
+        width: 80%;
+        height: 1px;
+        margin: 20px auto; /* Línea horizontal */
+    }
+
+    .avatar {
+        margin-top: -60px; /* Ajusta el solapamiento */
+        width: 100px;
+        height: 100px;
+    }
+
+    .usuario h2 {
+        font-size: 26px;
+    }
+
+    .logros h3 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 768px) { /* Para móviles grandes y tablets pequeñas */
+    .logo-header {
+        height: 40px;
+    }
+    
+    .menu-item {
+        padding: 12px 20px;
+    }
+    
+    .menu-item img {
+        width: 28px;
+        height: 28px;
+        margin-right: 12px;
+    }
+    
+    .menu-item span {
+        font-size: 16px;
+    }
+    
+    /* AJUSTES ESPECÍFICOS PARA PERFIL CARD EN MÓVILES */
+    .perfil-card {
+        width: 100%; /* Ocupa todo el ancho */
+        padding: 15px;
+        padding-top: 80px; /* Ajusta el espacio superior */
+    }
+
+    .banner {
+        width: calc(100% - 30px);
+        left: 15px;
+        top: 15px;
+        height: 90px; /* Banner más corto */
+    }
+
+    .avatar {
+        width: 80px;
+        height: 80px;
+        border-width: 3px;
+        margin-top: -50px; /* Ajusta solapamiento */
+    }
+
+    .usuario h2 {
+        font-size: 22px;
+    }
+
+    .usuario-id {
+        font-size: 13px;
+    }
+
+    .fecha {
+        font-size: 12px;
+        margin: 8px 0;
+    }
+
+    .libro-icono {
+        width: 35px; /* Ajusta el tamaño de la imagen del libro */
+    }
+
+    .logros h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .icono-titulo-logros {
+        width: 25px; /* Ajusta el tamaño del trofeo */
+    }
+
+    .logro {
+        padding: 10px;
+        font-size: 12px;
+        margin-bottom: 10px;
+        padding-left: 40px; /* Ajusta el padding para el ícono de logro */
+    }
+
+    .icono-logro {
+        width: 20px; /* Ajusta el tamaño de los íconos de logro */
+        left: 10px;
+    }
+
+    .barra {
+        height: 8px;
+    }
+
+    .progreso span {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) { /* Para móviles pequeños */
+    .header {
+        height: 60px;
+    }
+    
+    .container {
+        padding-top: 60px;
+    }
+    
+    .sidebar {
+        top: 60px;
+        height: calc(100vh - 60px);
+    }
+    
+    .logo-header {
+        height: 35px;
+    }
+    
+    .contenido {
+        padding: 15px;
+    }
+    
+    .perfil-card {
+        border-radius: 10px;
+    }
+
+    .banner {
+        height: 80px;
+        border-radius: 8px;
+    }
+
+    .avatar {
+        width: 70px;
+        height: 70px;
+        margin-top: -40px;
+    }
+
+    .usuario h2 {
+        font-size: 20px;
+    }
+}

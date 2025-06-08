@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f3f1;
+  color: #333;
+}
+
+.registro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  padding: 20px;
+}
+
+.registro-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.registro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 300px;
+}
+
+.registro-form input {
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  width: 100%;
+  background-color: white;
+}
+
+.input-password {
+  position: relative;
+}
+
+.ojo {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #aaa;
+}
+
+.crear-cuenta {
+  margin-top: 10px;
+  background-color: #00bfff;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.crear-cuenta:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 191, 255, 0.3);
+  transition: 0.2s ease;
+}
+
+.terminos {
+  font-size: 11px;
+  color: #888;
+  margin-top: 15px;
+  text-align: center;
+}

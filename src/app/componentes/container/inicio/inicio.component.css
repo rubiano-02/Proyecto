@@ -1,0 +1,278 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #F5F3F1;
+  padding: 20px;
+}
+
+body, html {
+  height: 100%;
+}
+.header {
+  animation: fadeIn 1s ease-out;
+}
+
+/* Aplica a texto e imagen */
+.texto {
+  animation: fadeInUp 1s ease-out;
+}
+
+.media .recuadro {
+  animation: fadeInUp 1.2s ease-out;
+}
+
+/* --- ANIMACIONES HOVER EN BOTONES --- */
+.btn-acceder:hover {
+  background-color: #00BFFF;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-crear:hover {
+  background-color: #0099cc;
+  transition: all 0.3s ease;
+  transform: scale(1.05);
+}
+
+/* Hover sobre enlaces del menú */
+.menu a:hover {
+  color: #00BFFF;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.logo-nombre {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+}
+
+.nombre {
+  height: 30px;
+  width: auto;
+}
+
+.menu {
+  display: flex;
+  gap: 25px;
+}
+
+.menu a {
+  color: gray;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.separador {
+  width: 2px;
+  height: 40px;
+  background-color: #00BFFF;
+}
+
+.botones {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-acceder {
+  background: white;
+  border: 2px solid #00BFFF;
+  border-radius: 20px;
+  padding: 6px 18px;
+  color: #00BFFF;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-crear {
+  background: #00BFFF;
+  border: none;
+  border-radius: 20px;
+  padding: 7px 20px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.linea {
+  border: 1px solid #00BFFF;
+  margin: 10px 0; /* Ajuste general para reducir espacio */
+  width: 100%;
+}
+
+.contenido {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px; /* Reducido de 40px a 20px */
+  text-align: center;
+}
+
+.texto {
+  max-width: 500px;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+  margin-top: 0; /* Elimina margen superior adicional */
+}
+
+.texto strong {
+  font-weight: bold;
+}
+
+.media .recuadro {
+  width: 300px;
+  height: 300px;
+  border: 3px solid #00BFFF;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+/* Responsive para tablets y móviles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .menu {
+    order: 1;
+    flex-direction: row;
+    gap: 25px;
+    margin-bottom: 5px;
+  }
+
+  .separador {
+    display: none;
+  }
+
+  .linea {
+    order: 2;
+    margin: 10px 0; /* Reducido de 15px a 10px */
+  }
+
+  .botones {
+    order: 3;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 5px;
+  }
+
+  .contenido {
+    flex-direction: column;
+    padding: 10px 20px; /* Reducido espacio vertical */
+    gap: 15px; /* Reducido de 40px a 15px */
+  }
+
+  .texto {
+    font-size: 1.2rem;
+    margin-top: 0; /* Aseguramos que no haya margen extra */
+  }
+
+  .media .recuadro {
+    width: 80vw;
+    max-width: 400px;
+    height: 250px;
+  }
+}
+
+/* Responsive para móviles pequeños (≤480px) */
+@media (max-width: 480px) {
+  .menu {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .botones {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-acceder,
+  .btn-crear {
+    width: 80%;
+    text-align: center;
+  }
+
+  .contenido {
+    padding: 10px; /* Menos padding en móviles pequeños */
+    gap: 10px; /* Espacio mínimo entre elementos */
+  }
+
+  .texto {
+    font-size: 1rem;
+  }
+
+  .media .recuadro {
+    height: 200px;
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.media .ilustracion {
+  width: 300px;
+  height: auto;
+  border-radius: 20px;
+  border: 3px solid #00BFFF;
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .media .ilustracion {
+    width: 80vw;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .media .ilustracion {
+    height: auto;
+  }
+}
+
+
+
+
+	

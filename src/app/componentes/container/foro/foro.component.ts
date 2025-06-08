@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './foro.component.css'
 })
 export class ForoComponent {
+ isSidebarActive = false;
 
+  toggleSidebar() {
+    this.isSidebarActive = !this.isSidebarActive;
+  }
 }

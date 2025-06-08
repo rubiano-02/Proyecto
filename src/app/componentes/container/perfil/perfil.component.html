@@ -1,60 +1,91 @@
-<p>perfil works!</p>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Perfil DIJU</title>
-  <link rel="stylesheet" href="perfil.component.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
-  <div class="contenedor">
-    <!-- Barra lateral -->
-    <aside class="sidebar">
-      <div class="logo">🧠 DIJU</div>
-      <ul class="menu">
-        <li><i class="fas fa-home"></i> Inicio</li>
-        <li><i class="fas fa-calculator"></i> Ejercicios</li>
-        <li><i class="fas fa-comments"></i> Foro</li>
-        <li class="activo"><i class="fas fa-user"></i> Perfil</li>
-        <li><i class="fas fa-ellipsis-h"></i> Más</li>
-      </ul>
-    </aside>
+<button class="menu-toggle" (click)="toggleSidebar()" [class.active]="isSidebarActive" aria-label="Abrir menú">
+  <i class="fa-solid fa-bars"></i>
+</button>
 
-    <!-- Contenido principal -->
-    <main class="perfil-contenido">
-      <div class="perfil-card">
-        <div class="banner"></div>
+<div class="container">
+  <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
+    <nav class="menu">
+      <a routerLink="/principal" class="menu-item">
+        <img src="assets/Images/Casa.png" alt="Inicio" />
+        <span>Inicio</span>
+      </a>
+      <a routerLink="/matematicas-1" class="menu-item">
+        <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
+        <span>Ejercicios</span>
+      </a>
+      <a routerLink="/foro" class="menu-item">
+        <img src="assets/Images/Foro.png" alt="Foro" />
+        <span>Foro</span>
+      </a>
+      <a routerLink="/perfil" class="menu-item active">
+        <img src="assets/Images/Perfil.png" alt="Perfil" />
+        <span>Perfil</span>
+      </a>
+      <a routerLink="/configuracion" class="menu-item">
+        <img src="assets/Images/Mas.png" alt="Más" />
+        <span>Más</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="contenido">
+    <div class="perfil-card">
+
+      <!-- 🖼️ Banner editable -->
+      <div
+        class="banner"
+        (click)="seleccionarImagen('banner')"
+        [style.backgroundImage]="imagenBanner ? 'url(' + imagenBanner + ')' : 'url(assets/Images/BannerDefault.png)'"
+        style="background-size: cover; background-position: center; cursor: pointer;">
+      </div>
+      <input type="file" accept="image/*" (change)="cambiarImagen($event, 'banner')" #inputBanner hidden>
+
+      <div class="perfil-main-content">
         <div class="usuario">
-          <img src="https://via.placeholder.com/100" alt="Avatar usuario" class="avatar"/>
+          <!-- 🧑‍🦱 Avatar editable -->
+          <img
+            [src]="imagenAvatar || 'assets/Images/Foto De Perfil.png'"
+            alt="Foto de perfil del usuario"
+            class="avatar"
+            (click)="seleccionarImagen('avatar')"
+            style="cursor: pointer;" />
+          <input type="file" accept="image/*" (change)="cambiarImagen($event, 'avatar')" #inputAvatar hidden>
+
           <h2>Nombre</h2>
           <p class="usuario-id">Nombre de usuario</p>
-          <p class="fecha">Su cuenta fue creada el <br>20/03/2025</p>
-          <div class="libro-icono">📖</div>
+          <p class="fecha">Su cuenta fue creada el <br />20/03/2025</p>
+          <img src="assets/Images/Libro.png" alt="Libro" class="libro-icono" />
         </div>
+
         <div class="linea"></div>
+
         <div class="logros">
-          <h3>Logros <i class="fas fa-trophy"></i></h3>
+          <h3>
+            Logros <img src="assets/Images/Trofeo.png" alt="Trofeo" class="icono-titulo-logros" />
+          </h3>
           <div class="logro">
-            <i class="fas fa-bullseye rojo"></i> Obtén 90% en los ejercicios
-            <div class="barra"><div class="progreso" style="width: 60%"></div></div>
-            <span>60%</span>
+            <img src="assets/Images/Objetivo.png" alt="Objetivo" class="icono-logro" />
+            Obtén 90% en los ejercicios
+            <div class="barra">
+              <div class="progreso rojo" style="width: 60%"><span>60%</span></div>
+            </div>
           </div>
           <div class="logro">
-            <i class="fas fa-calendar-Check azul"></i> Juega 10 días seguidos
-            <div class="barra"><div class="progreso azul" style="width: 45%"></div></div>
-            <span>45%</span>
+            <img src="assets/Images/Calendario.png" alt="Calendario" class="icono-logro" />
+            Juega 10 días seguidos
+            <div class="barra">
+              <div class="progreso azul" style="width: 45%"><span>45%</span></div>
+            </div>
           </div>
           <div class="logro">
-            <i class="fas fa-fire naranja"></i> Constancia imparable
-            <div class="barra"><div class="progreso naranja" style="width: 75%"></div></div>
-            <span>75%</span>
+            <img src="assets/Images/Fuego.png" alt="Fuego" class="icono-logro" />
+            Constancia imparable
+            <div class="barra">
+              <div class="progreso naranja" style="width: 75%"><span>75%</span></div>
+            </div>
           </div>
         </div>
       </div>
-    </main>
-  </div>
-</body>
-</html>
-
+    </div>
+  </main>
+</div>

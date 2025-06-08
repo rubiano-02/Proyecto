@@ -5,9 +5,11 @@
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f6f6f4;
-  overflow-x: hidden;
+ 
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f6f6f6;
+  padding-top: 70px;
 }
 
 /* Header centrado */
@@ -19,23 +21,27 @@ body {
   height: 70px;
   background-color: white;
   z-index: 1000;
+
   display: flex;
+  justify-content: center; /* Centrar horizontalmente */
   align-items: center;
-  justify-content: center;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 0 60px; /* Para que el botón tenga espacio sin romper el centrado */
+  position: relative;
 }
 
 .menu-toggle {
   position: absolute;
-  left: 20px;
+  left: 15px; /* A la izquierda, fijo */
+  top: 6%;
+  transform: translateY(-50%);
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
   color: #333;
-  display: none;
+  z-index: 1100;
 }
-
 .menu-toggle.active {
   color: #00B7FF;
 }
@@ -44,11 +50,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px; /* Espacio entre los logos */
 }
 
 .logo-header {
   height: 45px;
-  margin: 0 10px;
 }
 
 /* Layout principal */
@@ -58,46 +64,53 @@ body {
   padding-top: 70px;
 }
 
-/* Sidebar - Visible en desktop */
-/* Sidebar - Versión corregida */
+/* Sidebar */
 .sidebar {
-  width: 240px; /* Ancho original que tenías */
+  width: 240px;
   background-color: #fff;
   position: fixed;
-  top: 60px;
+  top: 70px; /* Igual que header */
   left: 0;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 70px);
   transition: transform 0.3s ease;
   z-index: 900;
   padding: 20px 0;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  transform: translateX(-100%);
+  transform: translateX(-100%); /* Oculto por defecto en móvil */
 }
 
+/* Sidebar visible cuando activo */
 .sidebar.active {
   transform: translateX(0);
 }
 
-/* Contenido principal - Ajuste de margen */
+/* Contenido principal */
 .contenido {
   flex: 1;
-  padding: 20px;
-  margin-left: 0; /* Inicialmente sin margen */
+  padding: 40px;
+  margin-left: 0; /* Sin margen en móvil */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: margin-left 0.3s ease;
 }
 
-/* Cuando el menú está activo en desktop */
+/* En desktop, sidebar siempre visible y contenido con margen */
 @media (min-width: 769px) {
   .sidebar {
     transform: translateX(0);
   }
-  
+
   .contenido {
-    margin-left: 240px; /* Igual al ancho del menú */
+    margin-left: 240px; /* Ancho del sidebar */
+  }
+
+  .menu-toggle {
+    display: none; /* Ocultar menú hamburguesa en desktop */
   }
 }
 
-/* === ANIMACIONES DEL MENÚ (sin cambiar el ancho) === */
+/* Estilos del menú */
 .menu {
   display: flex;
   flex-direction: column;
@@ -108,7 +121,7 @@ body {
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 15px 25px; /* Un poco menos de padding */
+  padding: 15px 25px;
   cursor: pointer;
   text-decoration: none;
   color: #333;
@@ -118,7 +131,7 @@ body {
 
 .menu-item:hover {
   background-color: #f0f0f0;
-  transform: translateX(5px); /* Menos desplazamiento */
+  transform: translateX(5px);
   border-left: 4px solid #00B7FF;
 }
 
@@ -128,32 +141,24 @@ body {
 }
 
 .menu-item img {
-  width: 32px; /* Tamaño original */
+  width: 32px;
   height: 32px;
   margin-right: 15px;
   transition: transform 0.3s ease;
 }
 
 .menu-item:hover img {
-  transform: scale(1.1); /* Animación más sutil */
+  transform: scale(1.1);
 }
 
 .menu-item span {
-  font-size: 20px; /* Tamaño original */
+  font-size: 20px;
   color: #333;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 /* Contenido principal - Cuadros con animaciones */
-.contenido {
-  flex: 1;
-  padding: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .tarjeta-opciones {
   display: grid;
   grid-template-columns: repeat(2, 280px);
@@ -211,58 +216,29 @@ body {
   transform: scale(1.1);
 }
 
-/* Estilos específicos para cada opción */
-.opcion.configuracion {
-  border-color: #00b4f1;
-}
-.opcion.configuracion h3 {
-  color: #00b4f1;
-}
-
-.opcion.cerrar-sesion {
-  border-color: #00b4f1;
-}
-.opcion.cerrar-sesion h3 {
-  color: #00b4f1;
-}
-
-.opcion.ayuda {
-  border-color: #00b4f1;
-}
-.opcion.ayuda h3 {
-  color: #00b4f1;
-}
-
-.opcion.calificanos {
-  border-color:#00b4f1;
-}
-.opcion.calificanos h3 {
-  color: #00b4f1;
-}
-
 /* Responsive */
 @media (max-width: 992px) {
   .menu-toggle {
-    display: block;
+    display: block; /* Mostrar menú hamburguesa en móvil */
   }
-  
+
   .sidebar {
-    position: fixed;
     top: 70px;
-    left: 0;
     height: calc(100vh - 70px);
     transform: translateX(-100%);
     z-index: 999;
+    position: fixed;
   }
-  
+
   .sidebar.active {
     transform: translateX(0);
   }
-  
+
   .contenido {
     padding: 30px 20px;
+    margin-left: 0; /* Sin margen en móvil */
   }
-  
+
   .tarjeta-opciones {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 240px);
@@ -277,27 +253,28 @@ body {
     grid-template-rows: repeat(4, 200px);
     max-width: 500px;
   }
-  
+
   .logo-header {
     height: 40px;
   }
-  
+
   .menu-item {
     padding: 15px 25px;
   }
-  
+
   .menu-item img {
     width: 32px;
     height: 32px;
     margin-right: 15px;
   }
-  
+
   .menu-item span {
     font-size: 18px;
   }
+
   .opcion img {
-    max-width: 80px; /* Ajusta este valor para cambiar el tamaño en móvil */
-    height: auto; /* Mantiene la proporción */
+    max-width: 80px;
+    height: auto;
   }
 }
 
@@ -305,35 +282,34 @@ body {
   .header {
     height: 60px;
   }
-  
+
   .container {
     padding-top: 60px;
   }
-  
+
   .sidebar {
     top: 60px;
     height: calc(100vh - 60px);
   }
-  
+
   .logo-header {
     height: 35px;
   }
-  
+
   .tarjeta-opciones {
     padding: 20px;
   }
-  
+
   .opcion {
     padding: 20px;
   }
-  
+
   .opcion h3 {
     font-size: 16px;
     margin-bottom: 15px;
   }
-  
+
   .opcion img {
     max-width: 120px;
   }
 }
-

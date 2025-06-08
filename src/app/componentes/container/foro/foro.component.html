@@ -1,109 +1,87 @@
-<p>foro works!</p>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Foro - DIJU</title>
-  <link rel="stylesheet" href="foro.component.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <header class="header">
-    <button class="menu-toggle" id="menu-toggle">☰</button>
-    <img src="Images/Koala_VSRSF.png" alt="Logo DIJU" class="logo-header">
-    <img src="Images/Diju Logo.png" class="logo-header">
-  </header>
-  
-  <div class="container">
-    <aside class="sidebar">
-      <div class="menu">
-        <div class="menu-item">
-          <img src="Images/Casa.jpeg" alt="Inicio">
-          <span>Inicio</span>
+<!-- Quita el header si ya tienes uno global -->
+<!-- Solo el botón toggle para abrir/cerrar el sidebar -->
+
+<button
+  class="menu-toggle"
+  (click)="toggleSidebar()"
+  [class.active]="isSidebarActive"
+  aria-label="Abrir menú"
+>
+  <i class="fa-solid fa-bars"></i>
+</button>
+
+<div class="container">
+ <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
+    <div class="menu">
+      <div class="menu-item" routerLink="/principal" routerLinkActive="activo">
+        <img src="assets/Images/Casa.jpeg" alt="Inicio" />
+        <span>Inicio</span>
+      </div>
+
+      <div class="menu-item" routerLink="/matematicas-1" routerLinkActive="activo">
+        <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
+        <span>Ejercicios</span>
+      </div>
+
+      <div class="menu-item" routerLink="/foro" routerLinkActive="activo">
+        <img src="assets/Images/Foro.jpeg" alt="Foro" />
+        <span>Foro</span>
+      </div>
+
+      <div class="menu-item" routerLink="/perfil" routerLinkActive="activo">
+        <img src="assets/Images/Perfil.jpeg" alt="Perfil" />
+        <span>Perfil</span>
+      </div>
+
+      <div class="menu-item" routerLink="/configuracion" routerLinkActive="activo">
+        <img src="assets/Images/Mas.jpeg" alt="Más" />
+        <span>Más</span>
+      </div>
+    </div>
+  </aside>
+
+
+  <main class="foro-contenido">
+    <section class="compartir-experiencia">
+      <h2>📌 Comparte tu experiencia</h2>
+      <textarea
+        placeholder="¿Te has enfrentado a algún desafío? Comparte cómo lo superaste y ayuda a otros con tu historia."
+      ></textarea>
+      <button class="enviar-btn">
+        <img src="assets/Images/Enviar.png" alt="Enviar" />
+      </button>
+    </section>
+
+    <section class="pregunta">
+      <h2>💡 Pregunta lo que quieras</h2>
+      <textarea
+        placeholder="No hay preguntas tontas, solo oportunidades de aprender. ¿Tienes dudas? ¡La comunidad te ayuda!"
+      ></textarea>
+      <button class="enviar-btn">
+        <img src="assets/Images/Enviar.png" alt="Enviar" />
+      </button>
+    </section>
+
+    <section class="forista-mes">
+      <h2>🏆 Forista del mes</h2>
+      <div class="mensaje">
+        Los participantes más activos y solidarios reciben un reconocimiento especial.
+        ¿Serás el próximo?
+      </div>
+      <div class="ranking">
+        <div class="puesto puesto1">
+          <div class="numero">1</div>
+          <div class="nombre"></div>
         </div>
-        <div class="menu-item">
-          <img src="Images/Ejercicios.png" alt="Ejercicios">
-          <span>Ejercicios</span>
+        <div class="puesto puesto2">
+          <div class="numero">2</div>
+          <div class="nombre"></div>
         </div>
-        <div class="menu-item ">
-          <img src="Images/Foro.jpeg" alt="Foro">
-          <span>Foro</span>
-        </div>
-        <div class="menu-item">
-          <img src="Images/Perfil.jpeg" alt="Perfil">
-          <span>Perfil</span>
-        </div>
-        <div class="menu-item">
-          <img src="Images/Mas.jpeg" alt="Más">
-          <span>Más</span>
+        <div class="puesto puesto3">
+          <div class="numero">3</div>
+          <div class="nombre"></div>
         </div>
       </div>
-    </aside>
-
-    <main class="foro-contenido">
-      <section class="compartir-experiencia">
-        <h2>📌 Comparte tu experiencia</h2>
-        <textarea placeholder="¿Te has enfrentado a algún desafío? Comparte cómo lo superaste y ayuda a otros con tu historia."></textarea>
-        <button class="enviar-btn"><img src="Images/Enviar.png" alt="Enviar"></button>
-      </section>
-
-      <section class="pregunta">
-        <h2>💡 Pregunta lo que quieras</h2>
-        <textarea placeholder="No hay preguntas tontas, solo oportunidades de aprender. ¿Tienes dudas? ¡La comunidad te ayuda!"></textarea>
-        <button class="enviar-btn"><img src="Images/Enviar.png" alt="Enviar"></button>
-      </section>
-
-      <section class="forista-mes">
-        <h2>🏆 Forista del mes</h2>
-        <div class="mensaje">
-          Los participantes más activos y solidarios reciben un reconocimiento especial. ¿Serás el próximo?
-        </div>
-        <div class="ranking">
-          <div class="puesto puesto1">
-            <div class="numero">1</div>
-            <div class="nombre"></div>
-          </div>
-          <div class="puesto puesto2">
-            <div class="numero">2</div>
-            <div class="nombre"></div>
-          </div>
-          <div class="puesto puesto3">
-            <div class="numero">3</div>
-            <div class="nombre"></div>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <script>
-    const toggle = document.getElementById('menu-toggle');
-    const sidebar = document.querySelector('.sidebar');
-  
-    // Control del menú hamburguesa
-    toggle.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
-
-    // Ajuste inicial al cargar la página
-    window.addEventListener('load', function() {
-      if (window.innerWidth > 768) {
-        sidebar.classList.add('active');
-      }
-    });
-
-    // Manejo de redimensionamiento
-    window.addEventListener('resize', function() {
-      if (window.innerWidth > 768) {
-        sidebar.classList.add('active');
-        toggle.style.display = 'none';
-      } else {
-        sidebar.classList.remove('active');
-        toggle.style.display = 'block';
-      }
-    });
-  </script>
-</body>
-</html>
-
+    </section>
+  </main>
+</div>
