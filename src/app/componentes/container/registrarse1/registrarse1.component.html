@@ -56,6 +56,64 @@
   </button>
 </form>
 
+<!-- Modal para datos del padre/tutor (solo si edad < 18) -->
+<div class="modal-backdrop" *ngIf="mostrarModalPadre"></div>
+<div *ngIf="mostrarModalPadre" class="modal">
+  <h2>Datos del Padre o Tutor</h2>
+
+  <input type="text" placeholder="Nombre del padre/tutor" [(ngModel)]="padre.nombre" name="padreNombre" required>
+<input type="text" placeholder="Teléfono" [(ngModel)]="padre.telefono" name="padreTelefono">
+<input type="email" placeholder="Correo del padre/tutor" [(ngModel)]="padre.email" name="padreEmail">
+<input type="text" placeholder="Dirección" [(ngModel)]="padre.direccion" name="padreDireccion">
+
+  <button (click)="guardarPadreYTutor()">Guardar y continuar</button>
+  <button (click)="cerrarModalPadre()">Cancelar</button>
+</div>
+
+
+
+<!-- Modal con fondo (backdrop) -->
+<!-- Fuera del form, al final de <main> -->
+<button (click)="abrirModal()" style="margin-top: 20px;">Editar / Eliminar Usuario</button>
+<div class="modal-backdrop" *ngIf="mostrarModal"></div>
+<div *ngIf="mostrarModal">
+  <div class="modal-backdrop" (click)="cerrarModal()"></div>
+
+  <div class="modal">
+    <h2>Buscar Usuario</h2>
+
+    <input type="number" [(ngModel)]="usuarioIdBuscar" placeholder="Ingrese ID del usuario" name="buscarId" />
+    <button (click)="buscarUsuarioPorId()">Buscar</button>
+
+    <div *ngIf="usuarioEncontrado">
+      <label>Nombre:</label>
+      <input [(ngModel)]="usuarioEncontrado.nombre" name="nombreEncontrado" />
+      <label>Edad:</label>
+      <input type="number" [(ngModel)]="usuarioEncontrado.edad" name="edadEncontrado" />
+      <label>Correo:</label>
+      <input [(ngModel)]="usuarioEncontrado.email" name="emailEncontrado" />
+      <label>Contraseña:</label>
+      <input [(ngModel)]="usuarioEncontrado.contrasena" name="contrasenaEncontrado" />
+
+      <button (click)="actualizarUsuario()">Editar</button>
+      <button (click)="eliminarUsuario()">Eliminar</button>
+    </div>
+
+    <div *ngIf="usuarioNoEncontrado">
+      <p style="color: red;">Usuario no encontrado</p>
+    </div>
+
+    <button (click)="cerrarModal()">Cerrar</button>
+  </div>
+</div>
+
+
+    <!-- Botón para cerrar -->
+
+
+<!-- Modal o contenedor con campos para editar
+  -->
+
 
   <p class="terminos" data-aos="fade-in" data-aos-delay="500">
     Al registrarte en DIJU, aceptas nuestros<br>

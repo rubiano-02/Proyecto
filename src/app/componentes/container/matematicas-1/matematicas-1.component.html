@@ -1,10 +1,14 @@
-<p>inicio works!</p>
 <div class="contenedor">
-  <h1>🧠 ¡Suma y Aprende!</h1>
+  <h1 data-aos="fade-down">🧠 ¡Suma y Aprende!</h1>
 
-  <div *ngIf="!terminado" class="tarjeta">
+  <div *ngIf="!terminado" class="tarjeta" data-aos="zoom-in">
     <h2>Ejercicio {{ ejercicioActual }} de {{ totalEjercicios }}</h2>
-    <p class="pregunta">{{ numero1 }} + {{ numero2 }} = ?</p>
+
+    <div class="pregunta-grande" data-aos="fade-up">
+      <span>{{ numero1 }}</span>
+      <span class="signo">+</span>
+      <span>{{ numero2 }}</span>
+    </div>
 
     <input type="number" [(ngModel)]="respuestaUsuario" placeholder="Tu respuesta" [disabled]="mensaje !== ''">
     <button (click)="verificar()" [disabled]="mensaje !== '' || respuestaUsuario === null">Comprobar</button>
@@ -12,10 +16,14 @@
     <p class="mensaje" [style.color]="color">{{ mensaje }}</p>
   </div>
 
-  <div *ngIf="terminado" class="resultado">
+  <div *ngIf="terminado" class="resultado" data-aos="zoom-in">
     <h2>🎉 ¡Has terminado!</h2>
     <p>Respuestas correctas: {{ aciertos }} de {{ totalEjercicios }}</p>
     <p class="calificacion">Tu calificación: {{ calificacion }} / 5 ⭐</p>
-    <button (click)="reiniciar()">Intentar de nuevo 🔁</button>
+
+    <div class="botones-finales">
+      <button (click)="reiniciar()">Intentar de nuevo 🔁</button>
+      <button class="volver" routerLink="/principal">Volver al inicio ⬅️</button>
+    </div>
   </div>
 </div>

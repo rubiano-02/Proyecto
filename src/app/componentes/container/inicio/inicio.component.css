@@ -12,11 +12,11 @@ body {
 body, html {
   height: 100%;
 }
+
 .header {
   animation: fadeIn 1s ease-out;
 }
 
-/* Aplica a texto e imagen */
 .texto {
   animation: fadeInUp 1s ease-out;
 }
@@ -24,6 +24,85 @@ body, html {
 .media .recuadro {
   animation: fadeInUp 1.2s ease-out;
 }
+
+/* ------------------ NUEVO: Estilos de la sección de bienvenida ------------------ */
+.inicio-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.bienvenida-card {
+  max-width: 500px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 191, 255, 0.15);
+  text-align: center;
+}
+
+.bienvenida-card h1 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #00BFFF;
+}
+
+.bienvenida-card p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.botones-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.accion-btn {
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.accion-btn.principal {
+  background-color: #00BFFF;
+  color: white;
+}
+
+.accion-btn.principal:hover {
+  background-color: #0099cc;
+  transform: scale(1.05);
+}
+
+.accion-btn.secundario {
+  background-color: white;
+  color: #00BFFF;
+  border: 2px solid #00BFFF;
+}
+
+.accion-btn.secundario:hover {
+  background-color: #e6f7ff;
+  transform: scale(1.05);
+}
+
+/* Ilustración en bienvenida */
+.ilustracion img {
+  width: 300px;
+  border-radius: 20px;
+  border: 3px solid #00BFFF;
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.2);
+}
+
+/* -------------------------------------------------------------------------- */
 
 /* --- ANIMACIONES HOVER EN BOTONES --- */
 .btn-acceder:hover {
@@ -38,12 +117,13 @@ body, html {
   transform: scale(1.05);
 }
 
-/* Hover sobre enlaces del menú */
 .menu a:hover {
   color: #00BFFF;
   text-decoration: underline;
   transition: color 0.3s ease;
 }
+
+/* --- HEADER --- */
 .header {
   display: flex;
   flex-wrap: wrap;
@@ -113,17 +193,18 @@ body, html {
 
 .linea {
   border: 1px solid #00BFFF;
-  margin: 10px 0; /* Ajuste general para reducir espacio */
+  margin: 10px 0;
   width: 100%;
 }
 
+/* --- CONTENIDO GENERAL --- */
 .contenido {
   min-height: calc(100vh - 120px);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px; /* Reducido de 40px a 20px */
+  gap: 20px;
   text-align: center;
 }
 
@@ -132,7 +213,7 @@ body, html {
   font-size: 1.5rem;
   color: #333;
   text-align: center;
-  margin-top: 0; /* Elimina margen superior adicional */
+  margin-top: 0;
 }
 
 .texto strong {
@@ -152,7 +233,7 @@ body, html {
   text-align: center;
 }
 
-/* Responsive para tablets y móviles */
+/* ------------------ RESPONSIVE ------------------ */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
@@ -173,7 +254,7 @@ body, html {
 
   .linea {
     order: 2;
-    margin: 10px 0; /* Reducido de 15px a 10px */
+    margin: 10px 0;
   }
 
   .botones {
@@ -185,13 +266,13 @@ body, html {
 
   .contenido {
     flex-direction: column;
-    padding: 10px 20px; /* Reducido espacio vertical */
-    gap: 15px; /* Reducido de 40px a 15px */
+    padding: 10px 20px;
+    gap: 15px;
   }
 
   .texto {
     font-size: 1.2rem;
-    margin-top: 0; /* Aseguramos que no haya margen extra */
+    margin-top: 0;
   }
 
   .media .recuadro {
@@ -199,9 +280,13 @@ body, html {
     max-width: 400px;
     height: 250px;
   }
+
+  .ilustracion img {
+    width: 80vw;
+    max-width: 400px;
+  }
 }
 
-/* Responsive para móviles pequeños (≤480px) */
 @media (max-width: 480px) {
   .menu {
     flex-direction: column;
@@ -220,8 +305,8 @@ body, html {
   }
 
   .contenido {
-    padding: 10px; /* Menos padding en móviles pequeños */
-    gap: 10px; /* Espacio mínimo entre elementos */
+    padding: 10px;
+    gap: 10px;
   }
 
   .texto {
@@ -231,7 +316,13 @@ body, html {
   .media .recuadro {
     height: 200px;
   }
+
+  .ilustracion img {
+    width: 90%;
+  }
 }
+
+/* --- ANIMACIONES --- */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -251,28 +342,3 @@ body, html {
     opacity: 1;
   }
 }
-.media .ilustracion {
-  width: 300px;
-  height: auto;
-  border-radius: 20px;
-  border: 3px solid #00BFFF;
-  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.2);
-}
-
-@media (max-width: 768px) {
-  .media .ilustracion {
-    width: 80vw;
-    max-width: 400px;
-  }
-}
-
-@media (max-width: 480px) {
-  .media .ilustracion {
-    height: auto;
-  }
-}
-
-
-
-
-	
