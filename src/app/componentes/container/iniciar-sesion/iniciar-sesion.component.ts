@@ -23,28 +23,33 @@ export class IniciarSesionComponent implements OnInit {
     setTimeout(() => AOS.refresh(), 0);
   }
 
-  // **** CAMBIO AQUÍ: Envía una solicitud POST al endpoint /login del backend ****
   iniciarSesion() {
     const credenciales = {
-      usuario: this.email, // El backend espera 'usuario' que puede ser email o nombre
+      usuario: this.email,
       contrasena: this.contrasena
     };
 
-    // Realiza la petición POST a tu endpoint de login en el backend
     this.http.post<any>('http://localhost:3000/login', credenciales).subscribe(
       response => {
         if (response.success) {
           alert('Inicio de sesión exitoso');
-          // Aquí podrías guardar el userId o un token de sesión si tu backend lo devuelve
-          console.log('ID de usuario logueado:', response.userId);
-          this.router.navigate(['/principal']);  // redirige al dashboard
+          // ¡¡¡CAMBIO CRUCIAL AQUÍ!!!
+          if (response.userId) { // Asegúrate de que response.userId existe antes de guardarlo
+            localStorage.setItem('userId', response.userId); // <--- ¡AÑADIR ESTA LÍNEA!
+            console.log('ID de usuario logueado guardado en localStorage:', response.userId);
+          } else {
+            console.warn('Backend no devolvió userId en la respuesta de login.');
+            alert('Inicio de sesión exitoso, pero no se pudo obtener el ID de usuario. Algunas funciones podrían no estar disponibles.');
+          }
+          // Puedes guardar también un token si tu backend lo devuelve
+          // localStorage.setItem('token', response.token);
+
+          this.router.navigate(['/principal']);
         } else {
-          // Si el backend devuelve success: false con un error
           alert(response.error || 'Correo/usuario o contraseña incorrectos');
         }
       },
       error => {
-        // Manejo de errores de la petición HTTP (ej. servidor no responde, error de red)
         console.error('Error al iniciar sesión:', error);
         alert('Error en el servidor al intentar iniciar sesión. Inténtalo de nuevo más tarde.');
       }
