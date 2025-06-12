@@ -23,21 +23,31 @@ export class IniciarSesionComponent implements OnInit {
     setTimeout(() => AOS.refresh(), 0);
   }
 
+  // **** CAMBIO AQUÍ: Envía una solicitud POST al endpoint /login del backend ****
   iniciarSesion() {
-    this.http.get<any[]>('http://localhost:3000/usuarios').subscribe(usuarios => {
-      const usuario = usuarios.find(u => 
-        (u.email === this.email || u.nombre === this.email) && u.contraseña === this.contrasena
-      );
+    const credenciales = {
+      usuario: this.email, // El backend espera 'usuario' que puede ser email o nombre
+      contrasena: this.contrasena
+    };
 
-      if (usuario) {
-        alert('Inicio de sesión exitoso');
-        this.router.navigate(['/principal']);  // redirige al dashboard
-      } else {
-        alert('Correo/usuario o contraseña incorrectos');
+    // Realiza la petición POST a tu endpoint de login en el backend
+    this.http.post<any>('http://localhost:3000/login', credenciales).subscribe(
+      response => {
+        if (response.success) {
+          alert('Inicio de sesión exitoso');
+          // Aquí podrías guardar el userId o un token de sesión si tu backend lo devuelve
+          console.log('ID de usuario logueado:', response.userId);
+          this.router.navigate(['/principal']);  // redirige al dashboard
+        } else {
+          // Si el backend devuelve success: false con un error
+          alert(response.error || 'Correo/usuario o contraseña incorrectos');
+        }
+      },
+      error => {
+        // Manejo de errores de la petición HTTP (ej. servidor no responde, error de red)
+        console.error('Error al iniciar sesión:', error);
+        alert('Error en el servidor al intentar iniciar sesión. Inténtalo de nuevo más tarde.');
       }
-    }, error => {
-      console.error('Error al iniciar sesión:', error);
-      alert('Error en el servidor');
-    });
+    );
   }
 }

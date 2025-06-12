@@ -75,6 +75,13 @@ const bcrypt = require('bcrypt'); // No olvides instalarlo con npm i bcrypt
 app.post('/login', (req, res) => {
   const { usuario, contrasena } = req.body;
 
+  // --- INICIO DE CONSOLE.LOGS PARA DEPURACIÓN ---
+    console.log('--- INTENTO DE LOGIN ---');
+    console.log('Usuario/Email recibido:', usuario);
+    console.log('Contraseña recibida (texto plano desde frontend):', contrasena); // NO DEJAR ESTA LÍNEA EN PRODUCCIÓN
+    console.log('-------------------------');
+    // --- FIN DE CONSOLE.LOGS PARA DEPURACIÓN ---
+
   if (!usuario || !contrasena) {
     return res.status(400).json({ success: false, error: 'Faltan datos' });
   }
