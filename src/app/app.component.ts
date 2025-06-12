@@ -10,7 +10,9 @@ import AOS from 'aos';
 export class AppComponent implements OnInit {
   title = 'DIJU';
 
-  ngOnInit(): void {
+ngOnInit() {
+  if (typeof window !== 'undefined') {
     AOS.init();
   }
+}
 }

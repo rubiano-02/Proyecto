@@ -101,7 +101,6 @@ export class Registrarse1Component implements OnInit {
   });
 }
 
-
   guardarPadreYTutor() {
   if (!this.padre.nombre || this.padre.nombre.trim() === '') {
     alert('Por favor completa el nombre del padre o tutor.');
@@ -161,7 +160,6 @@ export class Registrarse1Component implements OnInit {
     this.usuarioTemporal = null;
   }
 
-
   limpiarCampos() {
     this.nombre = '';
     this.edad = null;
@@ -196,7 +194,6 @@ export class Registrarse1Component implements OnInit {
     });
   }
 
-
   actualizarUsuario() {
     if (!this.usuarioEncontrado) return;
 
@@ -217,3 +214,5 @@ export class Registrarse1Component implements OnInit {
   }
 
 }
+
+
