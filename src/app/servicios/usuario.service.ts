@@ -17,4 +17,9 @@ export class UsuarioService {
   registrarUsuario(usuario: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, usuario);
   }
+  // ¡NUEVO MÉTODO QUE FALTABA!
+  obtenerUsuarioPorId(id: number): Observable<any> {
+    // Esta ruta apunta a http://localhost:3000/usuarios/ID_DEL_USUARIO
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
 }

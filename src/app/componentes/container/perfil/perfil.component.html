@@ -31,7 +31,6 @@
   <main class="contenido">
     <div class="perfil-card">
 
-      <!-- 🖼️ Banner editable -->
       <div
         class="banner"
         (click)="seleccionarImagen('banner')"
@@ -40,9 +39,11 @@
       </div>
       <input type="file" accept="image/*" (change)="cambiarImagen($event, 'banner')" #inputBanner hidden>
 
+      <button (click)="uploadBanner()" [disabled]="!selectedBannerFile">Subir Fondo</button>
+      <p *ngIf="bannerUploadMessage" class="upload-message">{{ bannerUploadMessage }}</p>
+
       <div class="perfil-main-content">
         <div class="usuario">
-          <!-- 🧑‍🦱 Avatar editable -->
           <img
             [src]="imagenAvatar || 'assets/Images/Foto De Perfil.png'"
             alt="Foto de perfil del usuario"
@@ -51,9 +52,11 @@
             style="cursor: pointer;" />
           <input type="file" accept="image/*" (change)="cambiarImagen($event, 'avatar')" #inputAvatar hidden>
 
-          <h2>Nombre</h2>
-          <p class="usuario-id">Nombre de usuario</p>
-          <p class="fecha">Su cuenta fue creada el <br />20/03/2025</p>
+          <button (click)="uploadAvatar()" [disabled]="!selectedAvatarFile">Subir Foto</button>
+          <p *ngIf="avatarUploadMessage" class="upload-message">{{ avatarUploadMessage }}</p>
+
+          <h2>{{ userProfile.nombre }}</h2>
+          <p class="fecha">Su cuenta fue creada el <br />{{ userProfile.fecha_registro | date:'dd/MM/yyyy' }}</p>
           <img src="assets/Images/Libro.png" alt="Libro" class="libro-icono" />
         </div>
 
