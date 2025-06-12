@@ -9,43 +9,66 @@ import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/dr
   styleUrl: './lectura-1.component.css'
 })
 export class Lectura1Component {
-   opciones = ['cama', 'cielo', 'fruta'];
-  palabraCorrecta = 'cama';
-  palabraSeleccionada: string | null = null;
+   opciones = ['cama', 'sol', 'ratón'];
+  respuestas: (string | null)[] = [null, null, null];
+  correctas = ['cama', 'sol', 'ratón'];
+  animar = [false, false, false];
   mensaje = '';
   color = '';
+ calificacion = 5; // Empieza en 5
+ intentosFallidos: number = 0;
+  soltar(event: CdkDragDrop<any>, index?: number) {
+    if (index === undefined || index < 0 || index > 2) return;
+    if (event.previousContainer === event.container) return;
 
-  soltar(event: CdkDragDrop<any>) {
-  if (event.previousContainer === event.container) {
-    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-  } else {
-    // Solo permitir una palabra en el cajón
-    if (event.container.id === 'cajon') {
-      this.palabraSeleccionada = event.previousContainer.data[event.previousIndex];
+    const item = event.previousContainer.data[event.previousIndex];
+
+    if (!this.respuestas[index]) {
+      this.respuestas[index] = item;
       event.previousContainer.data.splice(event.previousIndex, 1);
-    } else if (event.container.id === 'opciones') {
-      if (this.palabraSeleccionada) {
-        event.container.data.push(this.palabraSeleccionada);
-        this.palabraSeleccionada = null;
-      }
+
+      this.animar[index] = false;
+      setTimeout(() => this.animar[index] = true, 10);
     }
   }
-}
 
+  insertarPorClick(opcion: string, i: number) {
+    const index = this.respuestas.findIndex(r => r === null);
+    if (index !== -1) {
+      this.animar[index] = false;
+      this.respuestas[index] = opcion;
+      this.opciones.splice(i, 1);
+      setTimeout(() => this.animar[index] = true, 10);
+    }
+  }
+
+  sacarDelCajon(index: number) {
+    if (this.respuestas[index]) {
+      this.opciones.push(this.respuestas[index]!);
+      this.respuestas[index] = null;
+    }
+  }
 
   verificar() {
-    if (!this.palabraSeleccionada) {
-      this.mensaje = 'Debes completar la frase. 📌';
-      this.color = 'orange';
-      return;
-    }
+       const palabraCorrecta = ['cama', 'sol', 'ratón'];
 
-    if (this.palabraSeleccionada === this.palabraCorrecta) {
-      this.mensaje = '¡Correcto! 🎉';
-      this.color = 'green';
-    } else {
-      this.mensaje = 'Incorrecto. Intenta de nuevo. ❌';
-      this.color = 'red';
-    }
+  const esCorrecto = this.respuestas.length === palabraCorrecta.length &&
+                     this.respuestas.every((r, i) => r === palabraCorrecta[i]);
+
+  if (this.respuestas.includes(null)) {
+    this.mensaje = 'Debes completar todas las palabras. 📌';
+    this.color = 'orange';
+    return;
+  }
+
+  if (esCorrecto) {
+    this.mensaje = `¡Correcto! 🎉 Tu calificación: ${this.calificacion}/5`;
+    this.color = 'green';
+  } else {
+    this.intentosFallidos++;
+    this.calificacion = Math.max(0, 5 - this.intentosFallidos);
+    this.mensaje = `Incorrecto. Intenta de nuevo.`;
+    this.color = 'red';
+  }
   }
 }

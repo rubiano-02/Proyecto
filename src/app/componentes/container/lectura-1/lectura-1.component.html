@@ -1,28 +1,57 @@
 <div class="contenedor" data-aos="fade-up">
-  <h1 data-aos="zoom-in">📚 ¡Completa la frase!</h1>
+  <h1 data-aos="zoom-in"> ¡Completa la oracion!</h1>
 
   <p class="oracion" data-aos="fade-right">
     El gato está en la 
-    <span 
-      class="cajon"
-      cdkDropList 
-      [cdkDropListData]="[palabraSeleccionada]" 
-      [cdkDropListConnectedTo]="['opciones']"
-      (cdkDropListDropped)="soltar($event)">
-      <ng-container *ngIf="palabraSeleccionada; else vacio">
-        <div class="opcion insertada" cdkDrag>{{ palabraSeleccionada }}</div>
+    <span class="cajon" cdkDropList id="cajon0" [cdkDropListData]="[]" [cdkDropListConnectedTo]="['opciones']"
+      (cdkDropListDropped)="soltar($event, 0)">
+      <ng-container *ngIf="respuestas[0]; else vacio1">
+        <div class="opcion insertada" [class.animacion-insercion]="animar[0]" cdkDrag (click)="sacarDelCajon(0)">
+          {{ respuestas[0] }}
+        </div>
       </ng-container>
-      <ng-template #vacio>_____</ng-template>
-    </span>.
+      <ng-template #vacio1>_____</ng-template>
+    </span>, se estira y lame su pata. Afuera brilla el 
+    <span class="cajon" cdkDropList id="cajon1" [cdkDropListData]="[]" [cdkDropListConnectedTo]="['opciones']"
+      (cdkDropListDropped)="soltar($event, 1)">
+      <ng-container *ngIf="respuestas[1]; else vacio2">
+        <div class="opcion insertada" [class.animacion-insercion]="animar[1]" cdkDrag (click)="sacarDelCajon(1)">
+          {{ respuestas[1] }}
+        </div>
+      </ng-container>
+      <ng-template #vacio2>_____</ng-template>
+    </span>, dorado como un farol. De pronto pasa un 
+    <span class="cajon" cdkDropList id="cajon2" [cdkDropListData]="[]" [cdkDropListConnectedTo]="['opciones']"
+      (cdkDropListDropped)="soltar($event, 2)">
+      <ng-container *ngIf="respuestas[2]; else vacio3">
+        <div class="opcion insertada" [class.animacion-insercion]="animar[2]" cdkDrag (click)="sacarDelCajon(2)">
+          {{ respuestas[2] }}
+        </div>
+      </ng-container>
+      <ng-template #vacio3>_____</ng-template>
+    </span>, corriendo con un botón. El gato apenas lo vio... y durmiendo se quedó.
   </p>
 
-  <div class="opciones" id="opciones" cdkDropList [cdkDropListData]="opciones" [cdkDropListConnectedTo]="['opciones', 'cajon']" (cdkDropListDropped)="soltar($event)" data-aos="zoom-in-up">
-    <div *ngFor="let opcion of opciones" class="opcion" cdkDrag>
+  <div class="opciones" id="opciones" cdkDropList
+       [cdkDropListData]="opciones"
+       [cdkDropListConnectedTo]="['cajon0', 'cajon1', 'cajon2']"
+       (cdkDropListDropped)="soltar($event)"
+       data-aos="zoom-in-up">
+    <div *ngFor="let opcion of opciones; let i = index"
+         class="opcion"
+         cdkDrag
+         (click)="insertarPorClick(opcion, i)">
       {{ opcion }}
     </div>
   </div>
 
-  <button class="verificar" (click)="verificar()" data-aos="fade-up">✅ Verificar</button>
+  <button class="verificar" (click)="verificar()" data-aos="zoom-in-up">✅ Verificar</button>
+
 
   <p class="mensaje" *ngIf="mensaje" [style.color]="color">{{ mensaje }}</p>
+
+
+<p *ngIf="calificacion === 0" style="color:crimson; font-weight: bold; font-size: 20px;">
+  💥 Has agotado tus intentos. Calificación: 0/5
+</p>
 </div>
