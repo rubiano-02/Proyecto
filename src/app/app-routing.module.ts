@@ -9,6 +9,7 @@ import { IniciarSesionComponent } from './componentes/container/iniciar-sesion/i
 import { PerfilComponent } from './componentes/container/perfil/perfil.component';
 import { Matematicas1Component } from './componentes/container/matematicas-1/matematicas-1.component';
 import { Registrarse1Component } from './componentes/container/registrarse1/registrarse1.component';
+import { Lectura1Component } from './componentes/container/lectura-1/lectura-1.component';
 
 const routes: Routes = [
   {path: 'inicio', component:InicioComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'matematicas-1', component: Matematicas1Component},
   {path: 'registrarse1', component: Registrarse1Component},
   {path: 'principal', component: PrincipalComponent},
+  {path: 'lectura-1', component: Lectura1Component},
   { path: '', redirectTo: '/iniciar-sesion', pathMatch: 'full' }
 ];
 

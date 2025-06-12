@@ -14,6 +14,8 @@ import { ConfiguracionComponent } from './componentes/container/configuracion/co
 import { Matematicas1Component } from './componentes/container/matematicas-1/matematicas-1.component';
 import { Registrarse1Component } from './componentes/container/registrarse1/registrarse1.component';
 import { HttpClientModule } from '@angular/common/http';
+import { Lectura1Component } from './componentes/container/lectura-1/lectura-1.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,14 @@ import { HttpClientModule } from '@angular/common/http';
     ConfiguracionComponent,
     Matematicas1Component,
     Registrarse1Component,
+    Lectura1Component,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule
 
   ],
   providers: [

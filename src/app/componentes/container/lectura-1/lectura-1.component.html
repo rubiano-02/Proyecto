@@ -1,0 +1,28 @@
+<div class="contenedor" data-aos="fade-up">
+  <h1 data-aos="zoom-in">📚 ¡Completa la frase!</h1>
+
+  <p class="oracion" data-aos="fade-right">
+    El gato está en la 
+    <span 
+      class="cajon"
+      cdkDropList 
+      [cdkDropListData]="[palabraSeleccionada]" 
+      [cdkDropListConnectedTo]="['opciones']"
+      (cdkDropListDropped)="soltar($event)">
+      <ng-container *ngIf="palabraSeleccionada; else vacio">
+        <div class="opcion insertada" cdkDrag>{{ palabraSeleccionada }}</div>
+      </ng-container>
+      <ng-template #vacio>_____</ng-template>
+    </span>.
+  </p>
+
+  <div class="opciones" id="opciones" cdkDropList [cdkDropListData]="opciones" [cdkDropListConnectedTo]="['opciones', 'cajon']" (cdkDropListDropped)="soltar($event)" data-aos="zoom-in-up">
+    <div *ngFor="let opcion of opciones" class="opcion" cdkDrag>
+      {{ opcion }}
+    </div>
+  </div>
+
+  <button class="verificar" (click)="verificar()" data-aos="fade-up">✅ Verificar</button>
+
+  <p class="mensaje" *ngIf="mensaje" [style.color]="color">{{ mensaje }}</p>
+</div>

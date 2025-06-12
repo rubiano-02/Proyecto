@@ -40,6 +40,7 @@ app.get('/usuarios', (req, res) => {
 
 // NUEVA RUTA PARA REGISTRAR USUARIOS
 app.post('/usuarios', (req, res) => {
+  console.log('Datos recibidos:', req.body);
   const { nombre, edad, contraseña, email, id_padre } = req.body;
 
   if (!nombre || !edad || !contraseña || !email) {
