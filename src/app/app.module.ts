@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Lectura1Component } from './componentes/container/lectura-1/lectura-1.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { EjerciciosComponent } from './componentes/container/ejercicios/ejercicios.component';
+import { PrinLecturaComponent } from './componentes/container/prin-lectura/prin-lectura.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EjerciciosComponent } from './componentes/container/ejercicios/ejercici
     Registrarse1Component,
     Lectura1Component,
     EjerciciosComponent,
+    PrinLecturaComponent,
   ],
   imports: [
     BrowserModule,

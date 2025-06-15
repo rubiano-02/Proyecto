@@ -49,7 +49,7 @@ export class PerfilComponent implements OnInit {
     // La lógica de carga de imágenes desde localStorage aquí ya no es necesaria
     // porque la fuente de verdad será la base de datos a través de loadUserProfile()
 
-    const storedUserId = localStorage.getItem('userId');
+    const storedUserId = localStorage.getItem('user_id');
     if (storedUserId) {
       this.userId = +storedUserId;
       this.loadUserProfile(this.userId);

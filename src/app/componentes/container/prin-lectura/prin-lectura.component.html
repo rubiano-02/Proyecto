@@ -1,0 +1,134 @@
+<button class="menu-toggle" (click)="toggleSidebar()" [class.active]="isSidebarActive" aria-label="Abrir menú">
+  <i class="fa-solid fa-bars"></i>
+</button>
+<div class="container">
+  <!-- Menú lateral -->
+  <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
+    <div class="menu">
+      <div class="menu-item" routerLink="/principal" routerLinkActive="activo">
+        <img src="assets/Images/Casa.png" alt="Inicio" />
+        <span>Inicio</span>
+      </div>
+
+      <div class="menu-item" routerLink="/matematicas-1" routerLinkActive="activo">
+        <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
+        <span>Ejercicios</span>
+      </div>
+
+      <div class="menu-item" routerLink="/foro" routerLinkActive="activo">
+        <img src="assets/Images/Foro.png" alt="Foro" />
+        <span>Foro</span>
+      </div>
+
+      <div class="menu-item" routerLink="/perfil" routerLinkActive="activo">
+        <img src="assets/Images/Perfil.png" alt="Perfil" />
+        <span>Perfil</span>
+      </div>
+
+      <div class="menu-item" routerLink="/configuracion" routerLinkActive="activo">
+        <img src="assets/Images/Mas.png" alt="Más" />
+        <span>Más</span>
+      </div>
+    </div>
+  </aside>
+
+
+  <!-- Contenido principal -->
+  <main class="contenido">
+    <!-- Sección superior -->
+    <div class="seccion-superior">
+      <div class="dropdown">
+        <img src="assets/Images/Libro.png" alt="Lectura" />
+        <span>Lectura</span>
+        <img src="assets/Images/Flecha.png" alt="Flecha" />
+      </div>
+    </div>
+
+    <!-- Contenedor principal para secciones central y derecha -->
+    <div class="contenedor-principal">
+      <!-- Sección central -->
+      <div class="seccion-central">
+        <div class="contenedor-cuadros">
+          <div class="cuadro">
+            <div class="texto-cuadro">
+              <h2>Sumas Básicas</h2>
+              <p>Palabras y frases cortas con apoyo visual.</p>
+              <p>Textos con fuentes adaptadas para dislexia.</p>
+              <p>Ejercicios de completar palabras y asociación con imágenes.</p>
+            </div>
+            <div class="accion-cuadro">
+              <button class="iniciar">INICIAR</button>
+              <img src="assets/Images/Lectura Básica.png" alt="ABC" class="imagen-cuadro" />
+            </div>
+          </div>
+
+          <div class="cuadro">
+            <div class="texto-cuadro">
+              <h2>Comprensión De Textos</h2>
+              <p>Historias cortas con preguntas interactivas.</p>
+              <p>Identificación de ideas principales y palabras clave.</p>
+              <p>Ejercicios de inferencia y secuencia de eventos.</p>
+            </div>
+            <div class="accion-cuadro">
+              <button class="iniciar">INICIAR</button>
+              <img src="assets/Images/Comprensión.png" alt="Lector" class="imagen-cuadro" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección derecha -->
+      <div class="seccion-derecha">
+        <div class="contenedor-lateral">
+   <div class="cuadro-lateral">
+  <h3>📊 Estadísticas</h3>
+
+  <div class="estadistica">
+    <span class="etiqueta">Progreso general</span>
+    <div class="progreso azul">
+      <div [style.width.%]="progresoGeneralAnimado"></div>
+    </div>
+    <span class="porcentaje">{{ progresoGeneral }}%</span>
+  </div>
+
+  <div class="estadistica">
+    <span class="etiqueta">Puntaje</span>
+    <div class="progreso amarillo">
+      <div [style.width.%]="puntajeAnimado"></div>
+    </div>
+    <span class="porcentaje">{{ puntaje }}%</span>
+  </div>
+
+  <div class="estadistica">
+    <span class="etiqueta">Tiempo dedicado</span>
+    <div class="progreso naranja">
+      <div [style.width.%]="tiempoAnimado"></div>
+    </div>
+    <span class="porcentaje">{{ tiempo }}%</span>
+  </div>
+</div>
+
+
+
+          <div class="cuadro-lateral">
+            <h3>🏆 Desafíos</h3>
+            <ul class="desafios">
+              <li>
+                <span class="desafio-texto">Completa un ejercicio</span>
+                <span class="avance">1/2</span>
+              </li>
+              <li>
+                <span class="desafio-texto">Practica 3 días seguidos</span>
+                <span class="avance">0/3</span>
+              </li>
+              <li>
+                <span class="desafio-texto">Logra una racha de 7 días</span>
+                <span class="avance">0/7</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

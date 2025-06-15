@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ResultadosService } from '@servicios/resultados.service';
 import { HttpClient } from '@angular/common/http';
+
 @Component({
-  selector: 'app-principal',
+  selector: 'app-prin-lectura',
   standalone: false,
-  templateUrl: './principal.component.html',
-  styleUrl: './principal.component.css'
+  templateUrl: './prin-lectura.component.html',
+  styleUrl: './prin-lectura.component.css'
 })
-export class PrincipalComponent implements OnInit {
-  isSidebarActive = false;
+export class PrinLecturaComponent {
+ isSidebarActive = false;
 
   // Datos sin animación
   progresoGeneral: number = 0;
