@@ -13,7 +13,7 @@ export class IniciarSesionComponent implements OnInit {
   email: string = '';
   contrasena: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     AOS.init({
@@ -44,7 +44,29 @@ export class IniciarSesionComponent implements OnInit {
           // Puedes guardar también un token si tu backend lo devuelve
           // localStorage.setItem('token', response.token);
 
-          this.router.navigate(['/principal']);
+          // Obtener preferencia del usuario y redirigir
+          this.http.get<any>(`http://localhost:3000/usuarios/${response.userId}`).subscribe(
+            usuario => {
+              const preferencia = usuario.tipo_ejercicio_preferido;
+
+              if (!preferencia) {
+                this.router.navigate(['/eleccion']);
+              } else if (preferencia === 'matematicas') {
+                this.router.navigate(['/principal']);
+              } else if (preferencia === 'lectura') {
+                this.router.navigate(['/prin-lectura']);
+              } else {
+                alert('Preferencia no válida. Por favor elígela nuevamente.');
+                this.router.navigate(['/eleccion']);
+              }
+            },
+            error => {
+              console.error('Error al obtener datos del usuario:', error);
+              alert('No se pudo obtener la preferencia. Redirigiendo...');
+              this.router.navigate(['/eleccion']);
+            }
+          );
+
         } else {
           alert(response.error || 'Correo/usuario o contraseña incorrectos');
         }
