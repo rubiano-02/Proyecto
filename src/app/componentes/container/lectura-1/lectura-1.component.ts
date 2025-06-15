@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ResultadosService } from '@servicios/resultados.service';
 
 @Component({
   selector: 'app-lectura-1',
@@ -17,6 +18,11 @@ export class Lectura1Component {
   color = '';
  calificacion = 5; // Empieza en 5
  intentosFallidos: number = 0;
+  ejercicioActual: number = 1;
+  totalEjercicios: number = 5;
+  aciertos: number = 0;
+  terminado: boolean = false;
+  constructor(private resultadosService: ResultadosService) { }
   soltar(event: CdkDragDrop<any>, index?: number) {
     if (index === undefined || index < 0 || index > 2) return;
     if (event.previousContainer === event.container) return;
@@ -63,6 +69,7 @@ export class Lectura1Component {
 
   if (esCorrecto) {
     this.mensaje = `¡Correcto! 🎉 Tu calificación: ${this.calificacion}/5`;
+    this.guardarResultado(); // 1 a
     this.color = 'green';
   } else {
     this.intentosFallidos++;
@@ -71,4 +78,26 @@ export class Lectura1Component {
     this.color = 'red';
   }
   }
+  guardarResultado(): void {
+  const idUsuarioStr = localStorage.getItem('user_id');
+  if (!idUsuarioStr) {
+    console.warn('⚠️ ID de usuario no encontrado en localStorage');
+    return;
+  }
+
+  const idUsuario = Number(idUsuarioStr);
+  const calificacion = this.calificacion;
+  const tiempo_dedicado = this.totalEjercicios * 2;
+
+  this.resultadosService.guardarResultado(idUsuario, calificacion, tiempo_dedicado).subscribe({
+    next: (response:any) => {
+      console.log('✅ Resultado guardado:', response);
+      alert('Resultado guardado correctamente');
+    },
+    error: (error:any) => {
+      console.error('❌ Error al guardar resultado:', error);
+      alert('Error al guardar resultado');
+    }
+  });
+}
 }

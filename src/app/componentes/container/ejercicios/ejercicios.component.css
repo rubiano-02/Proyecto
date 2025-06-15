@@ -1,0 +1,200 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 0 60px; /* Para que el botón tenga espacio sin romper el centrado */
+  position: relative;
+}
+
+.menu-toggle {
+  position: absolute;
+  left: 15px; /* A la izquierda, fijo */
+  top: 6%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+  z-index: 1100;
+}
+.menu-toggle.active {
+  color: #00B7FF;
+}
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+   margin-left: 200px; /* Este valor debe coincidir con el ancho real de tu barra lateral */
+ padding-left: 20px;
+  box-sizing: border-box;
+}
+
+.modulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: 2px solid gold;
+  border-radius: 12px;
+  padding: 20px;
+  gap: 60px;
+  background-color: #fff;
+  flex-wrap: wrap;
+   width: 100%; /* Asegura que use todo el ancho disponible */
+  box-sizing: border-box;
+}
+
+.contenido {
+  flex: 1;
+  min-width: 250px;
+  padding-left: 0px; 
+}
+
+.contenido h3 {
+  color: #0099ff;
+  margin-bottom: 10px;
+   font-size: 1.4rem; 
+}
+
+.contenido ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.lado-derecho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.lado-derecho img {
+  width: 90px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.btn {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background-color: #007acc;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .modulo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contenido,
+  .lado-derecho {
+    width: 100%;
+  }
+}
+
+.sidebar {
+  width: 240px; /* Ancho original que tenías */
+  background-color: #fff;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  height: calc(100vh - 60px);
+  transition: transform 0.3s ease;
+  z-index: 900;
+  padding: 20px 0;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  transform: translateX(-100%);
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+/* Contenido principal - Ajuste de margen */
+.contenido {
+  flex: 1;
+  padding: 20px;
+  margin-left: 0; /* Inicialmente sin margen */
+  transition: margin-left 0.3s ease;
+}
+
+/* Cuando el menú está activo en desktop */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+  
+  .contenido {
+    margin-left: 240px; /* Igual al ancho del menú */
+  }
+}
+
+/* === ANIMACIONES DEL MENÚ (sin cambiar el ancho) === */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px; /* Un poco menos de padding */
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.menu-item:hover {
+  background-color: #f0f0f0;
+  transform: translateX(5px); /* Menos desplazamiento */
+  border-left: 4px solid #00B7FF;
+}
+
+.menu-item.activo {
+  background-color: #e6f7ff;
+  border-left: 4px solid #00B7FF;
+}
+
+.menu-item img {
+  width: 32px; /* Tamaño original */
+  height: 32px;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover img {
+  transform: scale(1.1); /* Animación más sutil */
+}
+
+.menu-item span {
+  font-size: 20px; /* Tamaño original */
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}

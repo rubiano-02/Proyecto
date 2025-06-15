@@ -35,7 +35,7 @@ export class IniciarSesionComponent implements OnInit {
           alert('Inicio de sesión exitoso');
           // ¡¡¡CAMBIO CRUCIAL AQUÍ!!!
           if (response.userId) { // Asegúrate de que response.userId existe antes de guardarlo
-            localStorage.setItem('userId', response.userId); // <--- ¡AÑADIR ESTA LÍNEA!
+            localStorage.setItem('user_id', response.userId); // <--- ¡AÑADIR ESTA LÍNEA!
             console.log('ID de usuario logueado guardado en localStorage:', response.userId);
           } else {
             console.warn('Backend no devolvió userId en la respuesta de login.');

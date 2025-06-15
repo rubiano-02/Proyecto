@@ -20,3 +20,5 @@ ng g c componentes/container/matematicas-1 --skip-tests
 ng g c componentes/container/usuarios --skip-tests
 
 ng g c componentes/container/lectura-1 --skip-tests
+
+ng g c componentes/container/ejercicios --skip-tests

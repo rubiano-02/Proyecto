@@ -118,11 +118,28 @@ app.post('/usuarios', (req, res) => {
       connection.query(insertSql, [nombre, edad, hash, email, id_padre || null], (err, result) => {
         if (err) return res.status(500).json({ error: 'Error al registrar usuario' });
 
-        res.status(201).json({ message: 'Usuario registrado', id_usuario: result.insertId });
+        const nuevoUsuarioId = result.insertId;
+
+        // Insertar fila en progreso_usuarios con valores iniciales
+        const progresoSql = `
+    INSERT INTO progreso_usuarios 
+    (id_usuario, progreso_general, puntaje_promedio, tiempo_total, ejercicios_realizados, fecha_ultima_actividad) 
+    VALUES (?, 0, 0, 0, 0, NOW())`;
+
+        connection.query(progresoSql, [nuevoUsuarioId], (err2) => {
+          if (err2) {
+            console.error('Error al insertar en progreso_usuarios:', err2);
+            return res.status(500).json({ error: 'Usuario registrado, pero error al crear progreso' });
+          }
+
+          res.status(201).json({ message: 'Usuario y progreso registrados', id_usuario: nuevoUsuarioId });
+        });
       });
+
     });
   });
 });
+
 
 const bcrypt = require('bcrypt'); // Asegúrate de haber instalado 'bcrypt' con `npm i bcrypt` en la carpeta backend
 
@@ -285,6 +302,81 @@ app.post('/usuarios/:id/banner', upload.single('banner'), (req, res) => {
   });
 });
 // **********************************************************
+
+app.get('/estadisticas/:id', (req, res) => {
+  const userId = req.params.id;
+  const query = `
+    SELECT progreso_general, puntaje_promedio, tiempo_total
+    FROM progreso_usuarios
+    WHERE id_usuario = ?;
+  `;
+  connection.query(query, [userId], (err, result) => {
+    if (err) {
+      console.error('Error al obtener estadísticas:', err);
+      res.status(500).send('Error del servidor');
+    } else if (result.length === 0) {
+      res.status(404).send('Usuario no encontrado');
+    } else {
+      res.json(result[0]);
+    }
+  });
+});
+app.post('/resultados', (req, res) => {
+  const { id_usuario, calificacion, tiempo_dedicado } = req.body;
+
+  const sql = 'INSERT INTO resultados (id_usuario, calificacion, tiempo_dedicado) VALUES (?, ?, ?)';
+  connection.query(sql, [id_usuario, calificacion, tiempo_dedicado], (err, result) => {
+    if (err) {
+      console.error('Error al insertar resultado:', err);
+      return res.status(500).json({ mensaje: 'Error al guardar el resultado' });
+    }
+
+    const updateSql = `
+      UPDATE progreso_usuarios
+      JOIN (
+        SELECT 
+          id_usuario,
+          COUNT(*) AS ejercicios_realizados,
+          AVG(calificacion) AS puntaje_promedio,
+          SUM(tiempo_dedicado) AS tiempo_total
+        FROM resultados
+        WHERE id_usuario = ?
+        GROUP BY id_usuario
+      ) AS r ON progreso_usuarios.id_usuario = r.id_usuario
+      SET 
+        progreso_usuarios.ejercicios_realizados = r.ejercicios_realizados,
+        progreso_usuarios.puntaje_promedio = ROUND(r.puntaje_promedio),
+        progreso_usuarios.tiempo_total = r.tiempo_total,
+        progreso_usuarios.fecha_ultima_actividad = NOW(),
+        progreso_usuarios.progreso_general = LEAST(100, FLOOR((r.ejercicios_realizados / 10) * 100))
+    `;
+
+    connection.query(updateSql, [id_usuario], (err2) => {
+      if (err2) {
+        console.error('Error al actualizar progreso:', err2);
+        return res.status(500).json({ mensaje: 'Resultado guardado pero error en progreso' });
+      }
+
+      // ✅ Solo se responde aquí, cuando todo fue exitoso
+      return res.status(200).json({ mensaje: 'Resultado y progreso actualizados correctamente' });
+    });
+  });
+});
+
+app.get('/progreso/:id_usuario', (req, res) => {
+  const { id_usuario } = req.params;
+  const sql = 'SELECT * FROM progreso_usuarios WHERE id_usuario = ?';
+  connection.query(sql, [id_usuario], (err, results) => {
+    if (err) {
+      console.error('Error al obtener progreso:', err);
+      return res.status(500).json({ error: 'Error en la base de datos' });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Progreso no encontrado' });
+    }
+    res.json(results[0]);
+  });
+});
 
 
 // Iniciar servidor

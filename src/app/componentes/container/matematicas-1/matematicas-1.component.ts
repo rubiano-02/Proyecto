@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ResultadosService } from '@servicios/resultados.service';
+// Ajusta la ruta según tu estructura
 
 @Component({
   selector: 'app-matematicas-1',
@@ -7,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './matematicas-1.component.css'
 })
 export class Matematicas1Component {
-numero1: number = 0;
+  numero1: number = 0;
   numero2: number = 0;
   respuestaUsuario: number | null = null;
   mensaje: string = '';
@@ -17,7 +19,7 @@ numero1: number = 0;
   aciertos: number = 0;
   terminado: boolean = false;
   calificacion: number = 0;
-
+  constructor(private resultadosService: ResultadosService) { }
   ngOnInit(): void {
     this.generarNuevaSuma();
   }
@@ -49,10 +51,38 @@ numero1: number = 0;
     } else {
       setTimeout(() => {
         this.terminado = true;
-        this.calificacion = this.aciertos; // 1 a 5
+        this.calificacion = this.aciertos;
+        this.guardarResultado(); // 1 a 5
       }, 2000);
     }
   }
+
+
+
+guardarResultado(): void {
+  const idUsuarioStr = localStorage.getItem('user_id');
+  if (!idUsuarioStr) {
+    console.warn('⚠️ ID de usuario no encontrado en localStorage');
+    return;
+  }
+
+  const idUsuario = Number(idUsuarioStr);
+  const calificacion = this.calificacion;
+  const tiempo_dedicado = this.totalEjercicios * 2;
+
+  this.resultadosService.guardarResultado(idUsuario, calificacion, tiempo_dedicado).subscribe({
+    next: (response:any) => {
+      console.log('✅ Resultado guardado:', response);
+      alert('Resultado guardado correctamente');
+    },
+    error: (error:any) => {
+      console.error('❌ Error al guardar resultado:', error);
+      alert('Error al guardar resultado');
+    }
+  });
+}
+
+
 
   reiniciar(): void {
     this.ejercicioActual = 1;
