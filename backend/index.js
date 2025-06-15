@@ -378,6 +378,20 @@ app.get('/progreso/:id_usuario', (req, res) => {
   });
 });
 
+// En tu index.js de Node.js:
+app.put('/usuarios/:id/preferencia', (req, res) => {
+  const id = req.params.id;
+  const { tipo_ejercicio_preferido } = req.body;
+
+  const sql = 'UPDATE usuarios SET tipo_ejercicio_preferido = ? WHERE id_usuario = ?';
+  connection.query(sql, [tipo_ejercicio_preferido, id], (err, result) => {
+    if (err) {
+      console.error('Error al actualizar preferencia:', err);
+      return res.status(500).json({ error: 'Error del servidor' });
+    }
+    res.json({ success: true });
+  });
+});
 
 // Iniciar servidor
 app.listen(PORT, () => {
