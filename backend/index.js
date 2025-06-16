@@ -175,7 +175,11 @@ app.post('/login', (req, res) => {
         return res.status(500).json({ success: false, error: 'Error interno' });
       }
       if (isMatch) {
-        return res.json({ success: true, userId: user.id_usuario });
+        return res.json({
+          success: true,
+          userId: user.id_usuario,
+          tipo_ejercicio_preferido: user.tipo_ejercicio_preferido // ✅ esta es la línea que te faltaba
+        });
       } else {
         return res.json({ success: false, error: 'Contraseña incorrecta' });
       }
@@ -261,7 +265,7 @@ app.post('/usuarios/:id/avatar', upload.single('avatar'), (req, res) => {
 
   // La URL que guardaremos en la base de datos. Es relativa a la raíz del servidor de Node.js.
   // Será accesada como 'http://localhost:3000/uploads/nombre_del_archivo.jpg'.
-  const imageUrl = `/uploads/${req.file.filename}`; 
+  const imageUrl = `/uploads/${req.file.filename}`;
 
   const sql = 'UPDATE usuarios SET foto_perfil_url = ? WHERE id_usuario = ?';
   connection.query(sql, [imageUrl, userId], (err, result) => {

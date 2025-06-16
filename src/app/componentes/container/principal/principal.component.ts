@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResultadosService } from '@servicios/resultados.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-principal',
   standalone: false,
@@ -20,7 +21,7 @@ export class PrincipalComponent implements OnInit {
   puntajeAnimado: number = 0;
   tiempoAnimado: number = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     const userId = localStorage.getItem('user_id');
@@ -61,4 +62,19 @@ export class PrincipalComponent implements OnInit {
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
   }
+
+  opcionSeleccionada = 'Lectura';
+iconoSeleccionado = 'assets/Images/Libro.png';
+mostrarOpciones = false;
+
+cambiarOpcion(opcion: string, icono: string) {
+  this.opcionSeleccionada = opcion;
+  this.iconoSeleccionado = icono;
+  this.mostrarOpciones = false;
+
+  if (opcion === 'Matemáticas') {
+    this.router.navigate(['/matematicas']); // cambia a tu ruta real si es distinta
+  }
+}
+
 }

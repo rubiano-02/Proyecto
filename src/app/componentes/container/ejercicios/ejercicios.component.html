@@ -1,16 +1,11 @@
-<button
-  class="menu-toggle"
-  (click)="toggleSidebar()"
-  [class.active]="isSidebarActive"
-  aria-label="Abrir menú"
->
+<button class="menu-toggle" (click)="toggleSidebar()" [class.active]="isSidebarActive" aria-label="Abrir menú">
   <i class="fa-solid fa-bars"></i>
 </button>
 
 <div class="container">
- <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
+  <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
     <div class="menu">
-      <div class="menu-item" routerLink="/principal" routerLinkActive="activo">
+      <div class="menu-item" routerLink="/prin-lectura" routerLinkActive="activo">
         <img src="assets/Images/Casa.png" alt="Inicio" />
         <span>Inicio</span>
       </div>
@@ -37,34 +32,20 @@
     </div>
   </aside>
   <div class="contenedor">
-  <div class="modulo">
-    <div class="contenido">
-      <h3>Lecturas Básicas</h3>
-      <ul>
-        <li>Palabras y frases cortas con apoyo visual.</li>
-        <li>Textos con fuentes adaptadas para dislexia.</li>
-        <li>Ejercicios de completar palabras y asociación con imágenes.</li>
-      </ul>
-    </div>
-    <div class="lado-derecho">
-      <img src="assets/Images/Lectura Básica.png" alt="Niño leyendo" />
-      <button class="btn">INICIAR</button>
-    </div>
-  </div>
+    <div class="modulo">
+      <div class="contenido">
+        <h3>Completar Oraciones</h3>
+        <ul class="sin-viñetas">
+          <li>Arrastra palabras para completar frases con sentido.</li>
+          <li>Asocia imágenes mentales con palabras clave.</li>
+          <li>Desarrolla comprensión y vocabulario en contexto.</li>
+        </ul>
+      </div>
+      <div class="lado-derecho">
+        <img src="assets/Images/Lectura Básica.png" alt="Niño leyendo" />
+        <a [routerLink]="['/lectura-1']">
+          <button class="btn">INICIAR</button>
+        </a>
 
-  <div class="modulo">
-    <div class="contenido">
-      <h3>Comprensión De Textos</h3>
-      <ul>
-        <li>Historias cortas con preguntas interactivas.</li>
-        <li>Identificación de ideas principales y palabras clave.</li>
-        <li>Ejercicios de inferencia y secuencia de eventos.</li>
-      </ul>
+      </div>
     </div>
-    <div class="lado-derecho">
-      <img src="assets/Images/Comprensión .png" alt="Bloques ABC" />
-      <button class="btn">INICIAR</button>
-    </div>
-  </div>
-</div>
-

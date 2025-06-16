@@ -47,7 +47,8 @@ export class IniciarSesionComponent implements OnInit {
           // Obtener preferencia del usuario y redirigir
           this.http.get<any>(`http://localhost:3000/usuarios/${response.userId}`).subscribe(
             usuario => {
-              const preferencia = usuario.tipo_ejercicio_preferido;
+              // Usar preferencia enviada directamente en el login
+              const preferencia = response.tipo_ejercicio_preferido;
 
               if (!preferencia) {
                 this.router.navigate(['/eleccion']);
@@ -59,6 +60,7 @@ export class IniciarSesionComponent implements OnInit {
                 alert('Preferencia no válida. Por favor elígela nuevamente.');
                 this.router.navigate(['/eleccion']);
               }
+
             },
             error => {
               console.error('Error al obtener datos del usuario:', error);

@@ -12,6 +12,7 @@ import { Registrarse1Component } from './componentes/container/registrarse1/regi
 import { Lectura1Component } from './componentes/container/lectura-1/lectura-1.component';
 import { EjerciciosComponent } from './componentes/container/ejercicios/ejercicios.component';
 import { PrinLecturaComponent } from './componentes/container/prin-lectura/prin-lectura.component';
+import { EjerMatematicasComponent } from './componentes/container/ejer-matematicas/ejer-matematicas.component';
 
 const routes: Routes = [
   {path: 'inicio', component:InicioComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'lectura-1', component: Lectura1Component},
   {path: 'ejercicios', component: EjerciciosComponent},
   {path: 'prin-lectura', component: PrinLecturaComponent},
+  {path: 'ejer-matematicas', component: EjerMatematicasComponent},
   { path: '', redirectTo: '/iniciar-sesion', pathMatch: 'full' }
 ];
 
