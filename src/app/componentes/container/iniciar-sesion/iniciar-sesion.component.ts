@@ -49,7 +49,7 @@ export class IniciarSesionComponent implements OnInit {
             usuario => {
               // Usar preferencia enviada directamente en el login
               const preferencia = response.tipo_ejercicio_preferido;
-
+              localStorage.setItem('preferencia', preferencia || '');
               if (!preferencia) {
                 this.router.navigate(['/eleccion']);
               } else if (preferencia === 'matematicas') {

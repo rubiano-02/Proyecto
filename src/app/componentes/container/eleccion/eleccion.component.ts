@@ -17,11 +17,12 @@ constructor(private http: HttpClient, private router: Router) {}
       alert('No se encontró ID de usuario');
       return;
     }
-
+localStorage.setItem('preferencia', tipo);
     this.http.put(`http://localhost:3000/usuarios/${id}/preferencia`, {
       tipo_ejercicio_preferido: tipo
     }).subscribe({
       next: () => {
+        
         const ruta = tipo === 'lectura' ? '/prin-lectura' : '/principal';
         this.router.navigate([ruta]);
       },

@@ -16,7 +16,14 @@ export class PerfilComponent implements OnInit {
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
   }
-
+irAPrincipal() {
+  const preferencia = localStorage.getItem('preferencia');
+  if (preferencia === 'lectura') {
+    this.router.navigate(['/prin-lectura']);
+  } else {
+    this.router.navigate(['/principal']);
+  }
+}
   userProfile: any = {
     nombre: 'Cargando...',
     fecha_registro: new Date(),

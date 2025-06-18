@@ -5,10 +5,11 @@
 <div class="container">
   <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
     <nav class="menu">
-      <a routerLink="/principal" class="menu-item">
+      <div class="menu-item" (click)="irAPrincipal()" routerLinkActive="activo">
         <img src="assets/Images/Casa.png" alt="Inicio" />
         <span>Inicio</span>
-      </a>
+      </div>
+
       <a routerLink="/matematicas-1" class="menu-item">
         <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
         <span>Ejercicios</span>

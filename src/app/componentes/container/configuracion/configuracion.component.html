@@ -16,10 +16,11 @@
 
 <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
     <div class="menu">
-      <div class="menu-item" routerLink="/principal" routerLinkActive="activo">
+       <div class="menu-item" (click)="irAPrincipal()" routerLinkActive="activo">
         <img src="assets/Images/Casa.png" alt="Inicio" />
         <span>Inicio</span>
       </div>
+
 
       <div class="menu-item" routerLink="/matematicas-1" routerLinkActive="activo">
         <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />

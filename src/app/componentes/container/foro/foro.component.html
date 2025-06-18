@@ -1,22 +1,19 @@
 <!-- Quita el header si ya tienes uno global -->
 <!-- Solo el botón toggle para abrir/cerrar el sidebar -->
 
-<button
-  class="menu-toggle"
-  (click)="toggleSidebar()"
-  [class.active]="isSidebarActive"
-  aria-label="Abrir menú"
->
+<button class="menu-toggle" (click)="toggleSidebar()" [class.active]="isSidebarActive" aria-label="Abrir menú">
   <i class="fa-solid fa-bars"></i>
 </button>
 
 <div class="container">
- <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
+  <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
     <div class="menu">
-      <div class="menu-item" routerLink="/principal" routerLinkActive="activo">
+      <div class="menu-item" (click)="irAPrincipal()" routerLinkActive="activo">
         <img src="assets/Images/Casa.png" alt="Inicio" />
         <span>Inicio</span>
       </div>
+
+
 
       <div class="menu-item" routerLink="/matematicas-1" routerLinkActive="activo">
         <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
@@ -45,8 +42,7 @@
     <section class="compartir-experiencia">
       <h2>📌 Comparte tu experiencia</h2>
       <textarea
-        placeholder="¿Te has enfrentado a algún desafío? Comparte cómo lo superaste y ayuda a otros con tu historia."
-      ></textarea>
+        placeholder="¿Te has enfrentado a algún desafío? Comparte cómo lo superaste y ayuda a otros con tu historia."></textarea>
       <button class="enviar-btn">
         <img src="assets/Images/Enviar.png" alt="Enviar" />
       </button>
@@ -55,8 +51,7 @@
     <section class="pregunta">
       <h2>💡 Pregunta lo que quieras</h2>
       <textarea
-        placeholder="No hay preguntas tontas, solo oportunidades de aprender. ¿Tienes dudas? ¡La comunidad te ayuda!"
-      ></textarea>
+        placeholder="No hay preguntas tontas, solo oportunidades de aprender. ¿Tienes dudas? ¡La comunidad te ayuda!"></textarea>
       <button class="enviar-btn">
         <img src="assets/Images/Enviar.png" alt="Enviar" />
       </button>
