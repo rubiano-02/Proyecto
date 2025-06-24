@@ -15,7 +15,7 @@
 
 
 
-      <div class="menu-item" routerLink="/matematicas-1" routerLinkActive="activo">
+      <div class="menu-item" (click)="irAEjercicio()" [class.activo]="esRutaActivaEjercicio()">
         <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
         <span>Ejercicios</span>
       </div>

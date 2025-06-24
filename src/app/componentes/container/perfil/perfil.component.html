@@ -10,10 +10,10 @@
         <span>Inicio</span>
       </div>
 
-      <a routerLink="/matematicas-1" class="menu-item">
+      <div class="menu-item" (click)="irAEjercicio()" [class.activo]="esRutaActivaEjercicio()">
         <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
         <span>Ejercicios</span>
-      </a>
+      </div>
       <a routerLink="/foro" class="menu-item">
         <img src="assets/Images/Foro.png" alt="Foro" />
         <span>Foro</span>

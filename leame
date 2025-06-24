@@ -26,3 +26,10 @@ ng g c componentes/container/ejercicios --skip-tests
 ng g c componentes/container/prin_lectura --skip-tests
 
 ng g c componentes/container/ejer-matematicas --skip-tests
+
+ng g c componentes/container/matematicas-2 --skip-tests
+
+ng g c componentes/container/matematicas-3 --skip-tests
+
+ng g c componentes/container/matematicas-4 --skip-tests
+ng g c componentes/container/matematicas-5 --skip-tests

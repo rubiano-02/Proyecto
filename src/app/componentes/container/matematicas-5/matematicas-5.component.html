@@ -1,0 +1,31 @@
+<div class="contenedor">
+  <h1 data-aos="fade-down">🧠 Encuentra el Número que Falta</h1>
+
+  <div *ngIf="!terminado" class="tarjeta" data-aos="zoom-in">
+    <h2>Ejercicio {{ ejercicioActual }} de {{ totalEjercicios }}</h2>
+
+    <div class="pregunta-grande" data-aos="fade-up">
+      <span *ngIf="posicion !== 'izq'">{{ numero1 }}</span>
+      <span>{{ operador }}</span>
+      <span *ngIf="posicion !== 'der'">{{ numero2 }}</span>
+      <span>=</span>
+      <span>{{ resultado }}</span>
+    </div>
+
+    <input type="number" [(ngModel)]="respuestaUsuario" placeholder="Número faltante" [disabled]="mensaje !== ''" />
+    <button (click)="verificar()" [disabled]="mensaje !== '' || respuestaUsuario === null">Comprobar</button>
+
+    <p class="mensaje" [style.color]="color">{{ mensaje }}</p>
+  </div>
+
+  <div *ngIf="terminado" class="resultado" data-aos="zoom-in">
+    <h2>🎉 ¡Has terminado!</h2>
+    <p>Respuestas correctas: {{ aciertos }} de {{ totalEjercicios }}</p>
+    <p class="calificacion">Tu calificación: {{ calificacion }} / 5 ⭐</p>
+
+    <div class="botones-finales">
+      <button (click)="reiniciar()">Intentar de nuevo 🔁</button>
+      <button class="volver" routerLink="/principal">Volver al inicio ⬅️</button>
+    </div>
+  </div>
+</div>

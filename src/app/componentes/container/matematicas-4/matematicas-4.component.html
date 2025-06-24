@@ -1,0 +1,33 @@
+<div class="contenedor">
+  <h1 data-aos="fade-down">🧠 Elige la Respuesta Correcta</h1>
+
+  <div *ngIf="!terminado" class="tarjeta" data-aos="zoom-in">
+    <h2>Ejercicio {{ ejercicioActual }} de {{ totalEjercicios }}</h2>
+
+    <div class="pregunta-grande" data-aos="fade-up">
+      <span>{{ numero1 }}</span>
+      <span>{{ operador }}</span>
+      <span>{{ numero2 }}</span>
+      <span>= ?</span>
+    </div>
+
+    <div class="opciones">
+      <button *ngFor="let opcion of opciones" (click)="verificar(opcion)" [disabled]="mensaje !== ''">
+        {{ opcion }}
+      </button>
+    </div>
+
+    <p class="mensaje" [style.color]="color">{{ mensaje }}</p>
+  </div>
+
+  <div *ngIf="terminado" class="resultado" data-aos="zoom-in">
+    <h2>🎉 ¡Has terminado!</h2>
+    <p>Respuestas correctas: {{ aciertos }} de {{ totalEjercicios }}</p>
+    <p class="calificacion">Tu calificación: {{ calificacion }} / 5 ⭐</p>
+
+    <div class="botones-finales">
+      <button (click)="reiniciar()">Intentar de nuevo 🔁</button>
+      <button class="volver" routerLink="/principal">Volver al inicio ⬅️</button>
+    </div>
+  </div>
+</div>

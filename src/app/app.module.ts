@@ -19,6 +19,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { EjerciciosComponent } from './componentes/container/ejercicios/ejercicios.component';
 import { PrinLecturaComponent } from './componentes/container/prin-lectura/prin-lectura.component';
 import { EjerMatematicasComponent } from './componentes/container/ejer-matematicas/ejer-matematicas.component';
+import { Matematicas2Component } from './componentes/container/matematicas-2/matematicas-2.component';
+import { Matematicas3Component } from './componentes/container/matematicas-3/matematicas-3.component';
+import { Matematicas4Component } from './componentes/container/matematicas-4/matematicas-4.component';
+import { Matematicas5Component } from './componentes/container/matematicas-5/matematicas-5.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,10 @@ import { EjerMatematicasComponent } from './componentes/container/ejer-matematic
     EjerciciosComponent,
     PrinLecturaComponent,
     EjerMatematicasComponent,
+    Matematicas2Component,
+    Matematicas3Component,
+    Matematicas4Component,
+    Matematicas5Component,
   ],
   imports: [
     BrowserModule,
