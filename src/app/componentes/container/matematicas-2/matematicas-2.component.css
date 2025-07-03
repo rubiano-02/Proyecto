@@ -1,43 +1,72 @@
-.contenedor {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 100px 30px 40px;
-  background: #f7faff;
-  border-radius: 20px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+.ejercicio-contenedor {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  padding: 40px 20px;
   text-align: center;
+  min-height: 100vh;
 }
 
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #007bff;
-  font-weight: bold;
-}
-
-.tarjeta {
-  background: #ffffff;
-  padding: 35px 25px;
-  border-radius: 20px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.06);
-}
-
-.pregunta-grande {
-  font-size: 3.5rem;
-  font-weight: bold;
-  margin: 40px 0 20px;
+/* Barra de progreso */
+.barra-progreso {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  align-items: center;
+  gap: 12px;
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  padding-top: 50px;
+}
+
+.barra-fondo {
+  flex: 1;
+  height: 12px;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.barra-relleno {
+  height: 100%;
+  background-color: #00b0ff;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.progreso-contador {
+  font-weight: bold;
+  color: #00b0ff;
+  font-size: 18px;
+}
+
+/* Zona del ejercicio */
+.zona-ejercicio {
+  margin-top: 20px;
+}
+
+.operacion {
+  font-size: 90px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
   flex-wrap: wrap;
+}
+
+.numero {
   color: #333;
 }
 
 .signo {
-  color: #444;
+  color: #ffcc00;
 }
 
-.opciones {
+.igual {
+  color: #4caf50;
+}
+
+/* Botones de opciones */
+.opciones-operacion {
   margin-top: 30px;
   display: flex;
   justify-content: center;
@@ -45,73 +74,106 @@ h1 {
   gap: 20px;
 }
 
-.opciones button {
-  font-size: 2rem;
-  padding: 20px 30px;
+.opciones-operacion button {
+  font-size: 36px;
+  padding: 14px 28px;
   border: none;
   border-radius: 12px;
-  background-color: #e0f0ff;
+  background-color: #e0f7ff;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: bold;
   min-width: 80px;
 }
 
-.opciones button:hover {
-  background-color: #007bff;
+.opciones-operacion button:hover {
+  background-color: #00b0ff;
   color: white;
   transform: scale(1.05);
 }
 
+/* Mensaje */
 .mensaje {
-  font-size: 1.5rem;
+  margin-top: 40px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.correcto {
+  color: #4caf50;
+}
+
+.incorrecto {
+  color: #f44336;
+}
+
+/* Zona final */
+.zona-final {
   margin-top: 30px;
+}
+
+.titulo-final {
+  font-size: 80px;
+  color: #4caf50;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.resultado {
-  text-align: center;
-  background-color: #dff6dd;
-  border: 2px solid #a4ddaa;
-  padding: 40px 25px;
-  border-radius: 20px;
-}
-
-.calificacion {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin: 20px 0;
-}
-
-.botones-finales {
+.resultado-final {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 30px;
-}
-
-.botones-finales button {
-  padding: 15px 25px;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  background-color: #cce5ff;
+  align-items: center;
+  font-size: 80px;
   font-weight: bold;
 }
 
-.botones-finales button:hover {
-  background-color: #007bff;
-  color: white;
+.resultado-numero,
+.resultado-total {
+  color: #333;
+}
+
+.resultado-slash {
+  color: #ffcc00;
+  margin: 0 10px;
 }
 
 .volver {
-  background-color: #ffd6d6;
+  margin-top: 50px;
+  background-color: #00b0ff;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .volver:hover {
-  background-color: #ff4d4d;
-  color: white;
+  background-color: #007acc;
+}
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+  .operacion {
+    font-size: 36px;
+    gap: 10px;
+  }
+
+  .opciones-operacion button {
+    font-size: 26px;
+    padding: 10px 20px;
+  }
+
+  .mensaje {
+    font-size: 24px;
+  }
+
+  .resultado-final {
+    font-size: 50px;
+  }
+
+  .titulo-final {
+    font-size: 36px;
+  }
 }

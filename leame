@@ -33,3 +33,15 @@ ng g c componentes/container/matematicas-3 --skip-tests
 
 ng g c componentes/container/matematicas-4 --skip-tests
 ng g c componentes/container/matematicas-5 --skip-tests
+
+
+ng g c componentes/container/matematicas-6 --skip-tests
+ng g c componentes/container/matematicas-7 --skip-tests
+ng g c componentes/container/matematicas-8 --skip-tests
+ng g c componentes/container/matematicas-9 --skip-tests
+ng g c componentes/container/matematicas-10 --skip-tests
+ng g c componentes/container/matematicas-11 --skip-tests
+ng g c componentes/container/matematicas-12 --skip-tests
+ng g c componentes/container/matematicas-13 --skip-tests
+ng g c componentes/container/matematicas-14 --skip-tests
+ng g c componentes/container/matematicas-15 --skip-tests

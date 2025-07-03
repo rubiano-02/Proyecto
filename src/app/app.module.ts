@@ -23,6 +23,16 @@ import { Matematicas2Component } from './componentes/container/matematicas-2/mat
 import { Matematicas3Component } from './componentes/container/matematicas-3/matematicas-3.component';
 import { Matematicas4Component } from './componentes/container/matematicas-4/matematicas-4.component';
 import { Matematicas5Component } from './componentes/container/matematicas-5/matematicas-5.component';
+import { Matematicas6Component } from './componentes/container/matematicas-6/matematicas-6.component';
+import { Matematicas7Component } from './componentes/container/matematicas-7/matematicas-7.component';
+import { Matematicas8Component } from './componentes/container/matematicas-8/matematicas-8.component';
+import { Matematicas9Component } from './componentes/container/matematicas-9/matematicas-9.component';
+import { Matematicas10Component } from './componentes/container/matematicas-10/matematicas-10.component';
+import { Matematicas11Component } from './componentes/container/matematicas-11/matematicas-11.component';
+import { Matematicas12Component } from './componentes/container/matematicas-12/matematicas-12.component';
+import { Matematicas13Component } from './componentes/container/matematicas-13/matematicas-13.component';
+import { Matematicas14Component } from './componentes/container/matematicas-14/matematicas-14.component';
+import { Matematicas15Component } from './componentes/container/matematicas-15/matematicas-15.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +55,16 @@ import { Matematicas5Component } from './componentes/container/matematicas-5/mat
     Matematicas3Component,
     Matematicas4Component,
     Matematicas5Component,
+    Matematicas6Component,
+    Matematicas7Component,
+    Matematicas8Component,
+    Matematicas9Component,
+    Matematicas10Component,
+    Matematicas11Component,
+    Matematicas12Component,
+    Matematicas13Component,
+    Matematicas14Component,
+    Matematicas15Component,
   ],
   imports: [
     BrowserModule,

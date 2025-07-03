@@ -1,31 +1,58 @@
-<div class="contenedor">
-  <h1 data-aos="fade-down">🧠 Encuentra el Número que Falta</h1>
+<!-- Barra de progreso -->
+<div *ngIf="!terminado" class="barra-progreso">
+  <div class="barra-fondo">
+    <div class="barra-relleno" [style.width.%]="(ejercicioActual - 1) / totalEjercicios * 100"></div>
+  </div>
+  <span class="progreso-contador">{{ ejercicioActual }}/{{ totalEjercicios }}</span>
+</div>
 
-  <div *ngIf="!terminado" class="tarjeta" data-aos="zoom-in">
-    <h2>Ejercicio {{ ejercicioActual }} de {{ totalEjercicios }}</h2>
+<!-- Contenedor principal -->
+<div class="ejercicio-contenedor">
+  <!-- Ejercicio activo -->
+  <div *ngIf="!terminado" class="zona-ejercicio" data-aos="zoom-in">
+    <div class="operacion">
+      <!-- Condicionales para mostrar input en el lugar del número faltante -->
+      <ng-container *ngIf="posicion === 'izq'; else mostrarNumero1">
+        <input type="number" [(ngModel)]="respuestaUsuario" class="input-faltante" placeholder="?" [disabled]="mensaje !== ''" />
+      </ng-container>
+      <ng-template #mostrarNumero1>
+        <span class="numero">{{ numero1 }}</span>
+      </ng-template>
 
-    <div class="pregunta-grande" data-aos="fade-up">
-      <span *ngIf="posicion !== 'izq'">{{ numero1 }}</span>
-      <span>{{ operador }}</span>
-      <span *ngIf="posicion !== 'der'">{{ numero2 }}</span>
-      <span>=</span>
-      <span>{{ resultado }}</span>
+      <span class="signo">{{ operador }}</span>
+
+      <ng-container *ngIf="posicion === 'der'; else mostrarNumero2">
+        <input type="number" [(ngModel)]="respuestaUsuario" class="input-faltante" placeholder="?" [disabled]="mensaje !== ''" />
+      </ng-container>
+      <ng-template #mostrarNumero2>
+        <span class="numero">{{ numero2 }}</span>
+      </ng-template>
+
+      <span class="igual">=</span>
+      <span class="numero">{{ resultado }}</span>
     </div>
 
-    <input type="number" [(ngModel)]="respuestaUsuario" placeholder="Número faltante" [disabled]="mensaje !== ''" />
-    <button (click)="verificar()" [disabled]="mensaje !== '' || respuestaUsuario === null">Comprobar</button>
+    <div class="respuesta-row">
+      <button (click)="verificar()" [disabled]="mensaje !== '' || respuestaUsuario === null">Comprobar</button>
 
-    <p class="mensaje" [style.color]="color">{{ mensaje }}</p>
+      <div class="mensaje">
+        <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
+        <span *ngIf="color === 'red'" class="incorrecto">
+          ❌ Solución correcta 
+          
+        </span>
+      </div>
+    </div>
   </div>
 
-  <div *ngIf="terminado" class="resultado" data-aos="zoom-in">
-    <h2>🎉 ¡Has terminado!</h2>
-    <p>Respuestas correctas: {{ aciertos }} de {{ totalEjercicios }}</p>
-    <p class="calificacion">Tu calificación: {{ calificacion }} / 5 ⭐</p>
-
-    <div class="botones-finales">
-      <button (click)="reiniciar()">Intentar de nuevo 🔁</button>
-      <button class="volver" routerLink="/principal">Volver al inicio ⬅️</button>
+  <!-- Resultado final -->
+  <div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
+    <p class="titulo-final">CALIFICACIÓN</p>
+    <div class="resultado-final">
+      <span class="resultado-numero">{{ calificacion }}</span>
+      <span class="resultado-slash">/</span>
+      <span class="resultado-total">{{ totalEjercicios }}</span>
     </div>
+    <button class="volver" routerLink="/principal">Volver al inicio</button>
   </div>
 </div>

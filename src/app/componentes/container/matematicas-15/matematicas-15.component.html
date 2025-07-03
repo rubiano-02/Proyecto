@@ -6,26 +6,25 @@
   <span class="progreso-contador">{{ ejercicioActual }}/{{ totalEjercicios }}</span>
 </div>
 
+<!-- Contenedor principal -->
 <div class="ejercicio-contenedor">
-  <!-- Zona de ejercicio -->
+  <!-- Ejercicio activo -->
   <div *ngIf="!terminado" class="zona-ejercicio" data-aos="zoom-in">
     <div class="operacion">
-      <span class="numero">{{ numero1 }}</span>
-      <span class="signo">{{ operador }}</span>
-      <span class="numero">{{ numero2 }}</span>
+      <span class="numero">{{ numero }}</span>
       <span class="igual">=</span>
-      <span class="numero">{{ resultadoMostrado }}</span>
+      <span class="signo">?</span>
     </div>
 
-    <div class="respuesta-row">
-      <div class="mensaje">
-        <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-        <span *ngIf="color === 'red'" class="incorrecto">X Incorrecto</span>
-      </div>
-      <div class="botones-verf">
-        <button (click)="verificar(true)" [disabled]="mensaje !== ''"> Verdadero</button>
-        <button (click)="verificar(false)" [disabled]="mensaje !== ''"> Falso</button>
-      </div>
+    <div class="opciones">
+      <button *ngFor="let opcion of opciones" (click)="verificar(opcion)" [disabled]="mensaje !== ''">
+        {{ opcion }}
+      </button>
+    </div>
+
+    <div class="mensaje">
+      <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
+      <span *ngIf="color === 'red'" class="incorrecto">❌ Solución correcta: {{ descomposicionCorrecta }}</span>
     </div>
   </div>
 
@@ -40,3 +39,4 @@
     <button class="volver" routerLink="/principal">Volver al inicio</button>
   </div>
 </div>
+

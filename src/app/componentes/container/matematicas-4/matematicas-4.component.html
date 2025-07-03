@@ -1,33 +1,47 @@
-<div class="contenedor">
-  <h1 data-aos="fade-down">🧠 Elige la Respuesta Correcta</h1>
+<!-- Barra de progreso -->
+<div *ngIf="!terminado" class="barra-progreso">
+  <div class="barra-fondo">
+    <div class="barra-relleno" [style.width.%]="(ejercicioActual - 1) / totalEjercicios * 100"></div>
+  </div>
+  <span class="progreso-contador">{{ ejercicioActual }}/{{ totalEjercicios }}</span>
+</div>
 
-  <div *ngIf="!terminado" class="tarjeta" data-aos="zoom-in">
-    <h2>Ejercicio {{ ejercicioActual }} de {{ totalEjercicios }}</h2>
-
-    <div class="pregunta-grande" data-aos="fade-up">
-      <span>{{ numero1 }}</span>
-      <span>{{ operador }}</span>
-      <span>{{ numero2 }}</span>
-      <span>= ?</span>
+<!-- Contenedor principal -->
+<div class="ejercicio-contenedor">
+  <!-- Ejercicio activo -->
+  <div *ngIf="!terminado" class="zona-ejercicio" data-aos="zoom-in">
+    <div class="operacion">
+      <span class="numero">{{ numero1 }}</span>
+      <span class="signo">{{ operador }}</span>
+      <span class="numero">{{ numero2 }}</span>
+      <span class="igual">=</span>
+      <span class="signo">?</span>
     </div>
 
-    <div class="opciones">
-      <button *ngFor="let opcion of opciones" (click)="verificar(opcion)" [disabled]="mensaje !== ''">
-        {{ opcion }}
-      </button>
-    </div>
+    <div class="respuesta-row">
+      <div class="opciones">
+        <button *ngFor="let opcion of opciones" (click)="verificar(opcion)" [disabled]="mensaje !== ''">
+          {{ opcion }}
+        </button>
+      </div>
 
-    <p class="mensaje" [style.color]="color">{{ mensaje }}</p>
+      <div class="mensaje">
+        <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
+        <span *ngIf="color === 'red'" class="incorrecto">
+          ❌ Solución correcta:<br>
+        </span>
+      </div>
+    </div>
   </div>
 
-  <div *ngIf="terminado" class="resultado" data-aos="zoom-in">
-    <h2>🎉 ¡Has terminado!</h2>
-    <p>Respuestas correctas: {{ aciertos }} de {{ totalEjercicios }}</p>
-    <p class="calificacion">Tu calificación: {{ calificacion }} / 5 ⭐</p>
-
-    <div class="botones-finales">
-      <button (click)="reiniciar()">Intentar de nuevo 🔁</button>
-      <button class="volver" routerLink="/principal">Volver al inicio ⬅️</button>
+  <!-- Resultado final -->
+  <div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
+    <p class="titulo-final">CALIFICACIÓN</p>
+    <div class="resultado-final">
+      <span class="resultado-numero">{{ calificacion }}</span>
+      <span class="resultado-slash">/</span>
+      <span class="resultado-total">{{ totalEjercicios }}</span>
     </div>
+    <button class="volver" routerLink="/principal">Volver al inicio</button>
   </div>
 </div>
