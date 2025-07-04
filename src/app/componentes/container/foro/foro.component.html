@@ -13,8 +13,6 @@
         <span>Inicio</span>
       </div>
 
-
-
       <div class="menu-item" (click)="irAEjercicio()" [class.activo]="esRutaActivaEjercicio()">
         <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
         <span>Ejercicios</span>
@@ -37,22 +35,21 @@
     </div>
   </aside>
 
-
   <main class="foro-contenido">
     <section class="compartir-experiencia">
       <h2>📌 Comparte tu experiencia</h2>
-      <textarea
+      <textarea [(ngModel)]="mensajeExperiencia"
         placeholder="¿Te has enfrentado a algún desafío? Comparte cómo lo superaste y ayuda a otros con tu historia."></textarea>
-      <button class="enviar-btn">
+      <button class="enviar-btn" (click)="enviarPublicacion()">
         <img src="assets/Images/Enviar.png" alt="Enviar" />
       </button>
     </section>
 
     <section class="pregunta">
       <h2>💡 Pregunta lo que quieras</h2>
-      <textarea
+      <textarea [(ngModel)]="mensajePregunta"
         placeholder="No hay preguntas tontas, solo oportunidades de aprender. ¿Tienes dudas? ¡La comunidad te ayuda!"></textarea>
-      <button class="enviar-btn">
+      <button class="enviar-btn" (click)="enviarPublicacion()">
         <img src="assets/Images/Enviar.png" alt="Enviar" />
       </button>
     </section>
@@ -63,20 +60,30 @@
         Los participantes más activos y solidarios reciben un reconocimiento especial.
         ¿Serás el próximo?
       </div>
-      <div class="ranking">
-        <div class="puesto puesto1">
-          <div class="numero">1</div>
-          <div class="nombre"></div>
-        </div>
-        <div class="puesto puesto2">
-          <div class="numero">2</div>
-          <div class="nombre"></div>
-        </div>
-        <div class="puesto puesto3">
-          <div class="numero">3</div>
-          <div class="nombre"></div>
-        </div>
-      </div>
+<div class="ranking">
+  <div class="puesto puesto1">
+    <div class="numero">1</div>
+    <div class="nombre forista-top">
+      {{ topForistas?.[0]?.nombre || '—' }}
+    </div>
+  </div>
+  <div class="puesto puesto2">
+    <div class="numero">2</div>
+    <div class="nombre forista-top">
+      {{ topForistas?.[1]?.nombre || '—' }}
+    </div>
+  </div>
+  <div class="puesto puesto3">
+    <div class="numero">3</div>
+    <div class="nombre forista-top">
+      {{ topForistas?.[2]?.nombre || '—' }}
+    </div>
+  </div>
+</div>
+
+
+
+
     </section>
   </main>
 </div>

@@ -140,6 +140,11 @@ body {
   font-weight: bold;
   transition: color 0.3s ease;
 }
+.nombre.forista-top {
+  font-weight: bold;
+  color: #000000d5; /* gris claro */
+  margin-left: 0px;
+}
 
 /* Contenido Foro */
 .foro-contenido {
@@ -260,7 +265,7 @@ textarea {
 .nombre {
   flex: 1;
   height: 32px;
-  background-color: #e6f7ff;
+  background-color: #f9fdff;
   border: 2px solid #00B7FF;
   border-radius: 10px;
 }

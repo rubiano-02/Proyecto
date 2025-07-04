@@ -1,13 +1,9 @@
 <!-- Asegúrate de tener esto en tu index.html (NO aquí): -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> -->
 
-  <button
-    class="menu-toggle"
-    (click)="toggleSidebar()"
-    [class.active]="isSidebarActive"
-  >
-    <i class="fa-solid fa-bars"></i> <!-- Moderno -->
-  </button>
+<button class="menu-toggle" (click)="toggleSidebar()" [class.active]="isSidebarActive">
+  <i class="fa-solid fa-bars"></i> <!-- Moderno -->
+</button>
 
 
 
@@ -15,34 +11,34 @@
 <!-- <app-cabecera></app-cabecera> -->
 
 <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
-    <div class="menu">
-       <div class="menu-item" (click)="irAPrincipal()" routerLinkActive="activo">
-        <img src="assets/Images/Casa.png" alt="Inicio" />
-        <span>Inicio</span>
-      </div>
-
-
-      <div class="menu-item" (click)="irAEjercicio()" [class.activo]="esRutaActivaEjercicio()">
-        <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
-        <span>Ejercicios</span>
-      </div>
-
-      <div class="menu-item" routerLink="/foro" routerLinkActive="activo">
-        <img src="assets/Images/Foro.png" alt="Foro" />
-        <span>Foro</span>
-      </div>
-
-      <div class="menu-item" routerLink="/perfil" routerLinkActive="activo">
-        <img src="assets/Images/Perfil.png" alt="Perfil" />
-        <span>Perfil</span>
-      </div>
-
-      <div class="menu-item" routerLink="/configuracion" routerLinkActive="activo">
-        <img src="assets/Images/Mas.png" alt="Más" />
-        <span>Más</span>
-      </div>
+  <div class="menu">
+    <div class="menu-item" (click)="irAPrincipal()" routerLinkActive="activo">
+      <img src="assets/Images/Casa.png" alt="Inicio" />
+      <span>Inicio</span>
     </div>
-  </aside>
+
+
+    <div class="menu-item" (click)="irAEjercicio()" [class.activo]="esRutaActivaEjercicio()">
+      <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
+      <span>Ejercicios</span>
+    </div>
+
+    <div class="menu-item" routerLink="/foro" routerLinkActive="activo">
+      <img src="assets/Images/Foro.png" alt="Foro" />
+      <span>Foro</span>
+    </div>
+
+    <div class="menu-item" routerLink="/perfil" routerLinkActive="activo">
+      <img src="assets/Images/Perfil.png" alt="Perfil" />
+      <span>Perfil</span>
+    </div>
+
+    <div class="menu-item" routerLink="/configuracion" routerLinkActive="activo">
+      <img src="assets/Images/Mas.png" alt="Más" />
+      <span>Más</span>
+    </div>
+  </div>
+</aside>
 
 
 <div class="container">
@@ -60,10 +56,28 @@
         <h3>AYUDA</h3>
         <img src="assets/Images/Ayuda.png" alt="Ayuda" />
       </a>
-      <a href="#" class="opcion calificanos">
+      <button type="button" class="opcion calificanos" (click)="abrirModal()">
         <h3>CALIFÍCANOS</h3>
         <img src="assets/Images/Calificanos.png" alt="Calificanos" />
-      </a>
+      </button>
+
+
     </div>
   </main>
+</div>
+<!-- Modal para calificación -->
+<div class="modal" [class.show]="mostrarModal">
+  <div class="modal-contenido">
+    <h2>Califícanos</h2>
+    <div class="estrellas">
+      <i *ngFor="let estrella of estrellas; index as i" class="fa-star" [class.fas]="i < calificacionSeleccionada"
+        [class.far]="i >= calificacionSeleccionada" (click)="seleccionarCalificacion(i + 1)"></i>
+    </div>
+    <button class="enviar-btn" (click)="enviarCalificacion()">
+      Enviar Calificación
+    </button>
+    <button class="cerrar-btn" (click)="cerrarModal()">
+      Cancelar
+    </button>
+  </div>
 </div>

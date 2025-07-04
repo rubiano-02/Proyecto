@@ -396,6 +396,68 @@ app.put('/usuarios/:id/preferencia', (req, res) => {
     res.json({ success: true });
   });
 });
+// Publicar un mensaje en el foro
+app.post('/foro/publicar', (req, res) => {
+  const { id_usuario, contenido } = req.body;
+  if (!id_usuario || !contenido) {
+    return res.status(400).json({ error: 'Faltan datos' });
+  }
+  const sql = 'INSERT INTO publicaciones_foro (id_usuario, contenido) VALUES (?, ?)';
+  connection.query(sql, [id_usuario, contenido], (err, result) => {
+    if (err) {
+      console.error('Error al insertar publicación:', err);
+      return res.status(500).json({ error: 'Error del servidor' });
+    }
+    res.json({ success: true, id_publicacion: result.insertId });
+  });
+});
+
+// Obtener top 3 foristas
+app.get('/foro/top', (req, res) => {
+  const sql = `
+    SELECT u.nombre, COUNT(*) AS publicaciones
+    FROM publicaciones_foro pf
+    JOIN usuarios u ON pf.id_usuario = u.id_usuario
+    GROUP BY pf.id_usuario
+    ORDER BY publicaciones DESC
+    LIMIT 3
+  `;
+  connection.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error al obtener ranking:', err);
+      return res.status(500).json({ error: 'Error del servidor' });
+    }
+    res.json(results);
+  });
+});
+// Guardar calificación de un usuario
+// Ruta para calificar (inserta calificación en publicaciones_foro)
+app.post('/foro/calificar', (req, res) => {
+  const { id_usuario, calificacion } = req.body;
+
+  // 1) Validación de datos
+  if (!id_usuario || calificacion == null) {
+    return res.status(400).json({ error: 'Faltan id_usuario o calificacion' });
+  }
+  if (calificacion < 1 || calificacion > 5) {
+    return res.status(400).json({ error: 'La calificación debe estar entre 1 y 5' });
+  }
+
+  // 2) Inserción en la tabla, sin alterar la publicación original
+  const sql = `
+    INSERT INTO publicaciones_foro (id_usuario, contenido, fecha_publicacion, calificacion)
+    VALUES (?, '', NOW(), ?)
+  `;
+  connection.query(sql, [id_usuario, calificacion], (err, result) => {
+    if (err) {
+      console.error('Error al insertar calificación:', err);
+      return res.status(500).json({ error: 'Error del servidor al guardar calificación' });
+    }
+    // Devolvemos success y el id generado (opcional)
+    res.json({ success: true, id_calificacion: result.insertId });
+  });
+});
+
 
 // Iniciar servidor
 app.listen(PORT, () => {
