@@ -67,7 +67,8 @@ export class ConfiguracionComponent {
     id_usuario: idUsuario,
     calificacion: this.calificacionSeleccionada,
   };
-  this.http.post('http://localhost:3000/foro/calificar', data).subscribe(
+  this.http.post('/foro/calificar', data)
+  .subscribe(
     () => {
       alert('¡Gracias por calificar!');
       this.cerrarModal();

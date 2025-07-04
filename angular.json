@@ -81,7 +81,8 @@
               "buildTarget": "DIJU:build:production"
             },
             "development": {
-              "buildTarget": "DIJU:build:development"
+              "buildTarget": "DIJU:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

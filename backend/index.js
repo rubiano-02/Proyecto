@@ -352,7 +352,7 @@ app.post('/resultados', (req, res) => {
         progreso_usuarios.puntaje_promedio = ROUND(r.puntaje_promedio),
         progreso_usuarios.tiempo_total = r.tiempo_total,
         progreso_usuarios.fecha_ultima_actividad = NOW(),
-        progreso_usuarios.progreso_general = LEAST(100, FLOOR((r.ejercicios_realizados / 10) * 100))
+        progreso_usuarios.progreso_general = LEAST(100, FLOOR((r.ejercicios_realizados / 50) * 100))
     `;
 
     connection.query(updateSql, [id_usuario], (err2) => {
