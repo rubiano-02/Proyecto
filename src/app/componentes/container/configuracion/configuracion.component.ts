@@ -1,11 +1,29 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 @Component({
   selector: 'app-configuracion',
   standalone: false,
   templateUrl: './configuracion.component.html',
   styleUrls: ['./configuracion.component.css'],
+  animations: [
+    trigger('desplegar', [
+      state('cerrado', style({
+        height: '0px',
+        opacity: 0,
+        overflow: 'hidden'
+      })),
+      state('abierto', style({
+        height: '*',
+        opacity: 1,
+        overflow: 'hidden'
+      })),
+      transition('cerrado <=> abierto', [
+        animate('300ms ease')
+      ]),
+    ])
+  ]
 })
 export class ConfiguracionComponent {
   
@@ -78,6 +96,47 @@ export class ConfiguracionComponent {
       alert('Ocurrió un error al enviar la calificación.');
     }
   );
+}
+mostrarModalAyuda = false;
+
+preguntasFrecuentes = [
+  {
+    pregunta: '¿Cómo cambio mi preferencia de ejercicio?',
+    respuesta: 'Ve a Configuración > Preferencias y selecciona tu tipo de ejercicio favorito.',
+    mostrar: false
+  },
+  {
+    pregunta: '¿Cómo puedo ver mi progreso?',
+    respuesta: 'Desde la página principal, tu progreso aparece en un cuadro de estadísticas actualizado en tiempo real.',
+    mostrar: false
+  },
+  {
+    pregunta: '¿Cómo participo en el foro?',
+    respuesta: 'Entra a la sección Foro, escribe tu publicación y compártela con otros usuarios.',
+    mostrar: false
+  },
+  {
+    pregunta: '¿Puedo actualizar mi foto de perfil?',
+    respuesta: 'Sí, desde tu perfil puedes subir una nueva foto que aparecerá en tus publicaciones.',
+    mostrar: false
+  },
+  {
+    pregunta: '¿Cómo contacto al soporte?',
+    respuesta: 'Escríbenos a soporte@tusitio.com y te ayudaremos lo antes posible.',
+    mostrar: false
+  }
+];
+
+abrirModalAyuda() {
+  this.mostrarModalAyuda = true;
+}
+
+cerrarModalAyuda() {
+  this.mostrarModalAyuda = false;
+}
+
+toggleRespuesta(index: number) {
+  this.preguntasFrecuentes[index].mostrar = !this.preguntasFrecuentes[index].mostrar;
 }
 
 }

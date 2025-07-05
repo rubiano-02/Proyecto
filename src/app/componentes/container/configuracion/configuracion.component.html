@@ -52,10 +52,11 @@
         <h3>CERRAR SESIÓN</h3>
         <img src="assets/Images/Cerrar sesión.png" alt="Cerrar sesión" />
       </a>
-      <a href="#" class="opcion ayuda">
+      <button type="button" class="opcion ayuda" (click)="abrirModalAyuda()">
         <h3>AYUDA</h3>
         <img src="assets/Images/Ayuda.png" alt="Ayuda" />
-      </a>
+      </button>
+
       <button type="button" class="opcion calificanos" (click)="abrirModal()">
         <h3>CALIFÍCANOS</h3>
         <img src="assets/Images/Calificanos.png" alt="Calificanos" />
@@ -78,6 +79,25 @@
     </button>
     <button class="cerrar-btn" (click)="cerrarModal()">
       Cancelar
+    </button>
+  </div>
+</div>
+<!-- Modal para ayuda -->
+<div class="modal" [class.show]="mostrarModalAyuda">
+  <div class="modal-contenido">
+    <h2>Preguntas Frecuentes</h2><br>
+    <div class="faq-item" *ngFor="let faq of preguntasFrecuentes; index as i">
+      <div class="pregunta" (click)="toggleRespuesta(i)">
+        {{ faq.pregunta }}
+        <span class="icono">{{ faq.mostrar ? '▲' : '▼' }}</span>
+      </div>
+      <div [@desplegar]="faq.mostrar ? 'abierto' : 'cerrado'" class="respuesta">
+        {{ faq.respuesta }}
+      </div>
+
+    </div><br>
+    <button class="cerrar-btn" (click)="cerrarModalAyuda()">
+      Cerrar
     </button>
   </div>
 </div>

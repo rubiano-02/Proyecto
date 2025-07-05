@@ -357,7 +357,26 @@ body {
 }
 
 .cerrar-btn:hover {
-  background-color: #666;
+  background-color: #0088cc;
+}
+.faq-item {
+  border-bottom: 1px solid #0088cc;
+  padding: 10px 0;
+}
+.modal-contenido h2 {
+   color: #0088cc;
+}
+.pregunta {
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.respuesta {
+  margin-top: 5px;
+  color: #0088cc;
 }
 
 /* Responsive */
