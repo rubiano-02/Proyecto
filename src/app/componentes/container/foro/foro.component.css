@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: #f6f6f6;
+ 
   padding-top: 70px;
 }
 
@@ -17,7 +17,7 @@ body {
   left: 0;
   width: 100%;
   height: 70px;
-  background-color: white;
+
   z-index: 1000;
 
   display: flex;
@@ -113,13 +113,13 @@ body {
 }
 
 .menu-item:hover {
-  background-color: #f0f0f0;
+
   transform: translateX(5px); /* Menos desplazamiento */
   border-left: 4px solid #00B7FF;
 }
 
 .menu-item.activo {
-  background-color: #e6f7ff;
+
   border-left: 4px solid #00B7FF;
 }
 
@@ -161,7 +161,7 @@ body {
 .compartir-experiencia,
 .pregunta,
 .forista-mes {
-  background-color: #fff;
+
   border: 3px solid #fddc57;
   border-radius: 15px;
   padding: 20px;
@@ -190,7 +190,7 @@ textarea {
   resize: none;
   border: none;
   outline: none;
-  background-color: #f6f6f6;
+
   padding: 15px;
   font-size: 14px;
   border-radius: 10px;
@@ -217,7 +217,7 @@ textarea {
 }
 
 .mensaje {
-  background-color: #fffbe5;
+ 
   border-radius: 10px;
   padding: 10px;
   font-size: 14px;
@@ -265,7 +265,7 @@ textarea {
 .nombre {
   flex: 1;
   height: 32px;
-  background-color: #f9fdff;
+
   border: 2px solid #00B7FF;
   border-radius: 10px;
 }

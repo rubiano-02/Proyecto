@@ -1,7 +1,7 @@
 .contenedor {
   text-align: center;
   padding: 40px 20px;
-  background: linear-gradient(135deg, #fff8e1, #e1f5fe);
+  
   min-height: 100vh;
 
   overflow: visible; /* <-- esto es importante */

@@ -94,13 +94,13 @@ body {
 }
 
 .menu-item:hover {
-  background-color: #f0f0f0;
+
   transform: translateX(5px);
   border-left: 4px solid #00B7FF;
 }
 
 .menu-item.activo {
-  background-color: #e6f7ff;
+ 
   border-left: 4px solid #00B7FF;
 }
 

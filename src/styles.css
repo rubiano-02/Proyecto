@@ -1,9 +1,186 @@
-/* You can add global styles to this file, and also import other style files */
+
 @import 'aos/dist/aos.css';
 body {
-  padding-top: 70px; /* Igual que la altura del header */
+  padding-top: 70px; 
 }
 body {
   font-family: 'Poppins', sans-serif;
 }
 
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  padding-top: 70px;
+}
+
+
+body.dark-mode {
+  background-color: #2b2b2b; 
+  color: #e0e0e0;        
+}
+
+body.dark-mode .sidebar {
+  background-color: #1e1e1e;
+}
+
+body.dark-mode .cuadro,
+body.dark-mode .cuadro-lateral {
+  background-color: #3a3a3a; 
+  border-color: #555;       
+}
+
+body.dark-mode .modal-contenido {
+  background-color: #333;
+  color: #f0f0f0;
+}
+body.dark-mode .contenido,
+body.dark-mode .container,
+body.dark-mode .cuadro,
+body.dark-mode .cuadro-lateral,
+body.dark-mode .seccion-central,
+body.dark-mode .seccion-derecha,
+body.dark-mode aside.sidebar,
+body.dark-mode main,
+body.dark-mode section,
+body.dark-mode div,
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #e0e0e0 !important; 
+}
+body.dark-mode .ejercicio-contenedor,
+body.dark-mode .ejercicio-contenedor * {
+  background-color: transparent; 
+  color: #e0e0e0 !important;  
+}
+body.dark-mode .foro-contenido,
+body.dark-mode .foro-contenido * {
+  color: #e0e0e0 !important;    
+}
+
+body.dark-mode .foro-contenido textarea {
+  background-color: #444 !important; 
+  color: #e0e0e0 !important;      
+}
+
+body.dark-mode .tarjeta-opciones .opcion {
+  background-color: #333 !important; 
+  border-color: #555 !important;   
+}
+
+body.dark-mode .tarjeta-opciones .opcion h3 {
+  color: #e0e0e0 !important;           
+}
+
+body.dark-mode .modal-contenido {
+  background-color: #333 !important;  
+  color: #e0e0e0 !important;         
+}
+
+body.dark-mode .modal-contenido h2 {
+  color: #00b4f1 !important;       
+}
+
+.modal-contenido button,
+.config-item button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #00b4f1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-contenido button:hover,
+.config-item button:hover {
+  background-color: #0088cc;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.modal-contenido .cerrar-btn {
+  background-color: #999;
+}
+
+.modal-contenido .cerrar-btn:hover {
+  background-color: #666;
+}
+
+body.dark-mode .modal-contenido button,
+body.dark-mode .config-item button {
+  background-color: #00b4f1;
+  color: #fff;
+}
+
+body.dark-mode .modal-contenido .cerrar-btn,
+body.dark-mode .config-item .cerrar-btn {
+  background-color: #777;
+}
+
+body.dark-mode .modal-contenido .cerrar-btn:hover,
+body.dark-mode .config-item .cerrar-btn:hover {
+  background-color: #555;
+}
+
+body.dark-mode .boton {
+  background-color: #1f1f1f;    
+  border-color: #444;            
+  color: #eee;                  
+}
+
+body.dark-mode .boton:hover {
+  border-color: #00B7FF;       
+}
+
+body.dark-mode .boton span {
+  color: #eee;                 
+}
+
+body.dark-mode .boton:hover span {
+  color: #00B7FF;               
+}
+
+body.dark-mode .boton:active::after {
+  background: radial-gradient(circle, rgba(0,183,255,0.4) 0%, transparent 70%);
+}
+
+body.dark-mode .estrellas i {
+  color: #888 !important;
+}
+
+body.dark-mode .estrellas .fas {
+  color: gold !important;             
+}
+
+body.dark-mode .compartir-experiencia,
+body.dark-mode .pregunta,
+body.dark-mode .forista-mes {
+  background-color: #333 !important;  
+}
+
+body.dark-mode .ejercicio-contenedor .zona-final {
+  background-color: #333 !important;
+}
+
+body.dark-mode .texto-azul {
+  color: #00bfff !important;
+}
+body.dark-mode header,
+body.dark-mode .header {
+  background-color: #1e1e1e; 
+  color: #e0e0e0;      
+}

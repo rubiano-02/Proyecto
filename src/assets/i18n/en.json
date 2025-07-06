@@ -1,0 +1,80 @@
+{
+  "INICIO": "Home",
+  "EJERCICIOS": "Exercises",
+  "FORO": "Forum",
+  "PERFIL": "Profile",
+  "MAS": "More",
+  "CONFIGURACION": "Settings",
+  "CERRAR_SESION": "Log Out",
+  "AYUDA": "Help",
+  "CALIFICANOS": "Rate Us",
+  "ENVIAR_CALIFICACION": "Submit Rating",
+  "CANCELAR": "Cancel",
+  "PREGUNTAS_FRECUENTES": "FAQs",
+  "CERRAR": "Close",
+  "ACTIVAR_MODO_OSCURO": "Enable dark mode",
+  "IDIOMA": "Language",
+  "ESPANOL": "Spanish",
+  "INGLES": "English",
+  "CAMBIAR_TIPO_EJERCICIO": "Change exercise type",
+  "FORO_COMPARTIR_EXPERIENCIA": "Share your experience",
+  "FORO_PLACEHOLDER_EXPERIENCIA": "Have you faced a challenge? Share how you overcame it and help others with your story.",
+  "FORO_PREGUNTA_TITULO": "Ask anything you want",
+  "FORO_PLACEHOLDER_PREGUNTA": "There are no silly questions, only opportunities to learn. Have doubts? The community will help you!",
+  "FORO_FORISTA_MES": "Forum member of the month",
+  "FORO_MENSAJE_FORISTA": "The most active and supportive participants receive special recognition. Will you be next?",
+  "MENU_INICIO": "Home",
+  "MENU_EJERCICIOS": "Exercises",
+  "MENU_FORO": "Forum",
+  "MENU_PERFIL": "Profile",
+  "MENU_MAS": "More",
+  "PERFIL_SUBIR_FONDO": "Upload Banner",
+  "PERFIL_SUBIR_FOTO": "Upload Photo",
+  "PERFIL_CREADA_EL": "Your account was created on",
+  "PERFIL_LOGROS": "Achievements",
+  "PERFIL_LOGRO_90": "Get 90% in the exercises",
+  "PERFIL_LOGRO_10_DIAS": "Play 10 days in a row",
+  "PERFIL_LOGRO_CONSTANCIA": "Unstoppable consistency",
+   "LECTURA": {
+    "TITULO": "Reading",
+    "BASICA": {
+      "TITULO": "Basic Reading",
+      "P1": "Words and short phrases with visual support.",
+      "P2": "Texts with dyslexia-friendly fonts.",
+      "P3": "Fill-in-the-blank and image association exercises."
+    },
+    "COMPRENSION": {
+      "TITULO": "Reading Comprehension",
+      "P1": "Short stories with interactive questions.",
+      "P2": "Identification of main ideas and key words.",
+      "P3": "Inference and event sequencing exercises."
+    }
+  },
+  "BOTON": {
+    "INICIAR": "START"
+  },
+  "ESTADISTICAS": {
+    "TITULO": "Statistics",
+    "PROGRESO_GENERAL": "Overall progress",
+    "PUNTAJE": "Score",
+    "TIEMPO": "Time spent"
+  },
+  "DESAFIOS": {
+    "TITULO": "Challenges",
+    "DESAFIO1": "Complete an exercise",
+    "DESAFIO2": "Practice 3 days in a row",
+    "DESAFIO3": "Reach a 7-day streak"
+  },
+   "SUMAS": {
+    "TITULO": "Sums and Basics",
+    "P1": "Addition exercises with an attractive and simple design.",
+    "P2": "Stimulates mental calculation and focus.",
+    "P3": "Step-by-step progress with immediate feedback."
+  },
+  "COMPRENSION": {
+    "TITULO": "Reading Comprehension",
+    "P1": "Short stories with interactive questions.",
+    "P2": "Identification of main ideas and key words.",
+    "P3": "Inference and event sequencing exercises."
+  }
+}

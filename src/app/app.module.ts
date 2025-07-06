@@ -14,7 +14,9 @@ import { PerfilComponent } from './componentes/container/perfil/perfil.component
 import { ConfiguracionComponent } from './componentes/container/configuracion/configuracion.component';
 import { Matematicas1Component } from './componentes/container/matematicas-1/matematicas-1.component';
 import { Registrarse1Component } from './componentes/container/registrarse1/registrarse1.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Lectura1Component } from './componentes/container/lectura-1/lectura-1.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { EjerciciosComponent } from './componentes/container/ejercicios/ejercicios.component';
@@ -34,6 +36,8 @@ import { Matematicas12Component } from './componentes/container/matematicas-12/m
 import { Matematicas13Component } from './componentes/container/matematicas-13/matematicas-13.component';
 import { Matematicas14Component } from './componentes/container/matematicas-14/matematicas-14.component';
 import { Matematicas15Component } from './componentes/container/matematicas-15/matematicas-15.component';
+
+
 
 @NgModule({
   declarations: [
@@ -73,8 +77,14 @@ import { Matematicas15Component } from './componentes/container/matematicas-15/m
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    DragDropModule
-
+    DragDropModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [
    //provideClientHydration()
@@ -82,3 +92,8 @@ import { Matematicas15Component } from './componentes/container/matematicas-15/m
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}

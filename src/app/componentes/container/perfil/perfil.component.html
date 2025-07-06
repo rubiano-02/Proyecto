@@ -7,24 +7,27 @@
     <nav class="menu">
       <div class="menu-item" (click)="irAPrincipal()" routerLinkActive="activo">
         <img src="assets/Images/Casa.png" alt="Inicio" />
-        <span>Inicio</span>
+        <span>{{ 'MENU_INICIO' | translate }}</span>
       </div>
 
       <div class="menu-item" (click)="irAEjercicio()" [class.activo]="esRutaActivaEjercicio()">
         <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
-        <span>Ejercicios</span>
+        <span>{{ 'MENU_EJERCICIOS' | translate }}</span>
       </div>
+
       <a routerLink="/foro" class="menu-item">
         <img src="assets/Images/Foro.png" alt="Foro" />
-        <span>Foro</span>
+        <span>{{ 'MENU_FORO' | translate }}</span>
       </a>
+
       <a routerLink="/perfil" class="menu-item active">
         <img src="assets/Images/Perfil.png" alt="Perfil" />
-        <span>Perfil</span>
+        <span>{{ 'MENU_PERFIL' | translate }}</span>
       </a>
+
       <a routerLink="/configuracion" class="menu-item">
         <img src="assets/Images/Mas.png" alt="Más" />
-        <span>Más</span>
+        <span>{{ 'MENU_MAS' | translate }}</span>
       </a>
     </nav>
   </aside>
@@ -40,7 +43,7 @@
       </div>
       <input type="file" accept="image/*" (change)="cambiarImagen($event, 'banner')" #inputBanner hidden>
 
-      <button (click)="uploadBanner()" [disabled]="!selectedBannerFile">Subir Fondo</button>
+      <button (click)="uploadBanner()" [disabled]="!selectedBannerFile">{{ 'PERFIL_SUBIR_FONDO' | translate }}</button>
       <p *ngIf="bannerUploadMessage" class="upload-message">{{ bannerUploadMessage }}</p>
 
       <div class="perfil-main-content">
@@ -53,11 +56,11 @@
             style="cursor: pointer;" />
           <input type="file" accept="image/*" (change)="cambiarImagen($event, 'avatar')" #inputAvatar hidden>
 
-          <button (click)="uploadAvatar()" [disabled]="!selectedAvatarFile">Subir Foto</button>
+          <button (click)="uploadAvatar()" [disabled]="!selectedAvatarFile">{{ 'PERFIL_SUBIR_FOTO' | translate }}</button>
           <p *ngIf="avatarUploadMessage" class="upload-message">{{ avatarUploadMessage }}</p>
 
           <h2>{{ userProfile.nombre }}</h2>
-          <p class="fecha">Su cuenta fue creada el <br />{{ userProfile.fecha_registro | date:'dd/MM/yyyy' }}</p>
+          <p class="fecha">{{ 'PERFIL_CREADA_EL' | translate }} <br />{{ userProfile.fecha_registro | date:'dd/MM/yyyy' }}</p>
           <img src="assets/Images/Libro.png" alt="Libro" class="libro-icono" />
         </div>
 
@@ -65,25 +68,25 @@
 
         <div class="logros">
           <h3>
-            Logros <img src="assets/Images/Trofeo.png" alt="Trofeo" class="icono-titulo-logros" />
+            {{ 'PERFIL_LOGROS' | translate }} <img src="assets/Images/Trofeo.png" alt="Trofeo" class="icono-titulo-logros" />
           </h3>
           <div class="logro">
             <img src="assets/Images/Objetivo.png" alt="Objetivo" class="icono-logro" />
-            Obtén 90% en los ejercicios
+            {{ 'PERFIL_LOGRO_90' | translate }}
             <div class="barra">
               <div class="progreso rojo" style="width: 60%"><span>60%</span></div>
             </div>
           </div>
           <div class="logro">
             <img src="assets/Images/Calendario.png" alt="Calendario" class="icono-logro" />
-            Juega 10 días seguidos
+            {{ 'PERFIL_LOGRO_10_DIAS' | translate }}
             <div class="barra">
               <div class="progreso azul" style="width: 45%"><span>45%</span></div>
             </div>
           </div>
           <div class="logro">
             <img src="assets/Images/Fuego.png" alt="Fuego" class="icono-logro" />
-            Constancia imparable
+            {{ 'PERFIL_LOGRO_CONSTANCIA' | translate }}
             <div class="barra">
               <div class="progreso naranja" style="width: 75%"><span>75%</span></div>
             </div>

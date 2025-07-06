@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-configuracion',
   standalone: false,
   templateUrl: './configuracion.component.html',
   styleUrls: ['./configuracion.component.css'],
+  
   animations: [
     trigger('desplegar', [
       state('cerrado', style({
@@ -28,7 +30,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class ConfiguracionComponent {
   
   isSidebarActive = false;
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private translate: TranslateService) { }
   mostrarModal = false;
   calificacionSeleccionada = 0;
   estrellas = Array(5).fill(0);
@@ -59,6 +61,9 @@ export class ConfiguracionComponent {
   abrirModal() {
     this.mostrarModal = true;
   }
+testClick() {
+  console.log('✅ Click recibido en ConfiguracionComponent');
+}
 
   cerrarModal() {
     this.mostrarModal = false;
@@ -137,6 +142,38 @@ cerrarModalAyuda() {
 
 toggleRespuesta(index: number) {
   this.preguntasFrecuentes[index].mostrar = !this.preguntasFrecuentes[index].mostrar;
+}
+mostrarModalConfiguracion = false;
+modoOscuro = false;
+idiomaSeleccionado = 'es';
+
+abrirModalConfiguracion() {
+  this.mostrarModalConfiguracion = true;
+}
+
+cerrarModalConfiguracion() {
+  this.mostrarModalConfiguracion = false;
+}
+
+
+toggleModoOscuro() {
+  this.modoOscuro = !this.modoOscuro;
+  console.log('Modo oscuro:', this.modoOscuro);
+  if (this.modoOscuro) {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
+}
+
+
+cambiarIdioma() {
+  this.translate.use(this.idiomaSeleccionado); // es o en
+}
+
+irACambioEleccion() {
+  this.router.navigate(['/eleccion']);
+  this.cerrarModalConfiguracion();
 }
 
 }

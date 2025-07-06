@@ -1,0 +1,82 @@
+{
+  "INICIO": "Inicio",
+  "EJERCICIOS": "Ejercicios",
+  "FORO": "Foro",
+  "PERFIL": "Perfil",
+  "MAS": "Más",
+  "CONFIGURACION": "Configuración",
+  "CERRAR_SESION": "Cerrar sesión",
+  "AYUDA": "Ayuda",
+  "CALIFICANOS": "Califícanos",
+  "ENVIAR_CALIFICACION": "Enviar Calificación",
+  "CANCELAR": "Cancelar",
+  "PREGUNTAS_FRECUENTES": "Preguntas Frecuentes",
+  "CERRAR": "Cerrar",
+  "ACTIVAR_MODO_OSCURO": "Activar modo oscuro",
+  "IDIOMA": "Idioma",
+  "ESPANOL": "Español",
+  "INGLES": "Inglés",
+  "MENU_INICIO": "Inicio",
+  "MENU_EJERCICIOS": "Ejercicios",
+  "MENU_FORO": "Foro",
+  "MENU_PERFIL": "Perfil",
+  "MENU_MAS": "Más",
+  "CAMBIAR_TIPO_EJERCICIO": "Cambiar tipo de ejercicio",
+  "FORO_COMPARTIR_EXPERIENCIA": "Comparte tu experiencia",
+  "FORO_PLACEHOLDER_EXPERIENCIA": "¿Te has enfrentado a algún desafío? Comparte cómo lo superaste y ayuda a otros con tu historia.",
+  "FORO_PREGUNTA_TITULO": "Pregunta lo que quieras",
+  "FORO_PLACEHOLDER_PREGUNTA": "No hay preguntas tontas, solo oportunidades de aprender. ¿Tienes dudas? ¡La comunidad te ayuda!",
+  "FORO_FORISTA_MES": "Forista del mes",
+  "FORO_MENSAJE_FORISTA": "Los participantes más activos y solidarios reciben un reconocimiento especial. ¿Serás el próximo?",
+  "PERFIL_SUBIR_FONDO": "Subir Fondo",
+  "PERFIL_SUBIR_FOTO": "Subir Foto",
+  "PERFIL_CREADA_EL": "Su cuenta fue creada el",
+  "PERFIL_LOGROS": "Logros",
+  "PERFIL_LOGRO_90": "Obtén 90% en los ejercicios",
+  "PERFIL_LOGRO_10_DIAS": "Juega 10 días seguidos",
+  "PERFIL_LOGRO_CONSTANCIA": "Constancia imparable",
+   "LECTURA": {
+    "TITULO": "Lectura",
+    "BASICA": {
+      "TITULO": "Lecturas Básicas",
+      "P1": "Palabras y frases cortas con apoyo visual.",
+      "P2": "Textos con fuentes adaptadas para dislexia.",
+      "P3": "Ejercicios de completar palabras y asociación con imágenes."
+    },
+    "COMPRENSION": {
+      "TITULO": "Comprensión De Textos",
+      "P1": "Historias cortas con preguntas interactivas.",
+      "P2": "Identificación de ideas principales y palabras clave.",
+      "P3": "Ejercicios de inferencia y secuencia de eventos."
+    }
+  },
+  "BOTON": {
+    "INICIAR": "INICIAR"
+  },
+  "ESTADISTICAS": {
+    "TITULO": "Estadísticas",
+    "PROGRESO_GENERAL": "Progreso general",
+    "PUNTAJE": "Puntaje",
+    "TIEMPO": "Tiempo dedicado"
+  },
+  "DESAFIOS": {
+    "TITULO": "Desafíos",
+    "DESAFIO1": "Completa un ejercicio",
+    "DESAFIO2": "Practica 3 días seguidos",
+    "DESAFIO3": "Logra una racha de 7 días"
+  },
+
+  "SUMAS": {
+    "TITULO": "Sumas y Básicas",
+    "P1": "Operaciones de suma con diseño llamativo y sencillo.",
+    "P2": "Estimula el cálculo mental y la concentración.",
+    "P3": "Progreso paso a paso con retroalimentación inmediata."
+  },
+  "COMPRENSION": {
+    "TITULO": "Comprensión De Textos",
+    "P1": "Historias cortas con preguntas interactivas.",
+    "P2": "Identificación de ideas principales y palabras clave.",
+    "P3": "Ejercicios de inferencia y secuencia de eventos."
+  }
+
+}

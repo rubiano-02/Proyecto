@@ -9,83 +9,84 @@
 
 <!-- No pongas <app-cabecera> si no necesitas otra cabecera -->
 <!-- <app-cabecera></app-cabecera> -->
-
+<!-- Menú lateral -->
 <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
   <div class="menu">
     <div class="menu-item" (click)="irAPrincipal()" routerLinkActive="activo">
       <img src="assets/Images/Casa.png" alt="Inicio" />
-      <span>Inicio</span>
+      <span>{{ 'INICIO' | translate }}</span>
     </div>
-
 
     <div class="menu-item" (click)="irAEjercicio()" [class.activo]="esRutaActivaEjercicio()">
       <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
-      <span>Ejercicios</span>
+      <span>{{ 'EJERCICIOS' | translate }}</span>
     </div>
 
     <div class="menu-item" routerLink="/foro" routerLinkActive="activo">
       <img src="assets/Images/Foro.png" alt="Foro" />
-      <span>Foro</span>
+      <span>{{ 'FORO' | translate }}</span>
     </div>
 
     <div class="menu-item" routerLink="/perfil" routerLinkActive="activo">
       <img src="assets/Images/Perfil.png" alt="Perfil" />
-      <span>Perfil</span>
+      <span>{{ 'PERFIL' | translate }}</span>
     </div>
 
-    <div class="menu-item" routerLink="/configuracion" routerLinkActive="activo">
+    <div class="menu-item" (click)="abrirModalConfiguracion()">
       <img src="assets/Images/Mas.png" alt="Más" />
-      <span>Más</span>
+      <span>{{ 'MAS' | translate }}</span>
     </div>
   </div>
 </aside>
 
-
+<!-- Tarjeta de opciones principales -->
 <div class="container">
   <main class="contenido">
     <div class="tarjeta-opciones">
-      <a href="#" class="opcion configuracion">
-        <h3>CONFIGURACIÓN</h3>
+      <a href="#" (click)="abrirModalConfiguracion(); $event.preventDefault()" class="opcion configuracion">
+        <h3>{{ 'CONFIGURACION' | translate }}</h3>
         <img src="assets/Images/Configuración.png" alt="Configuración" />
       </a>
+
       <a href="#" class="opcion cerrar-sesion">
-        <h3>CERRAR SESIÓN</h3>
+        <h3>{{ 'CERRAR_SESION' | translate }}</h3>
         <img src="assets/Images/Cerrar sesión.png" alt="Cerrar sesión" />
       </a>
+
       <button type="button" class="opcion ayuda" (click)="abrirModalAyuda()">
-        <h3>AYUDA</h3>
+        <h3>{{ 'AYUDA' | translate }}</h3>
         <img src="assets/Images/Ayuda.png" alt="Ayuda" />
       </button>
 
       <button type="button" class="opcion calificanos" (click)="abrirModal()">
-        <h3>CALIFÍCANOS</h3>
+        <h3>{{ 'CALIFICANOS' | translate }}</h3>
         <img src="assets/Images/Calificanos.png" alt="Calificanos" />
       </button>
-
-
     </div>
   </main>
 </div>
+
 <!-- Modal para calificación -->
 <div class="modal" [class.show]="mostrarModal">
   <div class="modal-contenido">
-    <h2>Califícanos</h2>
+    <h2>{{ 'CALIFICANOS' | translate }}</h2>
     <div class="estrellas">
       <i *ngFor="let estrella of estrellas; index as i" class="fa-star" [class.fas]="i < calificacionSeleccionada"
         [class.far]="i >= calificacionSeleccionada" (click)="seleccionarCalificacion(i + 1)"></i>
     </div>
     <button class="enviar-btn" (click)="enviarCalificacion()">
-      Enviar Calificación
+      {{ 'ENVIAR_CALIFICACION' | translate }}
     </button>
     <button class="cerrar-btn" (click)="cerrarModal()">
-      Cancelar
+      {{ 'CANCELAR' | translate }}
     </button>
   </div>
 </div>
+
 <!-- Modal para ayuda -->
 <div class="modal" [class.show]="mostrarModalAyuda">
   <div class="modal-contenido">
-    <h2>Preguntas Frecuentes</h2><br>
+    <h2>{{ 'PREGUNTAS_FRECUENTES' | translate }}</h2><br>
     <div class="faq-item" *ngFor="let faq of preguntasFrecuentes; index as i">
       <div class="pregunta" (click)="toggleRespuesta(i)">
         {{ faq.pregunta }}
@@ -94,10 +95,39 @@
       <div [@desplegar]="faq.mostrar ? 'abierto' : 'cerrado'" class="respuesta">
         {{ faq.respuesta }}
       </div>
-
     </div><br>
     <button class="cerrar-btn" (click)="cerrarModalAyuda()">
-      Cerrar
+      {{ 'CERRAR' | translate }}
+    </button>
+  </div>
+</div>
+
+<!-- Modal de configuración -->
+<div class="modal" [class.show]="mostrarModalConfiguracion">
+  <div class="modal-contenido">
+    <h2>{{ 'CONFIGURACION' | translate }}</h2>
+
+    <div class="config-item">
+      <label>
+        <input type="checkbox" [(ngModel)]="modoOscuro" (click)="toggleModoOscuro()" />
+        {{ 'ACTIVAR_MODO_OSCURO' | translate }}
+      </label>
+    </div>
+
+    <div class="config-item">
+      <label for="idiomaSelect">{{ 'IDIOMA' | translate }}:</label>
+      <select id="idiomaSelect" [(ngModel)]="idiomaSeleccionado" (change)="cambiarIdioma()">
+        <option value="es">{{ 'ESPANOL' | translate }}</option>
+        <option value="en">{{ 'INGLES' | translate }}</option>
+      </select>
+    </div>
+
+    <div class="config-item">
+      <button (click)="irACambioEleccion()">{{ 'CAMBIAR_TIPO_EJERCICIO' | translate }}</button>
+    </div>
+
+    <button class="cerrar-btn" (click)="cerrarModalConfiguracion()">
+      {{ 'CERRAR' | translate }}
     </button>
   </div>
 </div>

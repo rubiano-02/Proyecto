@@ -3,46 +3,39 @@
 </button>
 <div class="container">
   <!-- Menú lateral -->
-  <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
+   <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
     <div class="menu">
       <div class="menu-item" routerLink="/principal" routerLinkActive="activo">
         <img src="assets/Images/Casa.png" alt="Inicio" />
-        <span>Inicio</span>
+        <span>{{ 'MENU_INICIO' | translate }}</span>
       </div>
 
       <div class="menu-item" routerLink="/ejer-matematicas" routerLinkActive="activo">
-        <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
-        <span>Ejercicios</span>
+       <img src="assets/Images/Ejercicios.png" alt="Ejercicios" />
+        <span>{{ 'MENU_EJERCICIOS' | translate }}</span>
       </div>
 
       <div class="menu-item" routerLink="/foro" routerLinkActive="activo">
         <img src="assets/Images/Foro.png" alt="Foro" />
-        <span>Foro</span>
+        <span>{{ 'MENU_FORO' | translate }}</span>
       </div>
 
       <div class="menu-item" routerLink="/perfil" routerLinkActive="activo">
         <img src="assets/Images/Perfil.png" alt="Perfil" />
-        <span>Perfil</span>
+        <span>{{ 'MENU_PERFIL' | translate }}</span>
       </div>
 
       <div class="menu-item" routerLink="/configuracion" routerLinkActive="activo">
         <img src="assets/Images/Mas.png" alt="Más" />
-        <span>Más</span>
+        <span>{{ 'MENU_MAS' | translate }}</span>
       </div>
     </div>
   </aside>
 
-
   <!-- Contenido principal -->
   <main class="contenido">
     <!-- Sección superior -->
-    <div class="seccion-superior">
-      <div class="dropdown">
-        <img src="assets/Images/Libro.png" alt="Lectura" />
-        <span>Lectura</span>
-        <img src="assets/Images/Flecha.png" alt="Flecha" />
-      </div>
-    </div>
+    
 
     <!-- Contenedor principal para secciones central y derecha -->
     <div class="contenedor-principal">
@@ -51,26 +44,26 @@
         <div class="contenedor-cuadros">
           <div class="cuadro">
             <div class="texto-cuadro">
-              <h2>Sumas y Basicas</h2>
-              <p>Operaciones de suma con diseño llamativo y sencillo.</p>
-              <p>Estimula el cálculo mental y la concentración.</p>
-              <p>Progreso paso a paso con retroalimentación inmediata.</p>
+              <h2>{{ 'SUMAS.TITULO' | translate }}</h2>
+              <p>{{ 'SUMAS.P1' | translate }}</p>
+              <p>{{ 'SUMAS.P2' | translate }}</p>
+              <p>{{ 'SUMAS.P3' | translate }}</p>
             </div>
             <div class="accion-cuadro">
-              <button class="iniciar">INICIAR</button>
+              <button class="iniciar">{{ 'BOTON.INICIAR' | translate }}</button>
               <img src="assets/Images/Lectura Básica.png" alt="ABC" class="imagen-cuadro" />
             </div>
           </div>
 
           <div class="cuadro">
             <div class="texto-cuadro">
-              <h2>Comprensión De Textos</h2>
-              <p>Historias cortas con preguntas interactivas.</p>
-              <p>Identificación de ideas principales y palabras clave.</p>
-              <p>Ejercicios de inferencia y secuencia de eventos.</p>
+              <h2>{{ 'COMPRENSION.TITULO' | translate }}</h2>
+              <p>{{ 'COMPRENSION.P1' | translate }}</p>
+              <p>{{ 'COMPRENSION.P2' | translate }}</p>
+              <p>{{ 'COMPRENSION.P3' | translate }}</p>
             </div>
             <div class="accion-cuadro">
-              <button class="iniciar">INICIAR</button>
+              <button class="iniciar">{{ 'BOTON.INICIAR' | translate }}</button>
               <img src="assets/Images/Comprensión.png" alt="Lector" class="imagen-cuadro" />
             </div>
           </div>
@@ -78,13 +71,13 @@
       </div>
 
       <!-- Sección derecha -->
-      <div class="seccion-derecha">
+            <div class="seccion-derecha">
         <div class="contenedor-lateral">
           <div class="cuadro-lateral">
-            <h3>📊 Estadísticas</h3>
+            <h3>📊 {{ 'ESTADISTICAS.TITULO' | translate }}</h3>
 
             <div class="estadistica">
-              <span class="etiqueta">Progreso general</span>
+              <span class="etiqueta">{{ 'ESTADISTICAS.PROGRESO_GENERAL' | translate }}</span>
               <div class="progreso azul">
                 <div [style.width.%]="progresoGeneralAnimado"></div>
               </div>
@@ -92,7 +85,7 @@
             </div>
 
             <div class="estadistica">
-              <span class="etiqueta">Puntaje</span>
+              <span class="etiqueta">{{ 'ESTADISTICAS.PUNTAJE' | translate }}</span>
               <div class="progreso amarillo">
                 <div [style.width.%]="puntajeAnimado"></div>
               </div>
@@ -100,7 +93,7 @@
             </div>
 
             <div class="estadistica">
-              <span class="etiqueta">Tiempo dedicado</span>
+              <span class="etiqueta">{{ 'ESTADISTICAS.TIEMPO' | translate }}</span>
               <div class="progreso naranja">
                 <div [style.width.%]="tiempoAnimado"></div>
               </div>
@@ -108,21 +101,19 @@
             </div>
           </div>
 
-
-
           <div class="cuadro-lateral">
-            <h3>🏆 Desafíos</h3>
+            <h3>🏆 {{ 'DESAFIOS.TITULO' | translate }}</h3>
             <ul class="desafios">
               <li>
-                <span class="desafio-texto">Completa un ejercicio</span>
+                <span class="desafio-texto">{{ 'DESAFIOS.DESAFIO1' | translate }}</span>
                 <span class="avance">1/2</span>
               </li>
               <li>
-                <span class="desafio-texto">Practica 3 días seguidos</span>
+                <span class="desafio-texto">{{ 'DESAFIOS.DESAFIO2' | translate }}</span>
                 <span class="avance">0/3</span>
               </li>
               <li>
-                <span class="desafio-texto">Logra una racha de 7 días</span>
+                <span class="desafio-texto">{{ 'DESAFIOS.DESAFIO3' | translate }}</span>
                 <span class="avance">0/7</span>
               </li>
             </ul>
