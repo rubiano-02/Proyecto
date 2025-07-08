@@ -1,0 +1,95 @@
+.contenedor {
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+h1 {
+color: #4caf50;
+}
+.lista-frases {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 500px;
+}
+
+.tarjeta-frase {
+  background: #e1f5fe;
+  border: 2px solid #00b0ff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: move;
+  transition: all 0.3s ease;
+}
+
+.tarjeta-frase:hover {
+  background: #b3e5fc;
+}
+
+.verificar {
+  margin-top: 30px;
+  padding: 12px 30px;
+  font-size: 18px;
+  background-color: #00b0ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.verificar:hover {
+  background-color: #0091ea;
+}
+
+.mensaje {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.zona-final {
+  margin-top: 40px;
+}
+
+.titulo-final {
+  font-size: 40px;
+  color: #4caf50;
+  font-weight: bold;
+  margin-left: 520px;
+}
+
+.resultado-final {
+  font-size: 60px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resultado-numero, .resultado-total {
+  color: #333;
+}
+
+.resultado-slash {
+  color: #ffa000;
+  margin: 0 10px;
+}
+
+.volver {
+  margin-top: 30px;
+  padding: 12px 28px;
+  font-size: 18px;
+  background-color: #00b0ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 570px;
+}
+
+.volver:hover {
+  background-color: #007bb5;
+}

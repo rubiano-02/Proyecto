@@ -1,5 +1,6 @@
 <div class="contenedor" data-aos="fade-up">
-  <h1 data-aos="zoom-in"> ¡Completa la oracion!</h1>
+ 
+  <h1 data-aos="zoom-in"> Completa la oración:</h1>
 
   <p class="oracion" data-aos="fade-right">
     El gato está en la 
@@ -10,7 +11,7 @@
           {{ respuestas[0] }}
         </div>
       </ng-container>
-      <ng-template #vacio1>_____</ng-template>
+      <ng-template #vacio1></ng-template>
     </span>, se estira y lame su pata. Afuera brilla el 
     <span class="cajon" cdkDropList id="cajon1" [cdkDropListData]="[]" [cdkDropListConnectedTo]="['opciones']"
       (cdkDropListDropped)="soltar($event, 1)">
@@ -19,7 +20,7 @@
           {{ respuestas[1] }}
         </div>
       </ng-container>
-      <ng-template #vacio2>_____</ng-template>
+      <ng-template #vacio2></ng-template>
     </span>, dorado como un farol. De pronto pasa un 
     <span class="cajon" cdkDropList id="cajon2" [cdkDropListData]="[]" [cdkDropListConnectedTo]="['opciones']"
       (cdkDropListDropped)="soltar($event, 2)">
@@ -28,30 +29,46 @@
           {{ respuestas[2] }}
         </div>
       </ng-container>
-      <ng-template #vacio3>_____</ng-template>
+      <ng-template #vacio3></ng-template>
     </span>, corriendo con un botón. El gato apenas lo vio... y durmiendo se quedó.
   </p>
 
-  <div class="opciones" id="opciones" cdkDropList
-       [cdkDropListData]="opciones"
-       [cdkDropListConnectedTo]="['cajon0', 'cajon1', 'cajon2']"
-       (cdkDropListDropped)="soltar($event)"
-       data-aos="zoom-in-up">
-    <div *ngFor="let opcion of opciones; let i = index"
-         class="opcion"
-         cdkDrag
-         (click)="insertarPorClick(opcion, i)">
-      {{ opcion }}
+  <!-- ✅ Todo esto aparece solo después de que Angular terminó de renderizar -->
+  <div *ngIf="mostrarContenido">
+    <div class="opciones" id="opciones" cdkDropList
+         [cdkDropListData]="opciones"
+         [cdkDropListConnectedTo]="['cajon0', 'cajon1', 'cajon2']"
+         (cdkDropListDropped)="soltar($event)"
+         data-aos="zoom-in-up">
+      <div *ngFor="let opcion of opciones; let i = index"
+           class="opcion"
+           cdkDrag
+           (click)="insertarPorClick(opcion, i)">
+        {{ opcion }}
+      </div>
     </div>
+ <button class="salir" routerLink="/prin-lectura"><strong>←</strong></button>
+    <button class="verificar" (click)="verificar()">Verificar</button>
   </div>
 
-  <button class="verificar" (click)="verificar()" data-aos="zoom-in-up">✅ Verificar</button>
+ <!-- Mensajes dinámicos -->
+<div *ngIf="mensaje && !terminado" class="mensaje">
+  <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
+  <span *ngIf="color === 'red'" class="incorrecto">❌ Incorrecto</span>
+</div>
+
+<!-- Calificación final -->
+<div *ngIf="terminado" class="pantalla-final">
+  <div class="zona-final" data-aos="fade-up">
+    <p class="titulo-final">CALIFICACIÓN</p>
+    <div class="resultado-final">
+      <span class="resultado-numero">{{ calificacion }}</span>
+      <span class="resultado-slash">/</span>
+      <span class="resultado-total">5</span>
+    </div>
+    <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+  </div>
+</div>
 
 
-  <p class="mensaje" *ngIf="mensaje" [style.color]="color">{{ mensaje }}</p>
-
-
-<p *ngIf="calificacion === 0" style="color:crimson; font-weight: bold; font-size: 20px;">
-  💥 Has agotado tus intentos. Calificación: 0/5
-</p>
 </div>

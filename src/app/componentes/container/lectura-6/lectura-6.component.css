@@ -1,0 +1,160 @@
+@keyframes typing {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOutSlow {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(5px);
+  }
+}
+
+.contenedor {
+  padding: 50px 30px;
+  max-width: 900px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.titulo {
+  font-size: 42px;
+  color: #00b0ff;
+  margin-bottom: 10px;
+}
+
+.subtitulo {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* Texto */
+.tarjeta-texto {
+  background-color: #fff8dc;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 30px;
+  animation: typing 0.7s ease;
+}
+
+.tarjeta-texto.oculto {
+  animation: fadeOutSlow 1s forwards;
+}
+
+/* Preguntas */
+.pregunta {
+  margin-bottom: 30px;
+}
+
+.pregunta-texto {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.opciones {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.opciones button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #eeeeee;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.opciones button:hover {
+  background-color: #d6f0ff;
+}
+
+.opciones button.seleccionado {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  transform: scale(1.05);
+}
+
+/* Verificar */
+.verificar {
+  margin-top: 30px;
+  background-color: #00b0ff;
+  color: white;
+  padding: 12px 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.verificar:hover {
+  background-color: #007acc;
+  transform: scale(1.05);
+}
+
+/* Resultado final */
+.zona-final {
+  margin-top: 50px;
+  animation: zoomIn 0.6s ease;
+}
+
+.titulo-final {
+  font-size: 60px;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.resultado-final {
+  font-size: 60px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resultado-numero,
+.resultado-total {
+  color: #333;
+}
+
+.resultado-slash {
+  color: #ffcc00;
+  margin: 0 10px;
+}
+
+.volver {
+  margin-top: 40px;
+  background-color: #00b0ff;
+  color: white;
+  padding: 12px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.volver:hover {
+  background-color: #007acc;
+  transform: scale(1.05);
+}

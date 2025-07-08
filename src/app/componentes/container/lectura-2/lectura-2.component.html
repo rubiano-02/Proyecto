@@ -1,0 +1,33 @@
+<div class="ejercicio-contenedor">
+  <!-- Barra de progreso -->
+  <div *ngIf="!terminado" class="barra-progreso">
+    <div class="barra-fondo">
+      <div class="barra-relleno" [style.width.%]="(ejercicioActual) / totalEjercicios * 100"></div>
+    </div>
+    <span class="progreso-contador">{{ ejercicioActual + 1 }}/{{ totalEjercicios }}</span>
+  </div>
+
+  <!-- Ejercicio -->
+  <div *ngIf="!terminado" class="zona-ejercicio" data-aos="fade-up">
+    <p class="texto">{{ ejercicios[ejercicioActual].texto }}</p>
+    <div class="opciones">
+      <button *ngFor="let opcion of ejercicios[ejercicioActual].opciones"
+              class="opcion"
+              (click)="seleccionar(opcion)">
+        {{ opcion }}
+      </button>
+    </div>
+    <p class="mensaje" [style.color]="color">{{ mensaje }}</p>
+  </div>
+
+  <!-- Pantalla final -->
+  <div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
+    <p class="titulo-final">CALIFICACIÓN</p>
+    <div class="resultado-final">
+      <span class="resultado-numero">{{ calificacion }}</span>
+      <span class="resultado-slash">/</span>
+      <span class="resultado-total">{{ totalEjercicios }}</span>
+    </div>
+    <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+  </div>
+</div>

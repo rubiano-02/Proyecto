@@ -1,0 +1,92 @@
+.contenedor {
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+h1 {
+    color: #4caf50;
+}
+p {
+    color: #ff9800;
+}
+.tablas {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.item {
+  background: #e3f2fd;
+  border: 2px solid #00b0ff;
+  padding: 14px 20px;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.item:hover {
+  background: #bbdefb;
+}
+
+.seleccionada {
+  background-color: #00b0ff;
+  color: white;
+  border-color: #0091ea;
+}
+
+.mensaje {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.zona-final {
+  margin-top: 40px;
+}
+
+.titulo-final {
+  font-size: 40px;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.resultado-final {
+  font-size: 60px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resultado-numero, .resultado-total {
+  color: #333;
+}
+
+.resultado-slash {
+  margin: 0 10px;
+  color: #ff9800;
+}
+
+.volver {
+  margin-top: 30px;
+  padding: 12px 28px;
+  font-size: 18px;
+  background-color: #00b0ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.volver:hover {
+  background-color: #007bb5;
+}

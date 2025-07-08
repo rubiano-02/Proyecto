@@ -206,14 +206,16 @@ body, html {
   flex-wrap: wrap;
   gap: 20px;
   text-align: center;
+ 
 }
 
 .texto {
   max-width: 500px;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #333;
   text-align: center;
   margin-top: 0;
+   margin-right: 200px;
 }
 
 .texto strong {
@@ -231,6 +233,8 @@ body, html {
   font-weight: bold;
   color: #333;
   text-align: center;
+  margin-right: 500px;
+
 }
 
 /* ------------------ RESPONSIVE ------------------ */

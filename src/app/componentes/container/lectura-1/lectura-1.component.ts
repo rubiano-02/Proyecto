@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ResultadosService } from '@servicios/resultados.service';
-
+import * as AOS from 'aos';
+import { ChangeDetectorRef } from '@angular/core';
+import {  AfterViewInit } from '@angular/core';
 @Component({
   selector: 'app-lectura-1',
   standalone: false,
@@ -15,6 +17,14 @@ export class Lectura1Component {
   correctas = ['cama', 'sol', 'ratón'];
   animar = [false, false, false];
   mensaje = '';
+ mostrarContenido = false;
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.mostrarContenido = true;
+    }, 0);
+  }
+
   color = '';
  calificacion = 5; // Empieza en 5
  intentosFallidos: number = 0;
@@ -22,7 +32,10 @@ export class Lectura1Component {
   totalEjercicios: number = 5;
   aciertos: number = 0;
   terminado: boolean = false;
-  constructor(private resultadosService: ResultadosService) { }
+  constructor(private resultadosService: ResultadosService,private cdRef: ChangeDetectorRef) { }
+  ngOnInit(): void {
+  this.cdRef.detectChanges(); // 👈 Forzar Angular a refrescar la vista
+}
   soltar(event: CdkDragDrop<any>, index?: number) {
     if (index === undefined || index < 0 || index > 2) return;
     if (event.previousContainer === event.container) return;
@@ -56,7 +69,7 @@ export class Lectura1Component {
   }
 
   verificar() {
-       const palabraCorrecta = ['cama', 'sol', 'ratón'];
+  const palabraCorrecta = ['cama', 'sol', 'ratón'];
 
   const esCorrecto = this.respuestas.length === palabraCorrecta.length &&
                      this.respuestas.every((r, i) => r === palabraCorrecta[i]);
@@ -68,17 +81,24 @@ export class Lectura1Component {
   }
 
   if (esCorrecto) {
-    this.mensaje = `¡Correcto! 🎉 Tu calificación: ${this.calificacion}/5`;
-    this.guardarResultado(); // 1 a
+    this.mensaje = `✔ Correcto`;
     this.color = 'green';
+    this.terminado = true;
+    this.guardarResultado(); // 💾 guardar al acertar
   } else {
     this.intentosFallidos++;
     this.calificacion = Math.max(0, 5 - this.intentosFallidos);
-    this.mensaje = `Incorrecto. Intenta de nuevo.`;
+    this.mensaje = `❌ Solución correcta: cama, sol, ratón`;
     this.color = 'red';
+
+    if (this.intentosFallidos >= 5) {
+      this.terminado = true;
+      this.guardarResultado(); // 💾 guardar al fallar 5 veces
+    }
   }
-  }
-  guardarResultado(): void {
+}
+
+ guardarResultado(): void {
   const idUsuarioStr = localStorage.getItem('user_id');
   if (!idUsuarioStr) {
     console.warn('⚠️ ID de usuario no encontrado en localStorage');
@@ -90,14 +110,15 @@ export class Lectura1Component {
   const tiempo_dedicado = this.totalEjercicios * 2;
 
   this.resultadosService.guardarResultado(idUsuario, calificacion, tiempo_dedicado).subscribe({
-    next: (response:any) => {
-      console.log('✅ Resultado guardado:', response);
-      alert('Resultado guardado correctamente');
+    next: (response: any) => {
+      console.log('✅ Resultado guardado correctamente:', response);
+      alert('Resultado guardado correctamente ✅');
     },
-    error: (error:any) => {
+    error: (error: any) => {
       console.error('❌ Error al guardar resultado:', error);
-      alert('Error al guardar resultado');
+      alert('❌ Error al guardar el resultado');
     }
   });
 }
+
 }

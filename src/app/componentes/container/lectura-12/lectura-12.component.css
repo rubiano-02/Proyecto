@@ -1,0 +1,116 @@
+.contenedor {
+  max-width: 800px;
+  margin-left: 80px;
+  padding: 20px;
+  text-align: left;
+  
+}
+h1 {
+    color: #388e3c;
+}
+.dialogo {
+  background: #f0f8ff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  font-style: italic;
+  text-align: right;
+}
+
+.frases {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.frase {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.texto-frase {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.opciones button {
+  margin: 5px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #ececec;
+  transition: background-color 0.3s ease;
+}
+
+.opciones button.seleccionado {
+  background-color: #007bff;
+  color: white;
+}
+
+.pantalla-final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #e8f5e9;
+  text-align: center;
+}
+.verificar {
+  display: block;
+  margin: 30px auto;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.verificar:hover {
+  background: #2563eb;
+}
+
+.titulo-final {
+  font-size: 60px;
+  font-weight: bold;
+  color: #388e3c;
+  margin-bottom: 20px;
+  margin-left: 460px;
+  margin-top: 100px;
+}
+
+.resultado-final {
+  display: flex;
+  font-size: 60px;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+}
+
+.resultado-slash {
+  margin: 0 10px;
+  color: #ffb300;
+}
+
+.volver {
+  margin-top: 40px;
+  padding: 12px 30px;
+  font-size: 18px;
+  background-color: #00acc1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-left: 570px;
+}
+
+.volver:hover {
+  background-color: #00838f;
+}

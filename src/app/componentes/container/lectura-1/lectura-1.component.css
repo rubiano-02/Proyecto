@@ -1,5 +1,5 @@
 .contenedor {
-  text-align: center;
+  text-align: left;
   padding: 40px 20px;
   
   min-height: 100vh;
@@ -9,11 +9,11 @@
 
 
 h1 {
-  font-size: 48px;
-  color: #0288d1;
+  font-size: 45px;
+  color: #00b0ff;
   margin-bottom: 30px;
-  text-shadow: 0 0 10px #81d4fa, 0 0 20px #4fc3f7, 0 0 30px #29b6f6;
-  animation: parpadeoAzul 2s infinite;
+
+  margin-right: 800px;  
   font-weight: bold;
   position: relative;
   z-index: 1;
@@ -24,6 +24,7 @@ h1 {
   font-size: 30px;
   margin-bottom: 40px;
   font-weight: 500;
+  margin-top: 50px;
 }
 
 .cajon {
@@ -52,7 +53,7 @@ h1 {
 }
 
 .opcion {
-  background-color: #fdd835;
+  background-color: #52d02b;
   padding: 20px 30px;
   font-size: 24px;
   border-radius: 15px;
@@ -63,20 +64,21 @@ h1 {
 
 .opcion:hover {
   transform: scale(1.1);
-  background-color: #fbc02d;
+  background-color: #358d1a;
 }
 
 .insertada {
   font-size: 24px;
-  color: #1e88e5;
+  color: #fdfeff;
   font-weight: bold;
 }
 
 .verificar {
-  margin-top: 30px;
+  margin-top: 40px;
+  margin-left: 1100px;
   padding: 12px 24px;
   font-size: 20px;
-  background-color: #00796b;
+  background-color: #00b0ff;
   color: white;
   border: none;
   border-radius: 10px;
@@ -84,7 +86,7 @@ h1 {
 }
 
 .verificar:hover {
-  background-color: #004d40;
+  background-color: #0595d7;
 }
 
 .mensaje {
@@ -93,7 +95,7 @@ h1 {
   font-weight: bold;
 }
 .calificacion {
-  margin-top: 15px;
+  margin-top: 0px;
   font-size: 20px;
   color: #007bff; /* azul */
   font-weight: bold;
@@ -102,6 +104,85 @@ h1 {
 }
 .animacion-insercion {
   animation: entradaLenta 0.8s ease-out;
+}
+.mensaje {
+  margin-top: 30px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.correcto {
+  color: #4caf50;
+}
+
+.incorrecto {
+  color: #f44336;
+}
+
+/* Calificación final estilo */
+.zona-final {
+  margin-top: 10px;
+}
+
+.titulo-final {
+  font-size: 60px;
+  color: #4caf50;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.resultado-final {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.resultado-numero,
+.resultado-total {
+  color: #333;
+}
+
+.resultado-slash {
+  color: #ffcc00;
+  margin: 0 10px;
+}
+.volver {
+  margin-top: 30px;
+  margin-left: 115px;
+  background-color: #00b0ff;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+} 
+.salir {
+  background-color: #00b0ff;
+  
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 30px;
+}
+.volver:hover {
+  background-color: #007acc;
+}
+.pantalla-final {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 @keyframes entradaLenta {

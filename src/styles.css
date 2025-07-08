@@ -184,3 +184,33 @@ body.dark-mode .header {
   background-color: #1e1e1e; 
   color: #e0e0e0;      
 }
+/* AUTOMÁTICO: Detecta modo oscuro del sistema */
+@media (prefers-color-scheme: dark) {
+  body:not(.light-mode):not(.dark-mode) .boton {
+    background-color: #1f1f1f;
+    border-color: #444;
+    color: #eee;
+  }
+  body:not(.light-mode):not(.dark-mode) .boton:hover span {
+    color: #00B7FF;
+  }
+}
+/* MANUAL: Modo oscuro elegido por el usuario */
+body.dark-mode .boton {
+  background-color: #1f1f1f;
+  border-color: #444;
+  color: #eee;
+}
+body.dark-mode .boton:hover span {
+  color: #00B7FF;
+}
+
+/* MANUAL: Modo claro elegido por el usuario */
+body.light-mode .boton {
+  background-color: #fff;
+  border-color: #D9D9D9;
+  color: #4D4C4C;
+}
+body.light-mode .boton:hover span {
+  color: #00B7FF;
+}

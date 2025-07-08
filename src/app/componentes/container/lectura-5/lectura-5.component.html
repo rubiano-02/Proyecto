@@ -1,0 +1,53 @@
+<div class="contenedor">
+  
+
+  <!-- ✅ Sección del ejercicio, se oculta si ya terminó -->
+  <div *ngIf="!terminado">
+    <h1 data-aos="fade-up">🧠 Sinónimos en contexto</h1>
+    <h3 data-aos="fade-right">Arrastra la palabra correcta a la frase</h3>
+
+    <p class="oracion" data-aos="zoom-in">
+      El niño estaba muy 
+      <span class="cajon" cdkDropList id="cajon0" [cdkDropListData]="[]" [cdkDropListConnectedTo]="['opciones']"
+        (cdkDropListDropped)="soltar($event, 0)">
+        <ng-container *ngIf="respuestas[0]; else vacio1">
+          <div class="opcion insertada" [class.animacion-insercion]="animar[0]" cdkDrag (click)="sacar(0)">
+            {{ respuestas[0] }}
+          </div>
+        </ng-container>
+        <ng-template #vacio1>_____</ng-template>
+      </span>.
+    </p>
+
+    <div class="opciones" id="opciones" cdkDropList
+         [cdkDropListData]="opciones"
+         [cdkDropListConnectedTo]="['cajon0']"
+         (cdkDropListDropped)="soltar($event, -1)"
+         data-aos="zoom-in-up">
+      <div *ngFor="let opcion of opciones; let i = index"
+           class="opcion"
+           cdkDrag
+           (click)="insertarPorClick(opcion, i)">
+        {{ opcion }}
+      </div>
+    </div>
+
+    <button class="verificar" (click)="verificar()" data-aos="fade-up">✅ Verificar</button>
+
+    <!-- Resultado dentro del ejercicio -->
+    <p class="mensaje" *ngIf="mensaje" [style.color]="mensaje.includes('✔') ? 'green' : 'crimson'">
+      {{ mensaje }}
+    </p>
+  </div>
+
+  <!-- ✅ Zona de calificación, totalmente aparte -->
+  <div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
+    <p class="titulo-final">CALIFICACIÓN</p>
+    <div class="resultado-final">
+      <span class="resultado-numero">{{ calificacion }}</span>
+      <span class="resultado-slash">/</span>
+      <span class="resultado-total">5</span>
+    </div>
+    <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+  </div>
+</div>

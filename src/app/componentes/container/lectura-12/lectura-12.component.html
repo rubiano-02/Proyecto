@@ -1,0 +1,47 @@
+<div class="contenedor" data-aos="fade-up" *ngIf="!terminado">
+  <h1><strong>¿Quién lo dijo?</strong></h1><br>
+  <p class="instruccion">Lee el diálogo y selecciona quién dijo cada frase.</p>
+
+
+    <div class="texto-dialogo" data-aos="fade-up">
+  <p>— ¡Vamos al parque antes de que oscurezca! — dijo Sofía.</p>
+  <p>— ¿Y si llueve? No quiero mojarme otra vez — murmuró Leo.</p>
+  <p>— Solo serán unos minutos. Llevamos paraguas por si acaso — respondió Sofía.</p>
+  <p>— Bueno… pero esta vez tú cargas el paraguas — replicó Leo con una sonrisa.</p>
+</div>
+
+
+
+  <div class="frases" data-aos="fade-up">
+    <div class="frase" *ngFor="let f of frases; let i = index">
+      <p class="texto-frase">“{{ f.texto }}”</p>
+      <div class="opciones">
+        <button
+          *ngFor="let personaje of personajes"
+          (click)="seleccionar(i, personaje)"
+          [class.seleccionado]="respuestas[i] === personaje"
+          [disabled]="f.bloqueado"
+        >
+          {{ personaje }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button class="verificar" (click)="verificar()"> Verificar</button>
+
+  <p class="mensaje" *ngIf="mensaje" [style.color]="mensaje.includes('✔') ? 'green' : 'crimson'">
+    {{ mensaje }}
+  </p>
+</div>
+
+<!-- Pantalla final -->
+<div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
+  <p class="titulo-final">CALIFICACIÓN</p>
+  <div class="resultado-final">
+    <span class="resultado-numero">{{ calificacion }}</span>
+    <span class="resultado-slash">/</span>
+    <span class="resultado-total">5</span>
+  </div>
+  <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+</div>

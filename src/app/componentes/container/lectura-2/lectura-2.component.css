@@ -1,0 +1,113 @@
+.ejercicio-contenedor {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.barra-progreso {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.barra-fondo {
+  flex: 1;
+  height: 12px;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.barra-relleno {
+  height: 100%;
+  background-color: #42a5f5;
+  transition: width 0.3s ease;
+}
+
+.progreso-contador {
+  font-weight: bold;
+  color: #42a5f5;
+}
+
+.texto {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  margin-top: 60px;
+}
+
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+    margin-top: 60px;
+}
+
+.opcion {
+  font-size: 20px;
+  padding: 12px 18px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.opcion:hover {
+  background-color: #42a5f5;
+}
+
+.mensaje {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.zona-final {
+  margin-top: 40px;
+}
+
+.titulo-final {
+  font-size: 60px;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.resultado-final {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.resultado-numero,
+.resultado-total {
+  color: #333;
+}
+
+.resultado-slash {
+  color: #fbc02d;
+  margin: 0 10px;
+}
+
+.volver {
+  background-color: #42a5f5;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.volver:hover {
+  background-color: #1e88e5;
+}

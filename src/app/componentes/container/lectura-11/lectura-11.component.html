@@ -1,0 +1,37 @@
+<div class="contenedor" data-aos="fade-up" *ngIf="!terminado">
+  <h1 class="titulo"><strong>¿Verdadero o falso?</strong></h1>
+  <p class="instruccion">Lee el texto y selecciona si cada afirmación es verdadera o falsa.</p>
+
+  <div class="texto" data-aos="zoom-in">
+    <strong>"El perro corrió tras la pelota."</strong>
+  </div>
+
+  <div class="afirmaciones" data-aos="fade-up">
+    <div *ngFor="let afirm of afirmaciones" class="afirmacion" [class.correcto]="afirm.correcto === true" [class.incorrecto]="afirm.correcto === false">
+      <p>{{ afirm.texto }}</p>
+      <div class="botones">
+        <button (click)="seleccionar(afirm, true)" [class.seleccionado]="afirm.respuesta === true">✅ V</button>
+        <button (click)="seleccionar(afirm, false)" [class.seleccionado]="afirm.respuesta === false">❌ F</button>
+      </div>
+      <span *ngIf="afirm.correcto === true" class="icono-correcto">✔</span>
+      <span *ngIf="afirm.correcto === false" class="icono-incorrecto">✖</span>
+    </div>
+  </div>
+
+  <button class="verificar" (click)="verificar()" >Verificar</button>
+
+  <p class="mensaje" *ngIf="mensaje" [style.color]="mensaje.includes('✔') ? 'green' : 'crimson'">
+    {{ mensaje }}
+  </p>
+</div>
+
+<!-- Pantalla final -->
+<div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
+  <p class="titulo-final">CALIFICACIÓN</p>
+  <div class="resultado-final">
+    <span class="resultado-numero">{{ calificacion }}</span>
+    <span class="resultado-slash">/</span>
+    <span class="resultado-total">5</span>
+  </div>
+  <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+</div>

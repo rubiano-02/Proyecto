@@ -1,0 +1,26 @@
+<div class="contenedor" *ngIf="!terminado">
+  <h1>Detective de Palabras</h1>
+  <h3>Encuentra la palabra que se repite</h3>
+
+  <p class="texto">
+    <ng-container *ngFor="let palabra of palabras">
+      <span
+        class="palabra"
+        [ngClass]="palabra.estado"
+        (click)="seleccionar(palabra)">
+        {{ palabra.texto }}
+      </span>
+    </ng-container>
+  </p>
+</div>
+
+<!-- Pantalla final de calificación -->
+<div class="zona-final" *ngIf="terminado">
+  <p class="titulo-final">CALIFICACIÓN</p>
+  <div class="resultado-final">
+    <span class="resultado-numero">{{ calificacion }}</span>
+    <span class="resultado-slash">/</span>
+    <span class="resultado-total">5</span>
+  </div>
+  <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+</div>

@@ -1,0 +1,57 @@
+<div *ngIf="!terminado" class="contenedor" data-aos="fade-up">
+  <h1><strong>Relación causa y efecto</strong></h1>
+  <p>Haz clic primero en una <strong>causa</strong>, luego en su <strong>efecto</strong>.</p>
+
+  <div class="tablas">
+    <div class="columna columna-causa">
+      <h3>Causas</h3>
+     <div *ngFor="let causa of causas">
+  <div
+    *ngIf="!relacionesUsuario[causa]"
+    [@desaparecer]="desapareciendo.has(causa) ? 'oculto' : 'visible'"
+    (click)="seleccionarCausa(causa)"
+    [class.seleccionada]="causa === seleccionCausa"
+    class="item animado"
+    [style.backgroundColor]="colores[causa] || ''">
+    {{ causa }}
+  </div>
+</div>
+
+
+    </div>
+
+    <div class="columna columna-efecto">
+      <h3>Efectos</h3>
+    <div *ngFor="let efecto of efectos">
+  <div
+    *ngIf="!efectosUsados.includes(efecto)"
+    [@desaparecer]="desapareciendo.has(efecto) ? 'oculto' : 'visible'"
+    (click)="seleccionarEfecto(efecto)"
+    [class.seleccionado]="efecto === seleccionEfecto"
+    class="item animado"
+    [style.backgroundColor]="colores[efecto] || ''">
+    {{ efecto }}
+  </div>
+</div>
+
+
+    </div>
+  </div>
+
+  <button class="verificar" (click)="verificar()">✅ Verificar</button>
+
+  <p class="mensaje" *ngIf="mensaje" [style.color]="mensaje.includes('✔') ? 'green' : 'crimson'">
+    {{ mensaje }}
+  </p>
+</div>
+
+<!-- ✅ Pantalla de calificación final -->
+<div *ngIf="terminado" class="zona-final pantalla-final" data-aos="zoom-in">
+  <p class="titulo-final">CALIFICACIÓN</p>
+  <div class="resultado-final">
+    <span class="resultado-numero">{{ calificacion }}</span>
+    <span class="resultado-slash">/</span>
+    <span class="resultado-total">5</span>
+  </div>
+  <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+</div>

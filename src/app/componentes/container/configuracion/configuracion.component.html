@@ -109,11 +109,14 @@
 
     <div class="config-item">
       <label>
-        <input type="checkbox" [(ngModel)]="modoOscuro" (click)="toggleModoOscuro()" />
+         <input type="checkbox" onclick="toggleModoOscuro()" />
         {{ 'ACTIVAR_MODO_OSCURO' | translate }}
       </label>
     </div>
-
+    <div class="config-item">
+      <button onclick="activarModoClaro()">Modo claro</button>
+      <button onclick="resetearModo()">Seguir modo del sistema</button>
+    </div>
     <div class="config-item">
       <label for="idiomaSelect">{{ 'IDIOMA' | translate }}:</label>
       <select id="idiomaSelect" [(ngModel)]="idiomaSeleccionado" (change)="cambiarIdioma()">

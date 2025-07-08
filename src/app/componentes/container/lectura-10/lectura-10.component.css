@@ -1,0 +1,149 @@
+.contenedor {
+  padding: 30px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+}
+h1 {
+    color: #388e3c;
+}
+h3 {
+    color: #2196f3;
+}
+.tablas {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.item {
+  background-color: #f0f0f0;
+  padding: 14px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  width: 240px;
+  border: 2px solid transparent;
+}
+
+.item:hover {
+  background-color: #e0f7fa;
+  border-color: #29b6f6;
+}
+
+.seleccionada {
+  border-color: #4caf50 !important;
+  background-color: #c8e6c9 !important;
+}
+
+.usada {
+  display: none;
+}
+
+.verificar {
+  padding: 14px 40px;
+  font-size: 20px;
+  margin-top: 30px;
+  border-radius: 12px;
+  border: none;
+  background-color: #2196f3;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.verificar:hover {
+  background-color: #1976d2;
+}
+
+/* Zona final */
+.pantalla-final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #e8f5e9;
+  text-align: center;
+}
+
+.titulo-final {
+  font-size: 60px;
+  font-weight: bold;
+  color: #388e3c;
+  margin-bottom: 20px;
+}
+
+.resultado-final {
+  display: flex;
+  font-size: 60px;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+}
+
+.resultado-slash {
+  margin: 0 10px;
+  color: #ffb300;
+}
+
+.volver {
+  margin-top: 40px;
+  padding: 12px 30px;
+  font-size: 18px;
+  background-color: #00acc1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.volver:hover {
+  background-color: #00838f;
+}
+.desaparecer {
+  animation: fadeOut 0.6s forwards ease;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+  }
+}
+
+/* Extra para mantener el estilo lindo */
+.item {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  padding: 12px;
+  margin: 10px;
+  border-radius: 8px;
+  background-color: #e3f2fd;
+  font-weight: bold;
+  text-align: center;
+}
+
+.item:hover {
+  background-color: #bbdefb;
+  transform: scale(1.05);
+}

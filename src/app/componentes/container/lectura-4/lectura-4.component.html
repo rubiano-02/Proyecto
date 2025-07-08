@@ -1,0 +1,26 @@
+<div class="contenedor" *ngIf="!terminado">
+  <h1 data-aos="zoom-in"> ¿Quién lo dijo?</h1>
+  <h3 data-aos="fade-up">Empareja cada frase con el personaje correcto</h3>
+
+  <div class="frase-bloque" *ngFor="let frase of frases; let i = index" data-aos="fade-up">
+    <p class="frase"> {{ frase.texto }} </p>
+    <div class="opciones">
+      <button *ngFor="let personaje of personajes"
+              (click)="seleccionar(i, personaje)"
+              [disabled]="frase.seleccionado">
+        {{ personaje }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Resultado Final -->
+<div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
+  <p class="titulo-final">CALIFICACIÓN</p>
+  <div class="resultado-final">
+    <span class="resultado-numero">{{ calificacion }}</span>
+    <span class="resultado-slash">/</span>
+    <span class="resultado-total">5</span>
+  </div>
+  <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+</div>

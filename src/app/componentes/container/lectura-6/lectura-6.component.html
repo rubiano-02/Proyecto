@@ -1,0 +1,36 @@
+<div class="contenedor" data-aos="fade-up">
+  <h1 class="titulo" data-aos="fade-up">⏱️ Comprensión rápida</h1>
+  <h3 class="subtitulo" data-aos="fade-right">¡Lee con atención antes de que desaparezca!</h3>
+
+  <!-- Texto con animación -->
+  <div *ngIf="mostrarTexto" class="tarjeta-texto animar-texto" data-aos="zoom-in">
+    <p>{{ texto }}</p>
+  </div>
+
+  <!-- Preguntas -->
+  <div *ngIf="!mostrarTexto && !terminado" class="preguntas" data-aos="fade-up">
+    <div *ngFor="let p of preguntas; let i = index" class="pregunta" data-aos="zoom-in-up">
+      <p class="pregunta-texto"><strong>{{ p.pregunta }}</strong></p>
+      <div class="opciones">
+        <button *ngFor="let op of p.opciones"
+                [ngClass]="{ 'seleccionado': p.respuesta === op }"
+                (click)="seleccionarRespuesta(i, op)"
+                data-aos="zoom-in">
+          {{ op }}
+        </button>
+      </div>
+    </div>
+    <button class="verificar" (click)="verificar()" data-aos="fade-up">✅ Verificar</button>
+  </div>
+
+  <!-- Resultado final -->
+  <div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
+    <p class="titulo-final">CALIFICACIÓN</p>
+    <div class="resultado-final">
+      <span class="resultado-numero">{{ calificacion }}</span>
+      <span class="resultado-slash">/</span>
+      <span class="resultado-total">5</span>
+    </div>
+    <button class="volver" routerLink="/prin-lectura" data-aos="fade-up"> Volver al inicio</button>
+  </div>
+</div>

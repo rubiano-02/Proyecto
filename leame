@@ -45,3 +45,18 @@ ng g c componentes/container/matematicas-12 --skip-tests
 ng g c componentes/container/matematicas-13 --skip-tests
 ng g c componentes/container/matematicas-14 --skip-tests
 ng g c componentes/container/matematicas-15 --skip-tests
+
+ng g c componentes/container/lectura-2 --skip-tests
+ng g c componentes/container/lectura-3 --skip-tests
+ng g c componentes/container/lectura-4 --skip-tests
+ng g c componentes/container/lectura-5 --skip-tests
+ng g c componentes/container/lectura-6 --skip-tests
+ng g c componentes/container/lectura-7 --skip-tests
+ng g c componentes/container/lectura-8 --skip-tests
+ng g c componentes/container/lectura-9 --skip-tests
+ng g c componentes/container/lectura-10 --skip-tests
+ng g c componentes/container/lectura-11 --skip-tests
+ng g c componentes/container/lectura-12 --skip-tests
+ng g c componentes/container/lectura-13 --skip-tests
+ng g c componentes/container/lectura-14 --skip-tests
+ng g c componentes/container/lectura-15 --skip-tests

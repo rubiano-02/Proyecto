@@ -1,0 +1,24 @@
+<div *ngIf="!terminado" class="contenedor" data-aos="fade-up">
+  <h1><strong>Orden lógico</strong> </h1>
+  <h3>Arrastra las frases para reconstruir la historia</h3>
+
+  <div cdkDropList class="lista-frases" (cdkDropListDropped)="soltar($event)">
+    <div *ngFor="let frase of frases" class="tarjeta-frase animado" cdkDrag>
+      {{ frase }}
+    </div>
+  </div>
+
+  <button (click)="verificar()" [disabled]="terminado" class="verificar"> Verificar</button>
+  <p class="mensaje" *ngIf="mensaje" [style.color]="mensaje.includes('✔') ? 'green' : 'crimson'">{{ mensaje }}</p>
+</div>
+
+<!-- ✅ Pantalla de calificación final -->
+<div *ngIf="terminado" class="zona-final pantalla-final" data-aos="zoom-in">
+  <p class="titulo-final">CALIFICACIÓN</p>
+  <div class="resultado-final">
+    <span class="resultado-numero">{{ calificacion }}</span>
+    <span class="resultado-slash">/</span>
+    <span class="resultado-total">5</span>
+  </div>
+  <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+</div>

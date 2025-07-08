@@ -1,0 +1,40 @@
+<div class="contenedor" data-aos="fade-up">
+  <div *ngIf="!terminado">
+    <!-- Barra de progreso -->
+    <div class="barra-progreso">
+      <div class="barra-fondo">
+        <div class="barra-relleno" [style.width.%]="(preguntaActual) / totalPreguntas * 100"></div>
+      </div>
+      <span class="progreso-contador">{{ preguntaActual }}/{{ totalPreguntas }}</span>
+    </div>
+
+    <h1 class="titulo">Palabra intrusa</h1>
+    <h3 class="subtitulo">Haz clic en la palabra que no encaja</h3>
+
+    <div class="grupo-palabras" data-aos="zoom-in">
+      <button *ngFor="let palabra of preguntas[preguntaActual - 1].palabras"
+              [ngClass]="{
+                'correcta': palabra === seleccion && esCorrecto,
+                'incorrecta': palabra === seleccion && !esCorrecto
+              }"
+              (click)="seleccionar(palabra)">
+        {{ palabra }}
+      </button>
+    </div>
+
+    <p class="mensaje" *ngIf="mensaje" [style.color]="mensaje.includes('✔') ? 'green' : 'crimson'">
+      {{ mensaje }}
+    </p>
+  </div>
+
+  <!-- Resultado final -->
+  <div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
+    <p class="titulo-final">CALIFICACIÓN</p>
+    <div class="resultado-final">
+      <span class="resultado-numero">{{ calificacion }}</span>
+      <span class="resultado-slash">/</span>
+      <span class="resultado-total">{{ totalPreguntas }}</span>
+    </div>
+    <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+  </div>
+</div>

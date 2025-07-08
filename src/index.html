@@ -15,3 +15,39 @@
   <app-root></app-root>
 </body>
 </html>
+<body>
+  <app-root></app-root>
+
+  <script>
+    function toggleModoOscuro() {
+      const esOscuro = document.body.classList.toggle('dark-mode');
+      document.body.classList.remove('light-mode');
+
+      if (esOscuro) {
+        localStorage.setItem('modoPreferido', 'oscuro');
+      } else {
+        localStorage.removeItem('modoPreferido');
+      }
+    }
+
+    function activarModoClaro() {
+      document.body.classList.add('light-mode');
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('modoPreferido', 'claro');
+    }
+
+    function resetearModo() {
+      document.body.classList.remove('dark-mode', 'light-mode');
+      localStorage.removeItem('modoPreferido');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const preferencia = localStorage.getItem('modoPreferido');
+      if (preferencia === 'oscuro') {
+        document.body.classList.add('dark-mode');
+      } else if (preferencia === 'claro') {
+        document.body.classList.add('light-mode');
+      }
+    });
+  </script>
+</body>

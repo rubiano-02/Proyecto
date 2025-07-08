@@ -1,0 +1,39 @@
+<div class="contenedor" data-aos="fade-up">
+  <h1>Unir sinónimos</h1>
+  <p>Haz clic primero en la palabra base (izquierda), luego en su sinónimo (derecha).</p>
+
+  <div class="tablas">
+    <div class="columna columna-base">
+      <h3>Palabras</h3>
+      <div *ngFor="let palabra of palabrasBase"
+           (click)="seleccionarPalabraBase(palabra)"
+           [class.seleccionada]="seleccionando === palabra"
+           class="item animado">
+        {{ palabra }}
+      </div>
+    </div>
+
+    <div class="columna columna-sinonimo">
+      <h3>Sinónimos</h3>
+      <div *ngFor="let sinonimo of sinonimos"
+           (click)="seleccionarSinonimo(sinonimo)"
+           class="item animado">
+        {{ sinonimo }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje -->
+  <p class="mensaje" *ngIf="mensaje" [style.color]="mensaje.includes('✔') ? 'green' : 'crimson'">{{ mensaje }}</p>
+
+  <!-- Resultado final -->
+  <div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
+    <p class="titulo-final">CALIFICACIÓN</p>
+    <div class="resultado-final">
+      <span class="resultado-numero">{{ calificacion }}</span>
+      <span class="resultado-slash">/</span>
+      <span class="resultado-total">5</span>
+    </div>
+    <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+  </div>
+</div>

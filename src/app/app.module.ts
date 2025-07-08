@@ -36,6 +36,20 @@ import { Matematicas12Component } from './componentes/container/matematicas-12/m
 import { Matematicas13Component } from './componentes/container/matematicas-13/matematicas-13.component';
 import { Matematicas14Component } from './componentes/container/matematicas-14/matematicas-14.component';
 import { Matematicas15Component } from './componentes/container/matematicas-15/matematicas-15.component';
+import { Lectura2Component } from './componentes/container/lectura-2/lectura-2.component';
+import { Lectura3Component } from './componentes/container/lectura-3/lectura-3.component';
+import { Lectura4Component } from './componentes/container/lectura-4/lectura-4.component';
+import { Lectura5Component } from './componentes/container/lectura-5/lectura-5.component';
+import { Lectura6Component } from './componentes/container/lectura-6/lectura-6.component';
+import { Lectura7Component } from './componentes/container/lectura-7/lectura-7.component';
+import { Lectura8Component } from './componentes/container/lectura-8/lectura-8.component';
+import { Lectura9Component } from './componentes/container/lectura-9/lectura-9.component';
+import { Lectura10Component } from './componentes/container/lectura-10/lectura-10.component';
+import { Lectura11Component } from './componentes/container/lectura-11/lectura-11.component';
+import { Lectura12Component } from './componentes/container/lectura-12/lectura-12.component';
+import { Lectura13Component } from './componentes/container/lectura-13/lectura-13.component';
+import { Lectura14Component } from './componentes/container/lectura-14/lectura-14.component';
+import { Lectura15Component } from './componentes/container/lectura-15/lectura-15.component';
 
 
 
@@ -70,6 +84,20 @@ import { Matematicas15Component } from './componentes/container/matematicas-15/m
     Matematicas13Component,
     Matematicas14Component,
     Matematicas15Component,
+    Lectura2Component,
+    Lectura3Component,
+    Lectura4Component,
+    Lectura5Component,
+    Lectura6Component,
+    Lectura7Component,
+    Lectura8Component,
+    Lectura9Component,
+    Lectura10Component,
+    Lectura11Component,
+    Lectura12Component,
+    Lectura13Component,
+    Lectura14Component,
+    Lectura15Component,
   ],
   imports: [
     BrowserModule,

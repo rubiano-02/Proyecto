@@ -1,0 +1,135 @@
+.contenedor {
+  padding: 60px 30px;
+  max-width: 900px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.titulo {
+  font-size: 48px;
+  color: #4caf50;
+  margin-bottom: 10px;
+}
+
+.subtitulo {
+  font-size: 24px;
+  color: #444;
+  margin-bottom: 40px;
+}
+
+/* Barra de progreso */
+.barra-progreso {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.barra-fondo {
+  flex: 1;
+  height: 16px;
+  background-color: #ddd;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.barra-relleno {
+  height: 100%;
+  background-color: #00b0ff;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.progreso-contador {
+  font-weight: bold;
+  color: #00b0ff;
+  font-size: 20px;
+}
+
+/* Palabras */
+.grupo-palabras {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.grupo-palabras button {
+  padding: 20px 40px;
+  font-size: 28px;
+  border-radius: 14px;
+  border: 3px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.grupo-palabras button:hover {
+  background-color: #e0f7fa;
+  transform: scale(1.05);
+}
+
+.correcta {
+  background-color: #4caf50 !important;
+  color: white;
+  font-weight: bold;
+}
+
+.incorrecta {
+  background-color: #f44336 !important;
+  color: white;
+  font-weight: bold;
+}
+
+.mensaje {
+  font-size: 26px;
+  margin-top: 40px;
+  font-weight: bold;
+}
+
+/* Zona final */
+.zona-final {
+  margin-top: 50px;
+}
+
+.titulo-final {
+  font-size: 70px;
+  color: #4caf50;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.resultado-final {
+  font-size: 70px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resultado-numero,
+.resultado-total {
+  color: #333;
+}
+
+.resultado-slash {
+  color: #ffcc00;
+  margin: 0 10px;
+}
+
+.volver {
+  margin-top: 40px;
+  background-color: #00b0ff;
+  color: white;
+  padding: 16px 40px;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.volver:hover {
+  background-color: #007acc;
+}
