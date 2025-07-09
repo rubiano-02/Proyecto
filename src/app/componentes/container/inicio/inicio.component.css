@@ -35,6 +35,14 @@ body, html {
   padding: 40px;
   animation: fadeInUp 1s ease-out;
 }
+.botones-bienvenida {
+  display: flex;
+  gap: 10px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+  font-size: 20px;
+  margin-left: 80px;
+}
 
 .bienvenida-card {
   max-width: 500px;
@@ -116,6 +124,16 @@ body, html {
   transition: all 0.3s ease;
   transform: scale(1.05);
 }
+.recuadro-canvas {
+  width: 300px;
+  height: 300px;
+  margin-top: 100px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
 
 .menu a:hover {
   color: #00BFFF;
@@ -123,14 +141,7 @@ body, html {
   transition: color 0.3s ease;
 }
 
-/* --- HEADER --- */
-.header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
+
 
 .logo-nombre {
   display: flex;
@@ -198,24 +209,34 @@ body, html {
 }
 
 /* --- CONTENIDO GENERAL --- */
-.contenido {
-  min-height: calc(100vh - 120px);
+.contenido-principal {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  text-align: center;
- 
+  flex-wrap: wrap; /* Para que se acomode en pantallas pequeñas */
+  gap: 2rem;
+  margin-top: 40px;
 }
 
 .texto {
   max-width: 500px;
   font-size: 1.8rem;
-  color: #333;
   text-align: center;
-  margin-top: 0;
-   margin-right: 200px;
+  margin-right: 300px;  
+  margin-top: 80px;
+}
+
+.animation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+#canvas {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
 }
 
 .texto strong {
@@ -223,6 +244,7 @@ body, html {
 }
 
 .media .recuadro {
+  margin-right: 800px;
   width: 300px;
   height: 300px;
   border: 3px solid #00BFFF;
@@ -235,6 +257,77 @@ body, html {
   text-align: center;
   margin-right: 500px;
 
+}
+.seccion-objetivo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+  padding: 40px;
+}
+
+.recuadro-objetivo {
+  width: 500px;
+  height:500px;
+
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recuadro-objetivo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.texto-objetivo {
+  max-width: 500px;
+  text-align: left;
+}
+
+.texto-objetivo h2 {
+  color: #2bbb5b;
+  font-size: 3.2rem;
+  margin-bottom: 15px;
+  font-weight: bold;
+  
+}
+
+.texto-objetivo p {
+  font-size: 1.2rem;
+  color: #333;
+}
+.seccion-acerca {
+  padding: 40px 20px;
+ 
+  text-align: center;
+  border-top: 2px solid #ccf5cc;
+}
+
+.titulo-acerca {
+  color: #f1c228;
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.contenido-acerca {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.4rem;
+  color: #333;
+  line-height: 1.7;
+}
+
+.contenido-acerca strong {
+  color: #0c0c0ca7;
+  font-weight: bold;
 }
 
 /* ------------------ RESPONSIVE ------------------ */

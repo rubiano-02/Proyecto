@@ -1,21 +1,6 @@
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
- 
-  z-index: 1000;
-
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  padding: 0 60px; /* Para que el botón tenga espacio sin romper el centrado */
-  position: relative;
-}
 
 .menu-toggle {
+  display: none;
   position: absolute;
   left: 15px; /* A la izquierda, fijo */
   top: 6%;
@@ -27,9 +12,7 @@
   color: #333;
   z-index: 1100;
 }
-.menu-toggle.active {
-  color: #00B7FF;
-}
+
 .contenedor {
   display: flex;
   flex-direction: column;
@@ -102,18 +85,41 @@
 }
 
 /* Responsive para pantallas pequeñas */
+/* 🔒 Por defecto oculto en pantallas grandes */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #00BFFF;
+  margin-left: auto;
+}
+
+/* ✅ Se muestra solo en pantallas pequeñas */
 @media (max-width: 768px) {
-  .modulo {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .menu-toggle {
+    display: block;
   }
 
-  .contenido,
-  .lado-derecho {
-    width: 100%;
+  .menu {
+    display: none; /* Este se muestra con toggle */
+  }
+
+  .menu.mostrar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 10px;
+
   }
 }
+
 
 .sidebar {
   width: 240px; /* Ancho original que tenías */

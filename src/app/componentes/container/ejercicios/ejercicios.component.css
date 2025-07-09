@@ -16,6 +16,7 @@
 }
 
 .menu-toggle {
+  display: none;
   position: absolute;
   left: 15px; /* A la izquierda, fijo */
   top: 6%;
@@ -102,15 +103,25 @@
 
 /* Responsive para pantallas pequeñas */
 @media (max-width: 768px) {
-  .modulo {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .menu-toggle {
+    display: block;
   }
 
-  .contenido,
-  .lado-derecho {
-    width: 100%;
+  .menu {
+    display: none; /* Este se muestra con toggle */
+  }
+
+  .menu.mostrar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 10px;
+
   }
 }
 
