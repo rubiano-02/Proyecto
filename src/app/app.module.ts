@@ -74,7 +74,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     Registrarse1Component,
     Lectura1Component,
     EjerciciosComponent,
-    PrinLecturaComponent,
     EjerMatematicasComponent,
     Matematicas2Component,
     Matematicas3Component,
@@ -121,6 +120,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     PrincipalComponent, // <-- ¡DEBE ESTAR AQUÍ SI ES STANDALONE!
+    PrinLecturaComponent,
   ],
   providers: [
     // provideClientHydration() // Descomenta si lo necesitas para SSR
