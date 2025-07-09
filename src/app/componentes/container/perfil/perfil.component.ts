@@ -2,7 +2,8 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../../servicios/usuario.service';
-import { FileUploadService } from '../../../servicios/file-upload.service'; // ¡Añade esta línea!
+import { FileUploadService } from '../../../servicios/file-upload.service';
+import { LogroService, Logro } from '../../../servicios/logro.service'; // ¡Importa el nuevo servicio y la interfaz!
 
 @Component({
   selector: 'app-perfil',
@@ -16,62 +17,66 @@ export class PerfilComponent implements OnInit {
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
   }
-irAPrincipal() {
-  const preferencia = localStorage.getItem('preferencia');
-  if (preferencia === 'lectura') {
-    this.router.navigate(['/prin-lectura']);
-  } else {
-    this.router.navigate(['/principal']);
+
+  irAPrincipal() {
+    const preferencia = localStorage.getItem('preferencia');
+    if (preferencia === 'lectura') {
+      this.router.navigate(['/prin-lectura']);
+    } else {
+      this.router.navigate(['/principal']);
+    }
   }
-}
-irAEjercicio() {
-  const preferencia = localStorage.getItem('preferencia');
-  if (preferencia === 'lectura') {
-    this.router.navigate(['/ejercicios']);
-  } else {
-    this.router.navigate(['/ejer-matematicas']);
+
+  irAEjercicio() {
+    const preferencia = localStorage.getItem('preferencia');
+    if (preferencia === 'lectura') {
+      this.router.navigate(['/ejercicios']);
+    } else {
+      this.router.navigate(['/ejer-matematicas']);
+    }
   }
-}
+
   esRutaActivaEjercicio(): boolean {
     const ruta = this.router.url;
     return ruta.includes('ejer-lectura') || ruta.includes('ejer-matematicas');
   }
+
   userProfile: any = {
     nombre: 'Cargando...',
     fecha_registro: new Date(),
-    foto_perfil_url: null, // Asegúrate de que estas propiedades existan
-    fondo_perfil_url: null  // Asegúrate de que estas propiedades existan
+    foto_perfil_url: null,
+    fondo_perfil_url: null
   };
   userId: number | null = null;
 
-  // Propiedades para la previsualización local, ya no para la persistencia
   imagenBanner: string | null = null;
   imagenAvatar: string | null = null;
 
   @ViewChild('inputBanner') inputBanner!: ElementRef;
   @ViewChild('inputAvatar') inputAvatar!: ElementRef;
 
-  // ¡NUEVAS PROPIEDADES PARA EL MANEJO DE ARCHIVOS Y MENSAJES!
   selectedAvatarFile: File | null = null;
   selectedBannerFile: File | null = null;
   avatarUploadMessage: string | null = null;
   bannerUploadMessage: string | null = null;
 
+  // ¡NUEVA PROPIEDAD PARA ALMACENAR LOS LOGROS!
+  logros: Logro[] = [];
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private usuarioService: UsuarioService,
-    private fileUploadService: FileUploadService // ¡Añade esta inyección!
+    private fileUploadService: FileUploadService,
+    private logroService: LogroService // ¡Inyecta el nuevo servicio!
   ) {}
 
   ngOnInit() {
-    // La lógica de carga de imágenes desde localStorage aquí ya no es necesaria
-    // porque la fuente de verdad será la base de datos a través de loadUserProfile()
-
     const storedUserId = localStorage.getItem('user_id');
     if (storedUserId) {
       this.userId = +storedUserId;
       this.loadUserProfile(this.userId);
+      this.loadUserLogros(this.userId); // ¡Carga los logros también!
     } else {
       alert('No hay usuario logueado. Redirigiendo a la página de inicio de sesión.');
       this.router.navigate(['/iniciar-sesion']);
@@ -86,55 +91,67 @@ irAEjercicio() {
     }
   }
 
-  // Método 'cambiarImagen' modificado: ahora solo almacena el archivo y previsualiza
   cambiarImagen(event: any, tipo: 'banner' | 'avatar') {
     const archivo = event.target.files[0];
     if (archivo) {
       if (tipo === 'banner') {
         this.selectedBannerFile = archivo;
-        this.bannerUploadMessage = null; // Limpiar mensaje anterior
+        this.bannerUploadMessage = null;
       } else if (tipo === 'avatar') {
         this.selectedAvatarFile = archivo;
-        this.avatarUploadMessage = null; // Limpiar mensaje anterior
+        this.avatarUploadMessage = null;
       }
 
-      // Previsualización local del archivo seleccionado
       const lector = new FileReader();
       lector.onload = () => {
-          if (tipo === 'banner') {
-              this.imagenBanner = lector.result as string; // Actualiza la imagen mostrada temporalmente
-          } else if (tipo === 'avatar') {
-              this.imagenAvatar = lector.result as string; // Actualiza la imagen mostrada temporalmente
-          }
+        if (tipo === 'banner') {
+          this.imagenBanner = lector.result as string;
+        } else if (tipo === 'avatar') {
+          this.imagenAvatar = lector.result as string;
+        }
       };
       lector.readAsDataURL(archivo);
     }
   }
 
-  // Método para cargar el perfil del usuario desde el backend
   loadUserProfile(id: number): void {
     this.usuarioService.obtenerUsuarioPorId(id).subscribe(
       (data) => {
         this.userProfile = data;
-        // Las propiedades foto_perfil_url y fondo_perfil_url vienen de la base de datos
-        // Asegúrate de que tu backend las esté enviando con el prefijo /uploads/
         console.log('Perfil de usuario cargado:', this.userProfile);
-
-        // Actualiza las imágenes mostradas usando las URLs del backend o las por defecto
         this.imagenBanner = this.getBannerUrl();
         this.imagenAvatar = this.getAvatarUrl();
       },
       (error) => {
         console.error('Error al cargar el perfil del usuario:', error);
         alert('No se pudo cargar el perfil del usuario. Inténtalo de nuevo.');
-        // Si hay un error al cargar el perfil, muestra las imágenes por defecto
         this.imagenBanner = 'assets/Images/BannerDefault.png';
         this.imagenAvatar = 'assets/Images/Foto De Perfil.png';
       }
     );
   }
 
-  // ¡NUEVOS MÉTODOS PARA SUBIR ARCHIVOS AL BACKEND!
+  // ¡NUEVO MÉTODO PARA CARGAR LOS LOGROS DEL USUARIO!
+  loadUserLogros(id: number): void {
+    this.logroService.obtenerLogrosUsuario(id).subscribe(
+      (data: Logro[]) => {
+        this.logros = data;
+        console.log('Logros del usuario cargados:', this.logros);
+        // Opcional: podrías ordenar los logros aquí, por ejemplo, los completados al final
+        this.logros.sort((a, b) => {
+            if (a.completado && !b.completado) return 1;
+            if (!a.completado && b.completado) return -1;
+            return 0; // Mantener el orden relativo si ambos están completados o no
+        });
+      },
+      (error) => {
+        console.error('Error al cargar los logros del usuario:', error);
+        // Manejo de error, quizás mostrar un mensaje al usuario
+        this.logros = []; // Asegurarse de que no haya logros antiguos si falla
+      }
+    );
+  }
+
   uploadAvatar(): void {
     if (!this.userId) {
       this.avatarUploadMessage = 'Error: ID de usuario no disponible.';
@@ -149,9 +166,9 @@ irAEjercicio() {
     this.fileUploadService.uploadAvatar(this.userId, this.selectedAvatarFile).subscribe({
       next: (response) => {
         this.avatarUploadMessage = response.mensaje;
-        this.userProfile.foto_perfil_url = response.imageUrl; // ¡ACTUALIZA LA URL DEL PERFIL CON LA QUE VIENE DEL BACKEND!
-        this.imagenAvatar = this.getAvatarUrl(); // Refresca la imagen mostrada
-        this.selectedAvatarFile = null; // Limpiar el archivo seleccionado
+        this.userProfile.foto_perfil_url = response.imageUrl;
+        this.imagenAvatar = this.getAvatarUrl();
+        this.selectedAvatarFile = null;
       },
       error: (error) => {
         console.error('Error al subir foto de perfil:', error);
@@ -174,9 +191,9 @@ irAEjercicio() {
     this.fileUploadService.uploadBanner(this.userId, this.selectedBannerFile).subscribe({
       next: (response) => {
         this.bannerUploadMessage = response.mensaje;
-        this.userProfile.fondo_perfil_url = response.imageUrl; // ¡ACTUALIZA LA URL DEL PERFIL CON LA QUE VIENE DEL BACKEND!
-        this.imagenBanner = this.getBannerUrl(); // Refresca la imagen mostrada
-        this.selectedBannerFile = null; // Limpiar el archivo seleccionado
+        this.userProfile.fondo_perfil_url = response.imageUrl;
+        this.imagenBanner = this.getBannerUrl();
+        this.selectedBannerFile = null;
       },
       error: (error) => {
         console.error('Error al subir foto de fondo:', error);
@@ -185,29 +202,56 @@ irAEjercicio() {
     });
   }
 
-  // Métodos para obtener la URL correcta de la imagen (desde backend o por defecto)
   getAvatarUrl(): string {
     if (this.userProfile.foto_perfil_url) {
-      // Si la URL ya es completa (ej. http://localhost:3000/uploads/...), úsala directamente
       if (this.userProfile.foto_perfil_url.startsWith('http')) {
         return this.userProfile.foto_perfil_url;
       }
-      // Si la URL es relativa (ej. /uploads/avatar-123.png), construye la URL completa
       return `http://localhost:3000${this.userProfile.foto_perfil_url}`;
     }
-    // Retorna la imagen por defecto si no hay URL del backend
     return 'assets/Images/Foto De Perfil.png';
   }
 
   getBannerUrl(): string {
     if (this.userProfile.fondo_perfil_url) {
-      // Si la URL ya es completa úsala directamente
       if (this.userProfile.fondo_perfil_url.startsWith('http')) {
         return this.userProfile.fondo_perfil_url;
       }
       return `http://localhost:3000${this.userProfile.fondo_perfil_url}`;
     }
-    // Retorna la imagen por defecto si no hay URL del backend
     return 'assets/Images/BannerDefault.png';
+  }
+
+  // ¡NUEVOS MÉTODOS AUXILIARES PARA LOS LOGROS!
+  getProgresoLogroPorcentaje(logro: Logro): number {
+    if (logro.objetivo === 0) return 0; // Evita división por cero
+    const porcentaje = (logro.progreso_actual / logro.objetivo) * 100;
+    return Math.min(100, Math.max(0, porcentaje)); // Asegura que esté entre 0 y 100
+  }
+
+  getProgresoLogroTexto(logro: Logro): string {
+    if (logro.completado) {
+      return '100%'; // O "Completado" si prefieres texto
+    }
+    return `${Math.floor(this.getProgresoLogroPorcentaje(logro))}%`;
+  }
+
+  // Este método es crucial para el checkmark y los estilos
+  isLogroCompletado(logro: Logro): boolean {
+    return logro.completado; // Asumimos que el backend ya calcula esto
+  }
+
+  // Método para obtener la clase de color para la barra de progreso
+  getLogroBarraColorClass(logro: Logro): string {
+    if (logro.completado) {
+        return 'verde'; // Un color especial para los logros completados
+    }
+    // Si no está completado, usa el color que venga del backend o uno por defecto
+    switch (logro.color_barra) {
+        case 'rojo': return 'rojo';
+        case 'azul': return 'azul';
+        case 'naranja': return 'naranja';
+        default: return 'verde-claro'; // Un color por defecto si no se especifica o no está en la lista
+    }
   }
 }

@@ -43,7 +43,8 @@
       </div>
       <input type="file" accept="image/*" (change)="cambiarImagen($event, 'banner')" #inputBanner hidden>
 
-      <button (click)="uploadBanner()" [disabled]="!selectedBannerFile">{{ 'PERFIL_SUBIR_FONDO' | translate }}</button>
+      <!-- Los botones de subir foto/fondo deben estar fuera del banner si quieres que sean clickeables -->
+      <button (click)="uploadBanner()" [disabled]="!selectedBannerFile" class="upload-button">{{ 'PERFIL_SUBIR_FONDO' | translate }}</button>
       <p *ngIf="bannerUploadMessage" class="upload-message">{{ bannerUploadMessage }}</p>
 
       <div class="perfil-main-content">
@@ -56,7 +57,7 @@
             style="cursor: pointer;" />
           <input type="file" accept="image/*" (change)="cambiarImagen($event, 'avatar')" #inputAvatar hidden>
 
-          <button (click)="uploadAvatar()" [disabled]="!selectedAvatarFile">{{ 'PERFIL_SUBIR_FOTO' | translate }}</button>
+          <button (click)="uploadAvatar()" [disabled]="!selectedAvatarFile" class="upload-button">{{ 'PERFIL_SUBIR_FOTO' | translate }}</button>
           <p *ngIf="avatarUploadMessage" class="upload-message">{{ avatarUploadMessage }}</p>
 
           <h2>{{ userProfile.nombre }}</h2>
@@ -70,26 +71,27 @@
           <h3>
             {{ 'PERFIL_LOGROS' | translate }} <img src="assets/Images/Trofeo.png" alt="Trofeo" class="icono-titulo-logros" />
           </h3>
-          <div class="logro">
-            <img src="assets/Images/Objetivo.png" alt="Objetivo" class="icono-logro" />
-            {{ 'PERFIL_LOGRO_90' | translate }}
-            <div class="barra">
-              <div class="progreso rojo" style="width: 60%"><span>60%</span></div>
-            </div>
+          <!-- Contenido dinámico de logros -->
+          <div *ngIf="logros.length === 0 && userId" class="no-logros-message">
+            No se encontraron logros para este usuario. ¡Sigue aprendiendo para desbloquearlos!
           </div>
-          <div class="logro">
-            <img src="assets/Images/Calendario.png" alt="Calendario" class="icono-logro" />
-            {{ 'PERFIL_LOGRO_10_DIAS' | translate }}
-            <div class="barra">
-              <div class="progreso azul" style="width: 45%"><span>45%</span></div>
+          <div *ngFor="let logro of logros" class="logro-item" [class.completado]="isLogroCompletado(logro)">
+            <img [src]="logro.icono_url" [alt]="logro.nombre" class="icono-logro" />
+            <div class="logro-info">
+              <span class="logro-nombre">{{ logro.nombre }}</span>
+              <p class="logro-descripcion">{{ logro.descripcion }}</p>
+              <div class="barra-progreso-container">
+                <div class="barra">
+                  <div
+                    class="progreso"
+                    [class]="getLogroBarraColorClass(logro)"
+                    [style.width.%]="getProgresoLogroPorcentaje(logro)">
+                    <span>{{ getProgresoLogroTexto(logro) }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="logro">
-            <img src="assets/Images/Fuego.png" alt="Fuego" class="icono-logro" />
-            {{ 'PERFIL_LOGRO_CONSTANCIA' | translate }}
-            <div class="barra">
-              <div class="progreso naranja" style="width: 75%"><span>75%</span></div>
-            </div>
+            <span *ngIf="isLogroCompletado(logro)" class="logro-completado-badge">✅</span>
           </div>
         </div>
       </div>

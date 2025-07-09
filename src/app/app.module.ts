@@ -8,6 +8,7 @@ import { InicioComponent } from './componentes/container/inicio/inicio.component
 import { FormsModule } from '@angular/forms';
 import { IniciarSesionComponent } from './componentes/container/iniciar-sesion/iniciar-sesion.component';
 import { EleccionComponent } from './componentes/container/eleccion/eleccion.component';
+// Importa PrincipalComponent, pero NO lo declares si es standalone
 import { PrincipalComponent } from './componentes/container/principal/principal.component';
 import { ForoComponent } from './componentes/container/foro/foro.component';
 import { PerfilComponent } from './componentes/container/perfil/perfil.component';
@@ -50,7 +51,12 @@ import { Lectura12Component } from './componentes/container/lectura-12/lectura-1
 import { Lectura13Component } from './componentes/container/lectura-13/lectura-13.component';
 import { Lectura14Component } from './componentes/container/lectura-14/lectura-14.component';
 import { Lectura15Component } from './componentes/container/lectura-15/lectura-15.component';
+import { CommonModule } from '@angular/common'; // Necesario para ngIf, ngFor etc.
 
+// Función necesaria para ngx-translate para cargar los archivos de traducción
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 
 @NgModule({
@@ -60,7 +66,7 @@ import { Lectura15Component } from './componentes/container/lectura-15/lectura-1
     InicioComponent,
     IniciarSesionComponent,
     EleccionComponent,
-    PrincipalComponent,
+    // PrincipalComponent, // <-- ¡ELIMINA ESTA LÍNEA DE AQUÍ!
     ForoComponent,
     PerfilComponent,
     ConfiguracionComponent,
@@ -106,6 +112,7 @@ import { Lectura15Component } from './componentes/container/lectura-15/lectura-1
     FormsModule,
     HttpClientModule,
     DragDropModule,
+    CommonModule, // Asegúrate de que CommonModule esté importado
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -113,15 +120,11 @@ import { Lectura15Component } from './componentes/container/lectura-15/lectura-1
         deps: [HttpClient]
       }
     }),
+    PrincipalComponent, // <-- ¡DEBE ESTAR AQUÍ SI ES STANDALONE!
   ],
   providers: [
-   //provideClientHydration()
+    // provideClientHydration() // Descomenta si lo necesitas para SSR
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
