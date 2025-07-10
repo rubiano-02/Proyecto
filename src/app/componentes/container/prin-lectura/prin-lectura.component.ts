@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
 export class PrinLecturaComponent implements OnInit, OnDestroy {
   isSidebarActive = false;
 
-  // Datos de Estadísticas
+  // Datos de EstadísticasQ
   progresoGeneral: number = 0;
   puntaje: number = 0;
   tiempo: number = 0;
