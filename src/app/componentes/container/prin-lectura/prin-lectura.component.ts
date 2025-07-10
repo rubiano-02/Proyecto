@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
     RouterModule // <-- ¡AÑADE ESTO AQUÍ!
   ]
 })
-export class PrincipalComponent implements OnInit, OnDestroy {
+export class PrinLecturaComponent implements OnInit, OnDestroy {
   isSidebarActive = false;
 
   // Datos de Estadísticas

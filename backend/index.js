@@ -767,6 +767,7 @@ app.post('/foro/publicar', (req, res) => {
 });
 
 // Obtener top 3 foristas
+// Obtener top 3 foristas
 app.get('/foro/top', (req, res) => {
     const sql = `
     SELECT u.nombre, COUNT(*) AS publicaciones
@@ -776,7 +777,7 @@ app.get('/foro/top', (req, res) => {
     ORDER BY publicaciones DESC
     LIMIT 3
   `;
-    connection.query(sql, [userId], (err, results) => { // userId is not defined here. This route needs fixing.
+    connection.query(sql, (err, results) => {  // 🔧 Arreglado: sin [userId]
         if (err) {
             console.error('Error al obtener ranking:', err);
             return res.status(500).json({ error: 'Error del servidor' });
