@@ -2,12 +2,16 @@
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router, RouterModule } from '@angular/router'; // <-- Importa RouterModule aquí
+import { Router, RouterModule } from '@angular/router';
 import { ResultadosService } from '../../../servicios/resultados.service';
 import { Subscription, interval } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 
+// --- NUEVAS IMPORTACIONES PARA LA RACHA ---
+import { StreakService } from '../../../servicios/streak.service'; // Import the streak service
+import { StreakComponent } from '../../shared/streak/streak.component'; // Import the streak component
+// ------------------------------------------
 
 @Component({
   selector: 'app-principal',
@@ -17,28 +21,34 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     TranslateModule,
-    RouterModule // <-- ¡AÑADE ESTO AQUÍ!
+    RouterModule,
+    StreakComponent // <-- ADD THIS HERE for the streak component to work!
   ]
 })
 export class PrincipalComponent implements OnInit, OnDestroy {
   isSidebarActive = false;
 
-  // Datos de Estadísticas
+  // Statistics Data
   progresoGeneral: number = 0;
   puntaje: number = 0;
   tiempo: number = 0;
 
-  // Datos animados de Estadísticas
+  // Animated Statistics Data
   progresoGeneralAnimado: number = 0;
   puntajeAnimado: number = 0;
   tiempoAnimado: number = 0;
 
-  // Datos para Desafíos
+  // Challenge Data
   desafios: any[] = [];
   userId: number | null = null;
   private refreshSubscription: Subscription | null = null;
 
-  constructor(private http: HttpClient, private router: Router, private resultadosService: ResultadosService) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private resultadosService: ResultadosService,
+    private streakService: StreakService // <-- INJECT THE STREAK SERVICE HERE!
+  ) { }
 
   ngOnInit(): void {
     const userIdFromStorage = localStorage.getItem('user_id');
@@ -148,4 +158,17 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       this.router.navigate(['/prin-lectura']);
     }
   }
+
+  // --- NEW METHOD TO CALL THE STREAK SERVICE ---
+  // This method should be invoked when the user COMPLETES an exercise successfully.
+  // It is crucial that you call it from the logic that confirms the completion of an activity.
+  // For example, when submitting a final correct answer, or finishing a lesson.
+  public completarEjercicioYActualizarRacha(): void {
+    console.log('Exercise completion detected. Updating streak...');
+    this.streakService.completeActivity(); // This updates the streak in the service
+    // The StreakComponent will automatically react and animate.
+  }
+
+  // You can add a temporary button in your HTML to test this function:
+  // <button (click)="completarEjercicioYActualizarRacha()">Completar Ejercicio</button>
 }

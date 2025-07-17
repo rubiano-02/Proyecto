@@ -1,29 +1,35 @@
-// src/app/componentes/container/principal/principal.component.ts
+// src/app/componentes/container/prin-lectura/prin-lectura.component.ts
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router, RouterModule } from '@angular/router'; // <-- Importa RouterModule aquí
+import { Router, RouterModule } from '@angular/router';
 import { ResultadosService } from '../../../servicios/resultados.service';
 import { Subscription, interval } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 
+// --- ¡NUEVAS IMPORTACIONES PARA LA RACHA! ---
+import { StreakService } from '../../../servicios/streak.service'; // Importa el servicio de racha
+import { StreakComponent } from '../../shared/streak/streak.component'; // Importa el componente de racha
+// ------------------------------------------
 
 @Component({
-  selector: 'app-principal',
+  selector: 'app-principal', // Nota: El selector es 'app-principal' aquí, pero el nombre de la clase es PrinLecturaComponent.
+                            // Asegúrate de que esto sea consistente con cómo lo usas en tu app-routing.module.ts.
   standalone: true,
   templateUrl: './prin-lectura.component.html',
   styleUrls: ['./prin-lectura.component.css'],
   imports: [
     CommonModule,
     TranslateModule,
-    RouterModule // <-- ¡AÑADE ESTO AQUÍ!
+    RouterModule,
+    StreakComponent // <-- ¡AÑADE ESTO AQUÍ para que el componente de racha funcione!
   ]
 })
 export class PrinLecturaComponent implements OnInit, OnDestroy {
   isSidebarActive = false;
 
-  // Datos de EstadísticasQ
+  // Datos de Estadísticas
   progresoGeneral: number = 0;
   puntaje: number = 0;
   tiempo: number = 0;
@@ -38,7 +44,12 @@ export class PrinLecturaComponent implements OnInit, OnDestroy {
   userId: number | null = null;
   private refreshSubscription: Subscription | null = null;
 
-  constructor(private http: HttpClient, private router: Router, private resultadosService: ResultadosService) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private resultadosService: ResultadosService,
+    private streakService: StreakService // <-- ¡INYECTA EL SERVICIO DE RACHA AQUÍ!
+  ) { }
 
   ngOnInit(): void {
     const userIdFromStorage = localStorage.getItem('user_id');
@@ -148,4 +159,17 @@ export class PrinLecturaComponent implements OnInit, OnDestroy {
       this.router.navigate(['/prin-lectura']);
     }
   }
+
+  // --- NUEVO MÉTODO PARA LLAMAR AL SERVICIO DE RACHA ---
+  // Este método debe ser invocado cuando el usuario COMPLETA un ejercicio con éxito.
+  // Es crucial que lo llames desde la lógica que confirma la finalización de una actividad.
+  // Por ejemplo, al enviar una respuesta correcta final, o al terminar una lección.
+  public completarEjercicioYActualizarRacha(): void {
+    console.log('Detectada finalización de ejercicio. Actualizando racha...');
+    this.streakService.completeActivity(); // Esto actualiza la racha en el servicio
+    // El StreakComponent se encargará automáticamente de reaccionar y animarse.
+  }
+
+  // Puedes añadir un botón temporal en tu HTML para probar esta función:
+  // <button (click)="completarEjercicioYActualizarRacha()">Completar Ejercicio</button>
 }

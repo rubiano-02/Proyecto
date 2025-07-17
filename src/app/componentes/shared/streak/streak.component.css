@@ -1,0 +1,46 @@
+.streak-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre el icono y el texto */
+  background-color: #fff; /* Fondo blanco para el contenedor */
+  border-radius: 25px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interno */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin-top: 20px; /* Espacio superior */
+  justify-content: center; /* Centrar contenido */
+  min-width: 180px; /* Ancho mínimo para que no se vea comprimido */
+}
+
+.streak-icon {
+  width: 40px; /* Tamaño del icono */
+  height: 40px;
+  object-fit: contain; /* Asegura que la imagen se ajuste */
+  transition: transform 0.2s ease-out; /* Transición suave para el zoom */
+}
+
+.streak-text {
+  font-size: 1.4em; /* Tamaño de fuente para el texto de la racha */
+  font-weight: bold;
+  color: #ff9800; /* Color vibrante para el texto (naranja) */
+  white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+}
+
+/* Animación para cuando la racha se "enciende" */
+.streak-icon.active-animation {
+  animation: streakPop 0.8s ease-out forwards; /* Aplicar la animación streakPop */
+}
+
+@keyframes streakPop {
+  0% {
+    transform: scale(0.8); /* Empieza un poco más pequeño */
+    opacity: 0.5; /* Más transparente */
+  }
+  50% {
+    transform: scale(1.2); /* Se agranda un poco más de lo normal */
+    opacity: 1; /* Completamente visible */
+  }
+  100% {
+    transform: scale(1); /* Vuelve a su tamaño normal */
+    opacity: 1;
+  }
+}

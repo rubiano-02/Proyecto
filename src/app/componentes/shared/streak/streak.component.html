@@ -1,0 +1,11 @@
+<div class="streak-container">
+  <img 
+    [src]="(showStreakOnAnimation || (isStreakActive && isTodayCompleted)) ? 'assets/Images/Racha-On.png' : 'assets/Images/Racha-Off.png'" 
+    alt="{{ 'STREAK.ALT_TEXT' | translate }}" 
+    class="streak-icon" 
+    [class.active-animation]="showStreakOnAnimation"
+  />
+  <span class="streak-text">
+    {{ currentStreak }} {{ 'STREAK.DAYS' | translate }}
+  </span>
+</div>

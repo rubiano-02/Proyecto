@@ -51,7 +51,8 @@ import { Lectura12Component } from './componentes/container/lectura-12/lectura-1
 import { Lectura13Component } from './componentes/container/lectura-13/lectura-13.component';
 import { Lectura14Component } from './componentes/container/lectura-14/lectura-14.component';
 import { Lectura15Component } from './componentes/container/lectura-15/lectura-15.component';
-import { CommonModule } from '@angular/common'; // Necesario para ngIf, ngFor etc.
+import { CommonModule } from '@angular/common';
+import { StreakComponent } from './componentes/shared/streak/streak.component'; // Necesario para ngIf, ngFor etc.
 
 // Función necesaria para ngx-translate para cargar los archivos de traducción
 export function HttpLoaderFactory(http: HttpClient) {

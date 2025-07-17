@@ -69,11 +69,22 @@
             </div>
           </div>
         </div>
+
+        <!-- Botón de prueba para la racha (¡PUEDES QUITAR ESTO UNA VEZ QUE LO HAYAS INTEGRADO!) -->
+        <button (click)="completarEjercicioYActualizarRacha()" 
+                style="margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1em;">
+          Simular Completar Ejercicio (Racha)
+        </button>
+        <!------------------------------------------------------------------------------------>
+
       </div>
 
       <!-- Sección derecha -->
       <div class="seccion-derecha">
         <div class="contenedor-lateral">
+          <!-- ¡AÑADE EL COMPONENTE DE RACHA AQUÍ! -->
+          <app-streak></app-streak> 
+
           <div class="cuadro-lateral">
             <h3>📊 {{ 'ESTADISTICAS.TITULO' | translate }}</h3>
 
