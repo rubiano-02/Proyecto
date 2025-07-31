@@ -12,7 +12,15 @@ export class Matematicas11Component {
   sustraendo: number = 0;
   resultadoCorrecto: number = 0;
   opciones: number[] = [];
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   mensaje: string = '';
   color: string = '';
   ejercicioActual: number = 1;

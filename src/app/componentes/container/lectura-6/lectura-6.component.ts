@@ -29,7 +29,15 @@ export class Lectura6Component {
   totalEjercicios = 5;
 
   constructor(private resultadosService: ResultadosService) {}
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   ngOnInit() {
     setTimeout(() => this.mostrarTexto = false, 5000);
   }

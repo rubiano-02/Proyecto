@@ -27,7 +27,7 @@
       <div class="mensaje">
         <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
         <span *ngIf="color === 'red'" class="incorrecto">
-          X Operación correcta:<br> {{ simboloMostrado(operadorCorrecto) }}
+          No es asi<br>!Tu puedes!
         </span>
       </div>
     </div>
@@ -45,3 +45,23 @@
   </div>
 </div>
 
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+<h2>🧠 ¿Cómo resolver estas sumas?</h2>
+<ul>
+  <li>👁️‍🗨️ Observa bien los dos números que aparecen en la operación.</li>
+  <li>➕ Súmalos mentalmente o usando lápiz y papel.</li>
+  <li>⌨️ Escribe tu respuesta en el cuadro junto al signo igual (=).</li>
+  <li>✔ Haz clic en <strong>“Comprobar”</strong> para saber si tu respuesta es correcta.</li>
+</ul>
+<p>📊 A medida que avances, verás tu progreso en la barra superior. Al terminar todos los ejercicios, se mostrará tu <strong>calificación final</strong>.</p>
+
+  </div>
+</div>

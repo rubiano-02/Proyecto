@@ -18,6 +18,14 @@ export class Lectura1Component {
   animar = [false, false, false];
   mensaje = '';
  mostrarContenido = false;
+   modalAbierto: boolean = false;
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
 
   ngAfterViewInit(): void {
     setTimeout(() => {

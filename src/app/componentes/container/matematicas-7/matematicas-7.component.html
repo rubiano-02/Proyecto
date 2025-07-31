@@ -25,7 +25,7 @@
 
     <div class="mensaje">
       <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-      <span *ngIf="color === 'red'" class="incorrecto">❌ Incorrecto</span>
+      <span *ngIf="color === 'red'" class="incorrecto">No es asi<br>!Tu puedes!</span>
     </div>
   </div>
 
@@ -38,5 +38,26 @@
       <span class="resultado-total">{{ totalEjercicios }}</span>
     </div>
     <button class="volver" routerLink="/principal">Volver al inicio</button>
+  </div>
+</div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+   <h2>🔍 ¿Cómo jugar “¿Cuál es el mayor?”</h2>
+<ul>
+  <li>👀 Observa los números que aparecen en pantalla.</li>
+  <li>🧠 Piensa cuál de todos es el número más grande.</li>
+  <li>🖱️ Haz clic en la opción que creas que es la correcta.</li>
+</ul>
+<p>📊 Tu progreso aparecerá arriba. Cuando termines todos los ejercicios, verás tu <strong>calificación final</strong>.</p>
+
   </div>
 </div>

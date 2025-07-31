@@ -43,6 +43,15 @@ ejercicios = [
   terminado = false;
 
   constructor(private resultadosService: ResultadosService) {}
+modalAbierto: boolean = false;
+
+  abrirModal() {
+    this.modalAbierto = true;
+  }
+
+  cerrarModal() {
+    this.modalAbierto = false;
+  }
 
   seleccionar(opcion: string) {
     const ejercicio = this.ejercicios[this.ejercicioActual];
@@ -53,7 +62,7 @@ ejercicios = [
       this.color = 'green';
       this.calificacion++;
     } else {
-      this.mensaje = `❌ Solución correcta: ${ejercicio.correcta}`;
+      this.mensaje = `Casi. ¡Corrige!`;
       this.color = 'red';
     }
 

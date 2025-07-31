@@ -71,7 +71,15 @@ export class Matematicas13Component {
       }, 2000);
     }
   }
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   guardarResultado(): void {
     const idUsuarioStr = localStorage.getItem('user_id');
     if (!idUsuarioStr) return;

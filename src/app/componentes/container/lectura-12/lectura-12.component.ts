@@ -25,6 +25,15 @@ frases = [
 
   constructor(private resultadosService: ResultadosService) {}
 
+modalAbierto: boolean = false;
+
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   seleccionar(index: number, personaje: string) {
     this.respuestas[index] = personaje;
   }
@@ -42,7 +51,7 @@ frases = [
     });
 
     this.calificacion = Math.round((correctas / this.frases.length) * this.totalEjercicios);
-    this.mensaje = this.calificacion === 5 ? '✔ ¡Correcto!' : '❌ Solución correcta mostrada';
+    this.mensaje = this.calificacion === 5 ? '✔ ¡Correcto!' : 'Casi. ¡Corrige!';
     this.terminado = true;
     this.guardarResultado();
   }

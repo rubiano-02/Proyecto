@@ -37,3 +37,24 @@
     <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
   </div>
 </div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+
+  <!-- Modal -->
+  <div class="modal-fondo" *ngIf="modalAbierto">
+    <div class="modal-contenido" data-aos="zoom-in">
+      <span class="cerrar" (click)="cerrarModal()">&times;</span>
+
+  <h2>🔗 ¿Cómo jugar "Unir sinónimos"?</h2>
+    <ul>
+      <li>📌 Mira las dos columnas: una con <strong>palabras base</strong> y otra con <strong>sinónimos</strong>.</li>
+      <li>🖱️ Da clic primero en una palabra de la izquierda.</li>
+      <li>➡️ Luego da clic en la palabra de la derecha que signifique lo mismo (su sinónimo).</li>
+      <li>✔️ Si aciertas, ¡muy bien! Si no, intenta de nuevo.</li>
+    </ul>
+    <p>💡 <strong>Consejo:</strong> Si una palabra te suena parecida o tiene el mismo uso, ¡esa puede ser la correcta!</p>
+    </div>
+  </div>  

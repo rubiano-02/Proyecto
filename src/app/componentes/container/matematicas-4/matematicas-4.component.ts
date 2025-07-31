@@ -22,7 +22,15 @@ numero1: number = 0;
   calificacion: number = 0;
 
   constructor(private resultadosService: ResultadosService) {}
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   ngOnInit(): void {
     this.generarEjercicio();
   }

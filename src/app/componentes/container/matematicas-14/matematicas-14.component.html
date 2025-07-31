@@ -26,7 +26,7 @@
 
     <div class="mensaje">
       <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-      <span *ngIf="color === 'red'" class="incorrecto">❌ Solución correcta: {{ resultadoCorrecto }}</span>
+      <span *ngIf="color === 'red'" class="incorrecto">¡Intenta de nuevo!</span>
     </div>
   </div>
 
@@ -42,3 +42,25 @@
   </div>
 </div>
 
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+<h2>✖ ¡Hora de multiplicar!</h2>
+<ul>
+  <li>🔢 Mira los dos números: <strong>{{ numero1 }}</strong> y <strong>{{ numero2 }}</strong>.</li>
+  <li>✖ Multiplica: piensa cuántas veces se suma uno de ellos según el otro. Por ejemplo, <strong>3 × 4 = 3 + 3 + 3 + 3</strong>.</li>
+  <li>🤓 Elige la opción que creas correcta.</li>
+  <li>✅ Si aciertas, verás "Correcto". Si te equivocas, aprenderás con la respuesta correcta.</li>
+</ul>
+<p>🏁 ¡Sigue practicando y ve tu progreso en la parte de arriba! Al final te mostraremos tu <strong>calificación</strong>.</p>
+
+  </div>
+</div>

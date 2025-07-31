@@ -19,11 +19,27 @@ export class Matematicas1Component {
   aciertos: number = 0;
   terminado: boolean = false;
   calificacion: number = 0;
+  imagenSrc = 'assets/Images/pensando.png';
+
+cambiarImagen(hover: boolean) {
+  this.imagenSrc = hover
+    ? 'assets/Images/PenAyuda.png'
+    : 'assets/Images/pensando.png';
+}
+
   constructor(private resultadosService: ResultadosService) { }
   ngOnInit(): void {
     this.generarNuevaSuma();
   }
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   generarNuevaSuma(): void {
     this.numero1 = Math.floor(Math.random() * 50) + 10; // Números más grandes: 10-59
     this.numero2 = Math.floor(Math.random() * 50) + 10;

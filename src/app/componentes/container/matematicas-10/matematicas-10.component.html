@@ -23,7 +23,7 @@
 
     <div class="mensaje">
       <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-      <span *ngIf="color === 'red'" class="incorrecto">❌ Solución correcta: {{ solucionCorrecta }}</span>
+      <span *ngIf="color === 'red'" class="incorrecto">Casi lo logras ¡Otra vez!</span>
     </div>
   </div>
 
@@ -36,5 +36,26 @@
       <span class="resultado-total">{{ totalEjercicios }}</span>
     </div>
     <button class="volver" routerLink="/principal">Volver al inicio</button>
+  </div>
+</div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+<h2>🔢 ¿Cómo jugar “Sigue la serie”?</h2>
+<ul>
+  <li>👀 Mira con atención los números que aparecen en la serie.</li>
+  <li>🧠 Descubre qué patrón siguen: ¿suman? ¿restan? ¿multiplican?</li>
+  <li>❓ Elige cuál número debería seguir en la secuencia.</li>
+  <li>🖱️ Haz clic en la opción que creas correcta.</li>
+</ul>
+<p>📈 Tu progreso aparece arriba. Al final verás tu <strong>calificación total</strong>.</p>
+
   </div>
 </div>

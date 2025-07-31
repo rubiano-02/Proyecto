@@ -26,7 +26,7 @@
 
     <div class="mensaje">
       <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-      <span *ngIf="color === 'red'" class="incorrecto">❌ Solución correcta: {{ resultadoCorrecto }}</span>
+      <span *ngIf="color === 'red'" class="incorrecto">No es asi<br>!Tu puedes!</span>
     </div>
   </div>
 
@@ -39,5 +39,27 @@
       <span class="resultado-total">{{ totalEjercicios }}</span>
     </div>
     <button class="volver" routerLink="/principal">Volver al inicio</button>
+  </div>
+</div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+  <h2>➖ ¿Cómo resolver estas restas?</h2>
+<ul>
+  <li>🔍 Observa bien los dos números: el primero es el <strong>minuendo</strong> y el segundo el <strong>sustraendo</strong>.</li>
+  <li>🧮 Resta: ¿cuánto le quitas al primero para llegar al resultado?</li>
+  <li>🖱️ Elige la opción correcta entre las que aparecen.</li>
+  <li>✔ Haz clic para comprobar tu respuesta.</li>
+</ul>
+<p>📊 En la parte superior verás tu progreso. Al terminar, se mostrará tu <strong>calificación final</strong>.</p>
+
   </div>
 </div>

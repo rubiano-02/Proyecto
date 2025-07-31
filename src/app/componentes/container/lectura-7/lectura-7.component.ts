@@ -24,7 +24,15 @@ export class Lectura7Component {
   esCorrecto = false;
 
   constructor(private resultadosService: ResultadosService) {}
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   seleccionar(palabra: string) {
     if (this.seleccion) return;
 
@@ -36,7 +44,7 @@ export class Lectura7Component {
       this.calificacion += 1;
       this.mensaje = '✔ Correcto';
     } else {
-      this.mensaje = `❌ La palabra intrusa era: ${actual.intrusa}`;
+      this.mensaje = `¡Intenta de nuevo!`;
     }
 
     setTimeout(() => this.siguiente(), 1500); // Avanza solo después de 1.5 segundos

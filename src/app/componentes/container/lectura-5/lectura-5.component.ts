@@ -16,6 +16,15 @@ export class Lectura5Component {
   mensaje = '';
   terminado = false;
   totalEjercicios = 5;
+modalAbierto: boolean = false;
+
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
 
   constructor(private resultadosService: ResultadosService) {}
 
@@ -63,7 +72,7 @@ export class Lectura5Component {
       this.guardarResultado();
     } else {
       this.calificacion = 0;
-      this.mensaje = `❌ Solución correcta: ${this.correctas.join(', ')}`;
+      this.mensaje = `Casi. ¡Corrige!`;
       this.terminado = true;
       this.guardarResultado();
     }

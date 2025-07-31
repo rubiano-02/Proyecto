@@ -22,8 +22,7 @@
     <div class="respuesta-row">
       <div class="mensaje">
         <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-        <span *ngIf="color === 'red'" class="incorrecto">X Solución correcta:<br>
-          {{ numero1 + numero2 }}</span>
+        <span *ngIf="color === 'red'" class="incorrecto">Incorrecto<br>!Casi lo tienes!</span>
       </div>
       <button (click)="verificar()" [disabled]="mensaje !== '' || respuestaUsuario === null">Comprobar</button>
     </div>
@@ -38,5 +37,27 @@
       <span class="resultado-total">{{ totalEjercicios }}</span>
     </div>
     <button class="volver" routerLink="/principal">Volver al inicio</button>
+  </div>
+</div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+     <h2>🧮 ¿Cómo jugar “Sumas rápidas”?</h2>
+<ul>
+  <li>👀 Mira bien la operación que aparece en pantalla.</li>
+  <li>🧠 Haz la suma mentalmente o en tu cabeza.</li>
+  <li>⌨️ Escribe tu respuesta en el cuadro que aparece al lado del igual (=).</li>
+  <li>✅ Haz clic en <strong>“Comprobar”</strong> para ver si acertaste.</li>
+</ul>
+<p>🎯 Cuando termines todos los ejercicios, verás tu <strong>calificación final</strong>.</p>
+
   </div>
 </div>

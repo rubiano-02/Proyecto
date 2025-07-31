@@ -13,6 +13,31 @@
     </ng-container>
   </p>
 </div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+
+  <!-- Modal -->
+  <div class="modal-fondo" *ngIf="modalAbierto">
+    <div class="modal-contenido" data-aos="zoom-in">
+      <span class="cerrar" (click)="cerrarModal()">&times;</span>
+      
+    <h2>🕵️‍♂️ ¡Detective de Palabras!</h2>
+    <p>En este juego, tienes que <strong>encontrar la palabra que se repite</strong> en el texto.</p>
+
+    <ul>
+      <li>👀 <strong>Lee la oración completa</strong> con calma.</li>
+      <li>🔁 <strong>Busca palabras que aparezcan más de una vez.</strong></li>
+      <li>🖱️ <strong>Haz clic en la palabra que se repite</strong> para marcarla.</li>
+      <li>✅ <strong>Revisa bien antes de verificar</strong>. Solo hay una palabra repetida.</li>
+    </ul>
+
+    <p>💡 <strong>Pista:</strong> A veces las palabras repetidas no están juntas. ¡Tienes que observar con atención!</p>
+    </div>
+  </div>
+
 
 <!-- Pantalla final de calificación -->
 <div class="zona-final" *ngIf="terminado">

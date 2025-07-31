@@ -7,6 +7,7 @@ import { ResultadosService } from '@servicios/resultados.service';
   styleUrl: './matematicas-2.component.css'
 })
 export class Matematicas2Component {
+  
  numero1: number = 0;
   numero2: number = 0;
   resultado: number = 0;
@@ -26,7 +27,15 @@ export class Matematicas2Component {
   ngOnInit(): void {
     this.generarOperacion();
   }
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   generarOperacion(): void {
     const operadores = ['+', '-', '*', '/'];
     this.operadorCorrecto = operadores[Math.floor(Math.random() * operadores.length)];

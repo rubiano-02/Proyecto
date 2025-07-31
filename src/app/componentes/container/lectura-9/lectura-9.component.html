@@ -22,3 +22,22 @@
   </div>
   <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
 </div>
+ <button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+  <!-- Modal -->
+  <div class="modal-fondo" *ngIf="modalAbierto">
+    <div class="modal-contenido" data-aos="zoom-in">
+      <span class="cerrar" (click)="cerrarModal()">&times;</span>
+<h2>🧩 ¿Cómo jugar "Orden lógico"?</h2>
+    <ul>
+      <li>👀 Lee todas las frases que están en la pantalla.</li>
+      <li>🔀 Arrástralas con el mouse (o tu dedo) hasta que estén en el orden correcto.</li>
+      <li>⏳ Piensa: ¿qué pasó primero? ¿Qué fue después?</li>
+      <li>✔️ Cuando termines, dale clic al botón para comprobar.</li>
+    </ul>
+    <p>💡 <strong>Consejo:</strong> Recuerda lo que haces tú al despertarte. ¡Eso te puede ayudar a ordenar!</p>
+    </div>
+  </div>  

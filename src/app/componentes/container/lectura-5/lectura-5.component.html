@@ -39,6 +39,29 @@
       {{ mensaje }}
     </p>
   </div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+  <!-- Modal -->
+  <div class="modal-fondo" *ngIf="modalAbierto">
+    <div class="modal-contenido" data-aos="zoom-in">
+      <span class="cerrar" (click)="cerrarModal()">&times;</span>
+      
+<h2>🧠 ¡Ayuda con los sinónimos!</h2>
+    <p>En este juego debes <strong>arrastrar la palabra correcta</strong> a la frase para que tenga sentido.</p>
+
+    <ul>
+      <li>📖 <strong>Lee toda la frase:</strong> Así puedes entender de qué está hablando.</li>
+      <li>🟡 <strong>Mira las opciones:</strong> ¿Qué palabra tiene un significado parecido a lo que dice la frase?</li>
+      <li>🖱️ <strong>Arrastra la palabra correcta</strong> al cuadro azul con la línea.</li>
+      <li>✅ <strong>Haz clic en "Verificar"</strong> cuando estés seguro de tu elección.</li>
+    </ul>
+
+    <p>💡 <strong>Pista:</strong> Un sinónimo es una palabra que significa lo mismo o algo muy parecido a otra. ¡Busca la que encaje mejor!</p>
+    </div>
+  </div>
 
   <!-- ✅ Zona de calificación, totalmente aparte -->
   <div *ngIf="terminado" class="zona-final" data-aos="zoom-in">

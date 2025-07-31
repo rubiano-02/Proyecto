@@ -18,10 +18,11 @@
     </div>
 
     <div class="respuesta-row">
-      <div class="mensaje">
-        <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-        <span *ngIf="color === 'red'" class="incorrecto">X Incorrecto</span>
-      </div>
+    <div class="mensaje">
+  <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
+  <span *ngIf="color === 'red'" class="incorrecto mover-derecha">¡Intenta de nuevo!</span>
+</div>
+
       <div class="botones-verf">
         <button (click)="verificar(true)" [disabled]="mensaje !== ''"> Verdadero</button>
         <button (click)="verificar(false)" [disabled]="mensaje !== ''"> Falso</button>
@@ -38,5 +39,27 @@
       <span class="resultado-total">{{ totalEjercicios }}</span>
     </div>
     <button class="volver" routerLink="/principal">Volver al inicio</button>
+  </div>
+</div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+    <h2>🔍 ¿Cómo jugar “Verdadero o Falso”?</h2>
+    <ul>
+      <li>👁️ Observa bien la operación que aparece en pantalla.</li>
+      <li>🤔 Piensa si el resultado mostrado es correcto o incorrecto.</li>
+      <li>👍 Si crees que está bien, haz clic en <strong>“Verdadero”</strong>.</li>
+      <li>👎 Si crees que está mal, haz clic en <strong>“Falso”</strong>.</li>
+    </ul>
+    <p>📊 Verás tu progreso en la parte superior. Al terminar todos los ejercicios, se mostrará tu <strong>calificación
+        final</strong>.</p>
+
   </div>
 </div>
