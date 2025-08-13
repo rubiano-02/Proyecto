@@ -69,74 +69,69 @@ export class Registrarse1Component implements OnInit {
   get iconoOjo(): string {
     return this.mostrarContrasena ? '🙈' : '👁️';
   }
+
   registrar() {
-  // Si la edad es menor de 18, abrir el modal y guardar los datos temporalmente
-  if (this.edad !== null && this.edad < 18) {
-    this.usuarioTemporal = {
+    if (this.edad !== null && this.edad < 18) {
+      this.usuarioTemporal = {
+        nombre: this.nombre,
+        edad: this.edad,
+        email: this.email,
+        contraseña: this.contrasena
+      };
+      this.mostrarModalPadre = true;
+      return;
+    }
+
+    const nuevoUsuario = {
       nombre: this.nombre,
       edad: this.edad,
       email: this.email,
       contraseña: this.contrasena
     };
-    this.mostrarModalPadre = true;
-    return; // Detiene el flujo hasta que se complete el modal
+
+    this.http.post<any>('http://localhost:3000/usuarios', nuevoUsuario).subscribe({
+      next: () => {
+        this.router.navigate(['/iniciar-sesion']);
+      },
+      error: (error) => {
+        console.error('Error al registrar usuario:', error);
+      }
+    });
   }
-
-  // Si la edad es 18 o más, registrar directamente sin padre
-  const nuevoUsuario = {
-    nombre: this.nombre,
-    edad: this.edad,
-    email: this.email,
-    contraseña: this.contrasena
-  };
-
-  this.http.post<any>('http://localhost:3000/usuarios', nuevoUsuario).subscribe({
-    next: (respuestaUsuario) => {
-      alert('Usuario registrado correctamente');
-      this.router.navigate(['/iniciar-sesion']);
-    },
-    error: (error) => {
-      console.error('Error al registrar usuario:', error);
-    }
-  });
-}
 
   guardarPadreYTutor() {
-  if (!this.padre.nombre || this.padre.nombre.trim() === '') {
-    alert('Por favor completa el nombre del padre o tutor.');
-    return;
-  }
-
-  this.http.post<any>('http://localhost:3000/padres', this.padre).subscribe({
-    next: (respuestaPadre) => {
-      const idPadre = respuestaPadre.id_padre;
-
-      // Crear usuario con el ID del padre
-      const nuevoUsuario = {
-        nombre: this.usuarioTemporal.nombre,
-        edad: this.usuarioTemporal.edad,
-        email: this.usuarioTemporal.email,
-        contraseña: this.usuarioTemporal.contraseña,
-        id_padre: idPadre
-      };
-
-      this.http.post<any>('http://localhost:3000/usuarios', nuevoUsuario).subscribe({
-        next: (respuestaUsuario) => {
-          alert('Usuario registrado correctamente con datos del padre/tutor');
-          this.mostrarModalPadre = false;
-          this.usuarioTemporal = null;
-          this.router.navigate(['/iniciar-sesion']);
-        },
-        error: (error) => {
-          console.error('Error al registrar usuario:', error);
-        }
-      });
-    },
-    error: (error) => {
-      console.error('Error al registrar padre/tutor:', error);
+    if (!this.padre.nombre || this.padre.nombre.trim() === '') {
+      return;
     }
-  });
-}
+
+    this.http.post<any>('http://localhost:3000/padres', this.padre).subscribe({
+      next: (respuestaPadre) => {
+        const idPadre = respuestaPadre.id_padre;
+
+        const nuevoUsuario = {
+          nombre: this.usuarioTemporal.nombre,
+          edad: this.usuarioTemporal.edad,
+          email: this.usuarioTemporal.email,
+          contraseña: this.usuarioTemporal.contraseña,
+          id_padre: idPadre
+        };
+
+        this.http.post<any>('http://localhost:3000/usuarios', nuevoUsuario).subscribe({
+          next: () => {
+            this.mostrarModalPadre = false;
+            this.usuarioTemporal = null;
+            this.router.navigate(['/iniciar-sesion']);
+          },
+          error: (error) => {
+            console.error('Error al registrar usuario:', error);
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error al registrar padre/tutor:', error);
+      }
+    });
+  }
 
   cancelarRegistroPadre() {
     this.mostrarModalPadre = false;
@@ -178,7 +173,7 @@ export class Registrarse1Component implements OnInit {
     this.usuarioEncontrado = null;
     this.usuarioNoEncontrado = false;
   }
-  // Buscar usuario por ID
+
   buscarUsuarioPorId() {
     if (this.usuarioIdBuscar === null) return;
 
@@ -199,7 +194,7 @@ export class Registrarse1Component implements OnInit {
 
     this.http.put(`http://localhost:3000/usuarios/${this.usuarioIdBuscar}`, this.usuarioEncontrado)
       .subscribe(() => {
-        alert('Usuario actualizado');
+        // alert eliminado
       });
   }
 
@@ -208,7 +203,6 @@ export class Registrarse1Component implements OnInit {
 
     this.http.delete(`http://localhost:3000/usuarios/${this.usuarioIdBuscar}`)
       .subscribe(() => {
-        alert('Usuario eliminado');
         this.usuarioEncontrado = null;
       });
   }

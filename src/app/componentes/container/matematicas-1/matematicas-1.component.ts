@@ -8,6 +8,9 @@ import { ResultadosService } from '@servicios/resultados.service';
   templateUrl: './matematicas-1.component.html',
   styleUrl: './matematicas-1.component.css'
 })
+
+
+
 export class Matematicas1Component {
   numero1: number = 0;
   numero2: number = 0;
@@ -21,27 +24,30 @@ export class Matematicas1Component {
   calificacion: number = 0;
   imagenSrc = 'assets/Images/pensando.png';
 
-cambiarImagen(hover: boolean) {
-  this.imagenSrc = hover
-    ? 'assets/Images/PenAyuda.png'
-    : 'assets/Images/pensando.png';
-}
+  cambiarImagen(hover: boolean) {
+    this.imagenSrc = hover
+      ? 'assets/Images/PenAyuda.png'
+      : 'assets/Images/pensando.png';
+  }
 
   constructor(private resultadosService: ResultadosService) { }
+
   ngOnInit(): void {
     this.generarNuevaSuma();
   }
-modalAbierto: boolean = false;
 
-abrirModal() {
-  this.modalAbierto = true;
-}
+  modalAbierto: boolean = false;
 
-cerrarModal() {
-  this.modalAbierto = false;
-}
+  abrirModal() {
+    this.modalAbierto = true;
+  }
+
+  cerrarModal() {
+    this.modalAbierto = false;
+  }
+
   generarNuevaSuma(): void {
-    this.numero1 = Math.floor(Math.random() * 50) + 10; // Números más grandes: 10-59
+    this.numero1 = Math.floor(Math.random() * 50) + 10;
     this.numero2 = Math.floor(Math.random() * 50) + 10;
     this.respuestaUsuario = null;
     this.mensaje = '';
@@ -68,37 +74,31 @@ cerrarModal() {
       setTimeout(() => {
         this.terminado = true;
         this.calificacion = this.aciertos;
-        this.guardarResultado(); // 1 a 5
+        this.guardarResultado();
       }, 2000);
     }
   }
 
-
-
-guardarResultado(): void {
-  const idUsuarioStr = localStorage.getItem('user_id');
-  if (!idUsuarioStr) {
-    console.warn('⚠️ ID de usuario no encontrado en localStorage');
-    return;
-  }
-
-  const idUsuario = Number(idUsuarioStr);
-  const calificacion = this.calificacion;
-  const tiempo_dedicado = this.totalEjercicios * 2;
-
-  this.resultadosService.guardarResultado(idUsuario, calificacion, tiempo_dedicado).subscribe({
-    next: (response:any) => {
-      console.log('✅ Resultado guardado:', response);
-      alert('Resultado guardado correctamente');
-    },
-    error: (error:any) => {
-      console.error('❌ Error al guardar resultado:', error);
-      alert('Error al guardar resultado');
+  guardarResultado(): void {
+    const idUsuarioStr = localStorage.getItem('user_id');
+    if (!idUsuarioStr) {
+      console.warn('⚠️ ID de usuario no encontrado en localStorage');
+      return;
     }
-  });
-}
 
+    const idUsuario = Number(idUsuarioStr);
+    const calificacion = this.calificacion;
+    const tiempo_dedicado = this.totalEjercicios * 2;
 
+    this.resultadosService.guardarResultado(idUsuario, calificacion, tiempo_dedicado).subscribe({
+      next: (response: any) => {
+        console.log('✅ Resultado guardado:', response);
+      },
+      error: (error: any) => {
+        console.error('❌ Error al guardar resultado:', error);
+      }
+    });
+  }
 
   reiniciar(): void {
     this.ejercicioActual = 1;

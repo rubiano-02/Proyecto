@@ -48,9 +48,7 @@ import { Lectura9Component } from './componentes/container/lectura-9/lectura-9.c
 import { Lectura10Component } from './componentes/container/lectura-10/lectura-10.component';
 import { Lectura11Component } from './componentes/container/lectura-11/lectura-11.component';
 import { Lectura12Component } from './componentes/container/lectura-12/lectura-12.component';
-import { Lectura13Component } from './componentes/container/lectura-13/lectura-13.component';
-import { Lectura14Component } from './componentes/container/lectura-14/lectura-14.component';
-import { Lectura15Component } from './componentes/container/lectura-15/lectura-15.component';
+
 import { CommonModule } from '@angular/common';
 import { StreakComponent } from './componentes/shared/streak/streak.component'; // Necesario para ngIf, ngFor etc.
 
@@ -101,9 +99,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     Lectura10Component,
     Lectura11Component,
     Lectura12Component,
-    Lectura13Component,
-    Lectura14Component,
-    Lectura15Component,
   ],
   imports: [
     BrowserModule,
