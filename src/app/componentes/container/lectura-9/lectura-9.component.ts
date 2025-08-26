@@ -14,7 +14,15 @@ export class Lectura9Component {
     'Desayunó.',
     'Fue al colegio.'
   ];
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   frases = [...this.frasesCorrectas].sort(() => Math.random() - 0.5);
   mensaje = '';
   calificacion = 0;
@@ -38,7 +46,7 @@ export class Lectura9Component {
 
   this.mensaje = correctas === total
     ? '✔ ¡Secuencia correcta!'
-    : `❌ Orden incorrecto: acertaste ${correctas} de ${total}`;
+    : `¡Intenta de nuevo!`;
 
   this.terminado = true;
   this.guardarResultado();

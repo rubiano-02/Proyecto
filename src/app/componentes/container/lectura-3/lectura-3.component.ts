@@ -27,8 +27,15 @@ palabras = [
   errores = 0;
   calificacion = 0;
   terminado = false;
-
+modalAbierto: boolean = false;
   constructor(private resultadosService: ResultadosService) {}
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
 
   seleccionar(palabra: any) {
     if (palabra.estado !== '') return;
@@ -37,7 +44,7 @@ palabras = [
       palabra.estado = 'correcta';
       this.aciertos++;
     } else {
-      palabra.estado = 'incorrecta';
+      palabra.estado = 'Casi. ¡Corrige!';
       this.errores++;
     }
 

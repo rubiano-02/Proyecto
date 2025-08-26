@@ -26,7 +26,7 @@
 
     <div class="mensaje">
       <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-      <span *ngIf="color === 'red'" class="incorrecto">❌ Solución correcta: {{ resultadoCorrecto }}</span>
+      <span *ngIf="color === 'red'" class="incorrecto">¡Intenta de nuevo!</span>
     </div>
   </div>
 
@@ -39,5 +39,26 @@
       <span class="resultado-total">{{ totalEjercicios }}</span>
     </div>
     <button class="volver" routerLink="/principal">Volver al inicio</button>
+  </div>
+</div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+<h2>✖️ ¿Cómo resolver estas multiplicaciones?</h2>
+<ul>
+  <li>🔢 Mira los dos números que se están multiplicando.</li>
+  <li>💭 Piensa: ¿cuánto es <strong>{{ numero1 }} × {{ numero2 }}</strong>?</li>
+  <li>🖱️ Escoge la respuesta correcta entre las opciones.</li>
+  <li>✔ Si aciertas, aparecerá "Correcto". Si te equivocas, verás la solución correcta.</li>
+</ul>
+<p>📈 ¡Tu progreso se muestra arriba! Al terminar verás tu <strong>calificación total</strong>.</p>
+
   </div>
 </div>

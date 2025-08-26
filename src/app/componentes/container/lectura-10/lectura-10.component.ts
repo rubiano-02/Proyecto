@@ -34,6 +34,15 @@ shuffle(array: any[]) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+modalAbierto: boolean = false;
+
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
 ngOnInit() {
   this.shuffle(this.efectos);
 }
@@ -83,7 +92,7 @@ ngOnInit() {
 
     this.mensaje = correctas === this.totalEjercicios
       ? '✔ ¡Muy bien! Todas las relaciones son correctas.'
-      : `❌ Acertaste ${correctas} de ${this.totalEjercicios}`;
+      : `¡Intenta de nuevo!`;
 
     this.terminado = true;
     this.guardarResultado();

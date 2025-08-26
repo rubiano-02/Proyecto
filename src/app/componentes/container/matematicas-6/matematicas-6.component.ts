@@ -20,7 +20,15 @@ export class Matematicas6Component {
   calificacion: number = 0;
 
   constructor(private resultadosService: ResultadosService) {}
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   ngOnInit(): void {
     this.generarEjercicio();
   }

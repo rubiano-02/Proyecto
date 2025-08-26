@@ -18,7 +18,15 @@ numeros: number[] = [];
   aciertos: number = 0;
   terminado: boolean = false;
   calificacion: number = 0;
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   constructor(private resultadosService: ResultadosService) {}
 
   ngOnInit(): void {

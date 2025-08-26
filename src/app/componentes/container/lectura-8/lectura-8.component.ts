@@ -17,7 +17,15 @@ export class Lectura8Component {
   terminado = false;
   calificacion = 5;
   totalEjercicios = 5;
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   constructor(private resultadosService: ResultadosService) {
     this.sinonimos = this.mezclarArray(this.sinonimos);
   }
@@ -54,7 +62,7 @@ export class Lectura8Component {
     this.calificacion = aciertos * 5 / correctos.length;
     this.mensaje = aciertos === correctos.length
       ? '✔ ¡Perfecto! Todos los sinónimos correctos.'
-      : `❌ Algunos pares no son correctos.`;
+      : `Casi. ¡Corrige!`;
 
     this.terminado = true;
     this.guardarResultado();

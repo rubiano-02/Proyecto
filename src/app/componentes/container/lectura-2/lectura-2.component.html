@@ -11,13 +11,36 @@
   <div *ngIf="!terminado" class="zona-ejercicio" data-aos="fade-up">
     <p class="texto">{{ ejercicios[ejercicioActual].texto }}</p>
     <div class="opciones">
-      <button *ngFor="let opcion of ejercicios[ejercicioActual].opciones"
-              class="opcion"
-              (click)="seleccionar(opcion)">
+      <button *ngFor="let opcion of ejercicios[ejercicioActual].opciones" class="opcion" (click)="seleccionar(opcion)">
         {{ opcion }}
       </button>
     </div>
     <p class="mensaje" [style.color]="color">{{ mensaje }}</p>
+  </div>
+  <!-- Imagen en la esquina que abre el modal -->
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+  <!-- Modal -->
+  <div class="modal-fondo" *ngIf="modalAbierto">
+    <div class="modal-contenido" data-aos="zoom-in">
+      <span class="cerrar" (click)="cerrarModal()">&times;</span>
+      
+    <h2>¿Necesitas ayuda? ¡Aquí van unas pistas!</h2>
+    <p>👧🏽 <strong>Lola salió al parque con su perro. El cielo estaba oscuro y...</strong></p>
+    <p>Ahora tienes que elegir qué pasó después. No hay una sola respuesta correcta, ¡usa tu imaginación! Pero aquí tienes unas ideas para ayudarte:</p>
+    
+    <ul>
+      <li>💭 <strong>Lee bien la frase:</strong> Imagina la escena en tu cabeza. ¿Cómo te la imaginas si el cielo está oscuro?</li>
+      <li>🌧️ <strong>Piensa en lo lógico:</strong> Si el cielo está oscuro, podría pasar algo como que empiece a llover.</li>
+      <li>🐉 <strong>También puedes ser creativo:</strong> A veces las historias pueden tener cosas divertidas o mágicas, como un dragón o un perro en bicicleta.</li>
+      <li>✅ <strong>No te preocupes si te equivocas:</strong> Puedes intentarlo varias veces y divertirte con cada opción.</li>
+    </ul>
+
+    <p>👉 <strong>Elige la opción que te parezca más divertida o interesante. ¡Estás creando una historia!</strong></p>
+    </div>
   </div>
 
   <!-- Pantalla final -->

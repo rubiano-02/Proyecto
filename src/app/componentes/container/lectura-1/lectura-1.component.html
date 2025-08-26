@@ -32,6 +32,31 @@
       <ng-template #vacio3></ng-template>
     </span>, corriendo con un botón. El gato apenas lo vio... y durmiendo se quedó.
   </p>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+
+  <!-- Modal -->
+  <div class="modal-fondo" *ngIf="modalAbierto">
+    <div class="modal-contenido" data-aos="zoom-in">
+      <span class="cerrar" (click)="cerrarModal()">&times;</span>
+      
+ <h2> ¿Necesitas ayuda? ¡Aquí te explico cómo hacerlo!</h2>
+    <p>Vamos a completar la oración usando las palabras correctas.</p>
+    
+    <ul>
+      <li>👀 <strong>Lee toda la oración primero:</strong> Imagina lo que está pasando en la historia del gato.</li>
+      <li>🧩 <strong>Busca las palabras que tienen más sentido:</strong> ¿Dónde estaría el gato? ¿Qué brilla en el cielo? ¿Quién corre con un botón?</li>
+      <li>👉 <strong>Haz clic o arrastra las palabras verdes</strong> a los espacios vacíos (los cuadritos azules).</li>
+      <li>🔍 <strong>Si no estás seguro, prueba y vuelve a intentar:</strong> No pasa nada si te equivocas.</li>
+    </ul>
+
+    <p>💡 <strong>Consejo:</strong> Piensa en lo que hacen los gatos y lo que ocurre durante el día. ¡Tú puedes!</p>
+    </div>
+  </div>
+
 
   <!-- ✅ Todo esto aparece solo después de que Angular terminó de renderizar -->
   <div *ngIf="mostrarContenido">
@@ -47,14 +72,14 @@
         {{ opcion }}
       </div>
     </div>
- <button class="salir" routerLink="/prin-lectura"><strong>←</strong></button>
+
     <button class="verificar" (click)="verificar()">Verificar</button>
   </div>
 
  <!-- Mensajes dinámicos -->
 <div *ngIf="mensaje && !terminado" class="mensaje">
   <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-  <span *ngIf="color === 'red'" class="incorrecto">❌ Incorrecto</span>
+  <span *ngIf="color === 'red'" class="incorrecto">Casi. ¡Corrige!</span>
 </div>
 
 <!-- Calificación final -->

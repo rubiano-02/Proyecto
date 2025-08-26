@@ -38,7 +38,7 @@
       <div class="mensaje">
         <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
         <span *ngIf="color === 'red'" class="incorrecto">
-          ❌ Solución correcta 
+         Casi lo logras ¡Otra vez!
           
         </span>
       </div>
@@ -54,5 +54,28 @@
       <span class="resultado-total">{{ totalEjercicios }}</span>
     </div>
     <button class="volver" routerLink="/principal">Volver al inicio</button>
+  </div>
+</div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+<h2>✍️ ¿Cómo resolver esta operación?</h2>
+<ul>
+  <li>🔎 Observa bien la operación: hay un número que falta.</li>
+  <li>❓ El espacio vacío puede estar antes o después del signo.</li>
+  <li>🧠 Piensa qué número debe ir ahí para que el resultado sea correcto.</li>
+  <li>⌨️ Escribe tu respuesta en el cuadro con el signo de interrogación (?).</li>
+  <li>✔ Luego, haz clic en <strong>“Comprobar”</strong> para ver si acertaste.</li>
+</ul>
+<p>📊 Tu avance se muestra en la parte superior. Al final verás tu <strong>calificación total</strong>
+
   </div>
 </div>

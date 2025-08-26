@@ -13,6 +13,31 @@
     </div>
   </div>
 </div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+
+  <!-- Modal -->
+  <div class="modal-fondo" *ngIf="modalAbierto">
+    <div class="modal-contenido" data-aos="zoom-in">
+      <span class="cerrar" (click)="cerrarModal()">&times;</span>
+      
+ <span class="close">&times;</span>
+    <h2>🗣️ ¿Quién lo dijo?</h2>
+    <p>En este juego debes <strong>adivinar quién dijo cada frase</strong>: ¿fue la mamá o el hijo?</p>
+    
+    <ul>
+      <li>👂 <strong>Lee bien cada frase:</strong> Piensa quién diría algo así en una historia o en casa.</li>
+      <li>👩 <strong>¿La mamá?</strong> Tal vez dice cosas como “Hora de dormir” o “Ya es tarde”.</li>
+      <li>🧒 <strong>¿El hijo?</strong> Puede pedir “¡Otro cuento!” o “¡No quiero dormir!”.</li>
+      <li>✅ <strong>Haz clic en el personaje correcto</strong> debajo de cada frase.</li>
+    </ul>
+
+    <p>💡 <strong>Consejo:</strong> Imagina que estás en casa antes de dormir. ¿Quién dice cada cosa? ¡Usa tu lógica y tu imaginación!</p>
+    </div>
+  </div>
 
 <!-- Resultado Final -->
 <div *ngIf="terminado" class="zona-final" data-aos="zoom-in">

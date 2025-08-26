@@ -37,7 +37,15 @@ export class Lectura11Component {
     this.terminado = true;
     this.guardarResultado();
   }
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   guardarResultado() {
     const idUsuarioStr = localStorage.getItem('user_id');
     if (!idUsuarioStr) return;

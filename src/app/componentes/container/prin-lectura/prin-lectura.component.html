@@ -1,6 +1,7 @@
 <button class="menu-toggle" (click)="toggleSidebar()" [class.active]="isSidebarActive" aria-label="Abrir menú">
   <i class="fa-solid fa-bars"></i>
 </button>
+
 <div class="container">
   <aside class="sidebar" [class.active]="isSidebarActive" id="sidebar">
     <div class="menu">
@@ -31,8 +32,13 @@
     </div>
   </aside>
 
+  <!-- Contenido principal -->
   <main class="contenido">
+    <!-- Sección superior (vacía en tu código, puedes añadir aquí el selector de opción si lo tienes) -->
+
+    <!-- Contenedor principal para secciones central y derecha -->
     <div class="contenedor-principal">
+      <!-- Sección central -->
       <div class="seccion-central">
         <div class="contenedor-cuadros">
           <div class="cuadro">
@@ -43,6 +49,7 @@
               <p>{{ 'SUMAS.P3' | translate }}</p>
             </div>
             <div class="accion-cuadro">
+              <!-- Asegúrate de que este botón tenga un routerLink o una función para iniciar el ejercicio -->
               <button class="iniciar" routerLink="/matematicas-1">{{ 'BOTON.INICIAR' | translate }}</button>
               <img src="assets/Images/Lectura Básica.png" alt="ABC" class="imagen-cuadro" />
             </div>
@@ -56,21 +63,31 @@
               <p>{{ 'COMPRENSION.P3' | translate }}</p>
             </div>
             <div class="accion-cuadro">
+              <!-- Asegúrate de que este botón tenga un routerLink o una función para iniciar el ejercicio -->
               <button class="iniciar" routerLink="/lectura-1">{{ 'BOTON.INICIAR' | translate }}</button>
               <img src="assets/Images/Comprensión.png" alt="Lector" class="imagen-cuadro" />
             </div>
           </div>
         </div>
+
+        <!-- Botón de prueba para la racha (¡PUEDES QUITAR ESTO UNA VEZ QUE LO HAYAS INTEGRADO!) -->
+        <button (click)="completarEjercicioYActualizarRacha()" 
+                style="margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1em;">
+          Simular Completar Ejercicio (Racha)
+        </button>
+        <!------------------------------------------------------------------------------------>
+
       </div>
 
+      <!-- Sección derecha -->
       <div class="seccion-derecha">
-        <div class="streak-container-wrapper">
-          <app-streak></app-streak>
-        </div>
+        <div class="contenedor-lateral">
+          <!-- ¡AÑADE EL COMPONENTE DE RACHA AQUÍ! -->
+          <app-streak></app-streak> 
 
-        <div class="stats-and-challenges-container">
           <div class="cuadro-lateral">
             <h3>📊 {{ 'ESTADISTICAS.TITULO' | translate }}</h3>
+
             <div class="estadistica">
               <span class="etiqueta">{{ 'ESTADISTICAS.PROGRESO_GENERAL' | translate }}</span>
               <div class="progreso azul">
@@ -78,6 +95,7 @@
               </div>
               <span class="porcentaje">{{ progresoGeneral }}%</span>
             </div>
+
             <div class="estadistica">
               <span class="etiqueta">{{ 'ESTADISTICAS.PUNTAJE' | translate }}</span>
               <div class="progreso amarillo">
@@ -85,6 +103,7 @@
               </div>
               <span class="porcentaje">{{ puntaje }}%</span>
             </div>
+
             <div class="estadistica">
               <span class="etiqueta">{{ 'ESTADISTICAS.TIEMPO' | translate }}</span>
               <div class="progreso naranja">
@@ -94,89 +113,150 @@
             </div>
           </div>
 
+          <!-- SECCIÓN DE DESAFÍOS DINÁMICA -->
           <div class="cuadro-lateral">
             <h3>🏆 {{ 'DESAFIOS.TITULO' | translate }}</h3>
             <div class="desafios-lista">
-              <ng-container *ngIf="getDesafioByMetrica('ejercicios_completados_total', 1) as desafio1">
-                <div class="desafio-item">
-                  <span class="desafio-texto">{{ desafio1.nombre }}</span>
-                  <div class="desafio-progreso">
-                    <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(desafio1)" [class.completado]="isDesafioCompletado(desafio1)"></div>
-                    <span class="progreso-valor">{{ getProgresoTexto(desafio1) }}</span>
-                  </div>
-                  <span *ngIf="isDesafioCompletado(desafio1)" class="completado-badge">✅</span>
-                </div>
-              </ng-container>
+                <!-- Desafío: Primeros Pasos (ejercicios_completados_total, objetivo 1) -->
+                <ng-container *ngIf="getDesafioByMetrica('ejercicios_completados_total', 1) as desafio1">
+                    <div class="desafio-item">
+                        <span class="desafio-texto">{{ desafio1.nombre }}</span>
+                        <div class="desafio-progreso">
+                            <!-- AÑADIR CLASE 'completado' CONDICIONALMENTE -->
+                            <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(desafio1)" [class.completado]="isDesafioCompletado(desafio1)"></div>
+                            <span class="progreso-valor">{{ getProgresoTexto(desafio1) }}</span>
+                        </div>
+                        <span *ngIf="isDesafioCompletado(desafio1)" class="completado-badge">✅</span>
+                    </div>
+                </ng-container>
 
-              <ng-container *ngIf="getDesafioByMetrica('ejercicios_completados_total', 5) as desafio2">
-                <div class="desafio-item">
-                  <span class="desafio-texto">{{ desafio2.nombre }}</span>
-                  <div class="desafio-progreso">
-                    <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(desafio2)" [class.completado]="isDesafioCompletado(desafio2)"></div>
-                    <span class="progreso-valor">{{ getProgresoTexto(desafio2) }}</span>
-                  </div>
-                  <span *ngIf="isDesafioCompletado(desafio2)" class="completado-badge">✅</span>
-                </div>
-              </ng-container>
+                <!-- Desafío: Lector Constante (ejercicios_completados_total, objetivo 5) -->
+                <ng-container *ngIf="getDesafioByMetrica('ejercicios_completados_total', 5) as desafio2">
+                    <div class="desafio-item">
+                        <span class="desafio-texto">{{ desafio2.nombre }}</span>
+                        <div class="desafio-progreso">
+                            <!-- AÑADIR CLASE 'completado' CONDICIONALMENTE -->
+                            <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(desafio2)" [class.completado]="isDesafioCompletado(desafio2)"></div>
+                            <span class="progreso-valor">{{ getProgresoTexto(desafio2) }}</span>
+                        </div>
+                        <span *ngIf="isDesafioCompletado(desafio2)" class="completado-badge">✅</span>
+                    </div>
+                </ng-container>
 
-              <ng-container *ngIf="getDesafioByMetrica('dias_consecutivos', 3) as rachaInicial">
-                <div class="desafio-item">
-                  <span class="desafio-texto">{{ rachaInicial.nombre }}</span>
-                  <div class="desafio-progreso">
-                    <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(rachaInicial)" [class.completado]="isDesafioCompletado(rachaInicial)"></div>
-                    <span class="progreso-valor">{{ getProgresoTexto(rachaInicial) }}</span>
-                  </div>
-                  <span *ngIf="isDesafioCompletado(rachaInicial)" class="completado-badge">✅</span>
-                </div>
-              </ng-container>
+                <!-- Desafío: Racha Inicial (dias_consecutivos - objetivo 3) -->
+                <ng-container *ngIf="getDesafioByMetrica('dias_consecutivos', 3) as rachaInicial">
+                    <div class="desafio-item">
+                        <span class="desafio-texto">{{ rachaInicial.nombre }}</span>
+                        <div class="desafio-progreso">
+                            <!-- AÑADIR CLASE 'completado' CONDICIONALMENTE -->
+                            <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(rachaInicial)" [class.completado]="isDesafioCompletado(rachaInicial)"></div>
+                            <span class="progreso-valor">{{ getProgresoTexto(rachaInicial) }}</span>
+                        </div>
+                        <span *ngIf="isDesafioCompletado(rachaInicial)" class="completado-badge">✅</span>
+                    </div>
+                </ng-container>
 
-              <ng-container *ngIf="getDesafioByMetrica('dias_consecutivos', 7) as rachaImparable">
-                <div class="desafio-item">
-                  <span class="desafio-texto">{{ rachaImparable.nombre }}</span>
-                  <div class="desafio-progreso">
-                    <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(rachaImparable)" [class.completado]="isDesafioCompletado(rachaImparable)"></div>
-                    <span class="progreso-valor">{{ getProgresoTexto(rachaImparable) }}</span>
-                  </div>
-                  <span *ngIf="isDesafioCompletado(rachaImparable)" class="completado-badge">✅</span>
-                </div>
-              </ng-container>
+                <!-- Desafío: Racha Imparable (dias_consecutivos - objetivo 7) -->
+                <ng-container *ngIf="getDesafioByMetrica('dias_consecutivos', 7) as rachaImparable">
+                    <div class="desafio-item">
+                        <span class="desafio-texto">{{ rachaImparable.nombre }}</span>
+                        <div class="desafio-progreso">
+                            <!-- AÑADIR CLASE 'completado' CONDICIONALMENTE -->
+                            <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(rachaImparable)" [class.completado]="isDesafioCompletado(rachaImparable)"></div>
+                            <span class="progreso-valor">{{ getProgresoTexto(rachaImparable) }}</span>
+                        </div>
+                        <span *ngIf="isDesafioCompletado(rachaImparable)" class="completado-badge">✅</span>
+                    </div>
+                </ng-container>
 
-              <ng-container *ngIf="getDesafioByMetrica('calificacion_90_plus', 1) as excelenciaPrecisa">
-                <div class="desafio-item">
-                  <span class="desafio-texto">{{ excelenciaPrecisa.nombre }}</span>
-                  <div class="desafio-progreso">
-                    <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(excelenciaPrecisa)" [class.completado]="isDesafioCompletado(excelenciaPrecisa)"></div>
-                    <span class="progreso-valor">{{ getProgresoTexto(excelenciaPrecisa) }}</span>
-                  </div>
-                  <span *ngIf="isDesafioCompletado(excelenciaPrecisa)" class="completado-badge">✅</span>
-                </div>
-              </ng-container>
+                <!-- Desafío: Excelencia Precisa (calificacion_90_plus - objetivo 1) -->
+                <ng-container *ngIf="getDesafioByMetrica('calificacion_90_plus', 1) as excelenciaPrecisa">
+                    <div class="desafio-item">
+                        <span class="desafio-texto">{{ excelenciaPrecisa.nombre }}</span>
+                        <div class="desafio-progreso">
+                            <!-- AÑADIR CLASE 'completado' CONDICIONALMENTE -->
+                            <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(excelenciaPrecisa)" [class.completado]="isDesafioCompletado(excelenciaPrecisa)"></div>
+                            <span class="progreso-valor">{{ getProgresoTexto(excelenciaPrecisa) }}</span>
+                        </div>
+                        <span *ngIf="isDesafioCompletado(excelenciaPrecisa)" class="completado-badge">✅</span>
+                    </div>
+                </ng-container>
 
-              <ng-container *ngIf="getDesafioByMetrica('calificacion_90_plus', 3) as maestroPrecision">
-                <div class="desafio-item">
-                  <span class="desafio-texto">{{ maestroPrecision.nombre }}</span>
-                  <div class="desafio-progreso">
-                    <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(maestroPrecision)" [class.completado]="isDesafioCompletado(maestroPrecision)"></div>
-                    <span class="progreso-valor">{{ getProgresoTexto(maestroPrecision) }}</span>
-                  </div>
-                  <span *ngIf="isDesafioCompletado(maestroPrecision)" class="completado-badge">✅</span>
-                </div>
-              </ng-container>
+                <!-- Desafío: Maestro en Precisión (calificacion_90_plus - objetivo 3) -->
+                <ng-container *ngIf="getDesafioByMetrica('calificacion_90_plus', 3) as maestroPrecision">
+                    <div class="desafio-item">
+                        <span class="desafio-texto">{{ maestroPrecision.nombre }}</span>
+                        <div class="desafio-progreso">
+                            <!-- AÑADIR CLASE 'completado' CONDICIONALMENTE -->
+                            <div class="progreso-barra" [style.width.%]="getProgresoPorcentaje(maestroPrecision)" [class.completado]="isDesafioCompletado(maestroPrecision)"></div>
+                            <span class="progreso-valor">{{ getProgresoTexto(maestroPrecision) }}</span>
+                        </div>
+                        <span *ngIf="isDesafioCompletado(maestroPrecision)" class="completado-badge">✅</span>
+                    </div>
+                </ng-container>
+
+                <!-- Puedes añadir más ng-containers para otros desafíos si los tienes activos -->
             </div>
           </div>
         </div>
       </div>
     </div>
-  </main>
+  </aside>
 </div>
 
+
+<!-- Estilos básicos para la barra de progreso. Puedes moverlos a principal.component.css -->
 <style>
-  .desafios-panel {
-    background-color: #f0f0f0;
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  /* ... otros estilos de desafíos ... */
+    .desafios-panel {
+        background-color: #f0f0f0;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .desafios-panel h3 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 1.2em;
+        text-align: center;
+    }
+    .desafio-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        gap: 10px;
+    }
+    .desafio-texto {
+        flex-grow: 1;
+        font-weight: bold;
+        color: #555;
+    }
+    .desafio-progreso {
+        width: 120px; /* Ancho fijo para la barra de progreso */
+        height: 15px;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+    }
+    .progreso-barra {
+        height: 100%;
+        background-color: #4CAF50; /* Color verde para el progreso */
+        border-radius: 5px;
+        transition: width 0.5s ease-in-out; /* Animación de la barra */
+    }
+    .progreso-valor {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        line-height: 15px;
+        font-size: 0.8em;
+        color: #333;
+        font-weight: bold;
+    }
+    .completado-badge {
+        font-size: 1.2em;
+        margin-left: 5px;
+        color: #4CAF50;
+    }
 </style>

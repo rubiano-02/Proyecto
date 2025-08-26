@@ -38,3 +38,24 @@
       <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
     </div>
   </div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+
+  <!-- Modal -->
+  <div class="modal-fondo" *ngIf="modalAbierto">
+    <div class="modal-contenido" data-aos="zoom-in">
+      <span class="cerrar" (click)="cerrarModal()">&times;</span>
+
+   <h2>🧩 ¿Cómo jugar "Palabra intrusa"?</h2>
+    <ul>
+      <li>👀 Mira bien las palabras en pantalla.</li>
+      <li>❌ Una de ellas no tiene nada que ver con las otras.</li>
+      <li>🖱️ Haz clic sobre la que creas que no encaja.</li>
+      <li>💬 Si aciertas, verás un mensaje verde. Si no, ¡intenta de nuevo!</li>
+    </ul>
+    <p>🎯 <strong>Consejo:</strong> Piensa qué tienen en común las otras palabras. ¿Comida? ¿Animales? ¿Colores?</p>
+    </div>
+  </div>  

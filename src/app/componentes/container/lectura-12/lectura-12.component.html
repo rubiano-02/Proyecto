@@ -45,3 +45,22 @@
   </div>
   <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
 </div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+    <h2>🗣️ ¿Cómo jugar "¿Quién lo dijo?"</h2>
+    <ul>
+      <li>📖 Lee con atención el diálogo que aparece arriba.</li>
+      <li>🧠 Después, mira cada frase que está debajo.</li>
+      <li>🤔 Recuerda quién dijo esa frase en el diálogo.</li>
+      <li>👉 Haz clic en el nombre de la persona correcta: <strong>Sofía</strong> o <strong>Leo</strong>.</li>
+    </ul>
+    <p>🎯 Cuando termines todas, presiona <strong>“Verificar”</strong> para saber si acertaste.</p>
+  </div>
+</div>

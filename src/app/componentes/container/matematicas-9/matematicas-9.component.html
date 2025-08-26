@@ -1,10 +1,10 @@
-<!-- Barra de progreso -->
 <div *ngIf="!terminado" class="barra-progreso">
   <div class="barra-fondo">
     <div class="barra-relleno" [style.width.%]="(ejercicioActual - 1) / totalEjercicios * 100"></div>
   </div>
   <span class="progreso-contador">{{ ejercicioActual }}/{{ totalEjercicios }}</span>
 </div>
+
 
 <!-- Contenedor principal -->
 <div class="ejercicio-contenedor">
@@ -24,7 +24,7 @@
 
     <div class="mensaje">
       <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-      <span *ngIf="color === 'red'" class="incorrecto">❌ Incorrecto. El intermedio era {{ intermedio }}</span>
+      <span *ngIf="color === 'red'" class="incorrecto">No es asi<br>!Tu puedes!</span>
     </div>
   </div>
 
@@ -37,5 +37,26 @@
       <span class="resultado-total">{{ totalEjercicios }}</span>
     </div>
     <button class="volver" routerLink="/principal">Volver al inicio</button>
+  </div>
+</div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+   <h2>🔎 ¿Cómo jugar “¿Cuál es el número del medio?”</h2>
+<ul>
+  <li>👀 Mira bien los tres números que aparecen en pantalla.</li>
+  <li>📊 Tu tarea es encontrar el número que está entre el más pequeño y el más grande.</li>
+  <li>🖱️ Haz clic en la opción que creas que es la respuesta correcta.</li>
+</ul>
+<p>📈 Tu progreso se muestra arriba. Al final verás tu <strong>calificación</strong>.</p>
+
   </div>
 </div>

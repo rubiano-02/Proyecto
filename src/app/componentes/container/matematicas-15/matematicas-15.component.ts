@@ -11,7 +11,15 @@ export class Matematicas15Component {
   numero: number = 0;
   descomposicionCorrecta: string = '';
   opciones: string[] = [];
+modalAbierto: boolean = false;
 
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
   mensaje: string = '';
   color: string = '';
   ejercicioActual: number = 1;

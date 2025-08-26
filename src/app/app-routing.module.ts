@@ -38,9 +38,7 @@ import { Lectura9Component } from './componentes/container/lectura-9/lectura-9.c
 import { Lectura10Component } from './componentes/container/lectura-10/lectura-10.component';
 import { Lectura11Component } from './componentes/container/lectura-11/lectura-11.component';
 import { Lectura12Component } from './componentes/container/lectura-12/lectura-12.component';
-import { Lectura13Component } from './componentes/container/lectura-13/lectura-13.component';
-import { Lectura14Component } from './componentes/container/lectura-14/lectura-14.component';
-import { Lectura15Component } from './componentes/container/lectura-15/lectura-15.component';
+
 
 const routes: Routes = [
   {path: 'inicio', component:InicioComponent},
@@ -81,9 +79,6 @@ const routes: Routes = [
   {path: 'lectura-10' , component: Lectura10Component},
   {path: 'lectura-11' , component: Lectura11Component},
   {path: 'lectura-12' , component: Lectura12Component},
-  {path: 'lectura-13' , component: Lectura13Component},
-  {path: 'lectura-14' , component: Lectura14Component},
-  {path: 'lectura-15' , component: Lectura15Component},
   { path: '', redirectTo: '/iniciar-sesion', pathMatch: 'full' }
 ];
 

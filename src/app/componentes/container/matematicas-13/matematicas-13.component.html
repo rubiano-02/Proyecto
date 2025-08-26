@@ -26,7 +26,7 @@
 
     <div class="mensaje">
       <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-      <span *ngIf="color === 'red'" class="incorrecto">❌ Solución correcta: {{ resultadoCorrecto }}</span>
+      <span *ngIf="color === 'red'" class="incorrecto">Casi lo logras ¡Otra vez!</span>
     </div>
   </div>
 
@@ -42,3 +42,25 @@
   </div>
 </div>
 
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+    <h2>➗ ¡Vamos a dividir!</h2>
+<ul>
+  <li>📘 Observa los números: el <strong>{{ dividendo }}</strong> es el número grande (lo que vas a repartir).</li>
+  <li>👥 El <strong>{{ divisor }}</strong> es en cuántas partes se reparte.</li>
+  <li>🤔 Piensa: ¿cuánto da <strong>{{ dividendo }} ÷ {{ divisor }}</strong>?</li>
+  <li>🖱️ Elige la respuesta que crees correcta entre las opciones.</li>
+  <li>✔ Si aciertas verás "Correcto", y si no, te mostramos la respuesta correcta para aprender.</li>
+</ul>
+<p>🚀 ¡Sigue resolviendo y mira tu progreso arriba! Al final verás tu <strong>calificación total</strong>.</p>
+
+  </div>
+</div>

@@ -35,3 +35,23 @@
   </div>
   <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
 </div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+    <h2>✅ ¿Cómo jugar "¿Verdadero o falso?"</h2>
+    <ul>
+      <li>👀 Lee muy bien el texto de arriba.</li>
+      <li>📋 Luego mira cada afirmación.</li>
+      <li>❓ Pregúntate: ¿eso pasó en el texto?</li>
+      <li>✅ Si sí pasó, haz clic en <strong>V</strong> (verdadero).</li>
+      <li>❌ Si no pasó, haz clic en <strong>F</strong> (falso).</li>
+    </ul>
+    <p>🔍 Cuando termines, presiona <strong>“Verificar”</strong> para ver tu resultado.</p>
+  </div>
+</div>

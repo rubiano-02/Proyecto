@@ -24,7 +24,7 @@
 
     <div class="mensaje">
       <span *ngIf="color === 'green'" class="correcto">✔ Correcto</span>
-      <span *ngIf="color === 'red'" class="incorrecto">❌ Solución correcta: {{ descomposicionCorrecta }}</span>
+      <span *ngIf="color === 'red'" class="incorrecto">Casi lo logras ¡Otra vez!</span>
     </div>
   </div>
 
@@ -40,3 +40,25 @@
   </div>
 </div>
 
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/principal">Volver</button>
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+  <h2>🧩 ¡Vamos a descomponer números!</h2>
+<ul>
+  <li>👀 Observa el número que aparece en la parte superior: <strong>{{ numero }}</strong>.</li>
+  <li>🔍 Piensa cómo se forma ese número sumando sus unidades, decenas, centenas, etc.</li>
+  <li>🧠 Por ejemplo, <strong>245 = 200 + 40 + 5</strong>.</li>
+  <li>✅ Escoge la opción que representa la descomposición correcta.</li>
+  <li>🎯 Si aciertas, verás "Correcto". Si no, aprenderás viendo la respuesta correcta.</li>
+</ul>
+<p>📈 ¡Practica bien y ve tu avance en la barra de progreso! Al final conocerás tu <strong>calificación</strong>.</p>
+
+  </div>
+</div>

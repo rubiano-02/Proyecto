@@ -30,6 +30,15 @@ export class Lectura4Component {
       this.guardarResultado();
     }
   }
+modalAbierto: boolean = false;
+
+abrirModal() {
+  this.modalAbierto = true;
+}
+
+cerrarModal() {
+  this.modalAbierto = false;
+}
 
   guardarResultado(): void {
     const idUsuarioStr = localStorage.getItem('user_id');

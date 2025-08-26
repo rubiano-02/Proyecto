@@ -21,8 +21,9 @@
       </div>
     </div>
     <button class="verificar" (click)="verificar()" data-aos="fade-up">✅ Verificar</button>
-  </div>
 
+  </div>
+ 
   <!-- Resultado final -->
   <div *ngIf="terminado" class="zona-final" data-aos="zoom-in">
     <p class="titulo-final">CALIFICACIÓN</p>
@@ -34,3 +35,26 @@
     <button class="volver" routerLink="/prin-lectura" data-aos="fade-up"> Volver al inicio</button>
   </div>
 </div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+  <!-- Modal -->
+  <div class="modal-fondo" *ngIf="modalAbierto">
+    <div class="modal-contenido" data-aos="zoom-in">
+      <span class="cerrar" (click)="cerrarModal()">&times;</span>
+      
+  <h2>🕵️‍♂️ ¡Ayuda con la comprensión rápida!</h2>
+    <p>Lee con mucha atención el texto que aparece al principio. Solo estará un momento, ¡así que concéntrate!</p>
+
+    <ul>
+      <li>👀 <strong>Observa bien cada palabra</strong>: aunque desaparezca rápido, intenta recordar lo que leíste.</li>
+      <li>🧠 <strong>Piensa en lo más importante</strong>: ¿quién hizo qué? ¿Dónde estaba algo? ¿Qué pasó?</li>
+      <li>❓ <strong>Responde las preguntas</strong>: elige la opción que mejor responda lo que viste en el texto.</li>
+      <li>🔍 <strong>No te preocupes si no lo recuerdas todo</strong>, ¡con práctica te saldrá mejor cada vez!</li>
+    </ul>
+
+    <p>💡 <strong>Pista:</strong> Imagina la escena en tu cabeza mientras lees. Como una película rápida.</p>
+    </div>
+  </div>  

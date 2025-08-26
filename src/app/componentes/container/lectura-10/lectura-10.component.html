@@ -5,34 +5,26 @@
   <div class="tablas">
     <div class="columna columna-causa">
       <h3>Causas</h3>
-     <div *ngFor="let causa of causas">
-  <div
-    *ngIf="!relacionesUsuario[causa]"
-    [@desaparecer]="desapareciendo.has(causa) ? 'oculto' : 'visible'"
-    (click)="seleccionarCausa(causa)"
-    [class.seleccionada]="causa === seleccionCausa"
-    class="item animado"
-    [style.backgroundColor]="colores[causa] || ''">
-    {{ causa }}
-  </div>
-</div>
+      <div *ngFor="let causa of causas">
+        <div *ngIf="!relacionesUsuario[causa]" [@desaparecer]="desapareciendo.has(causa) ? 'oculto' : 'visible'"
+          (click)="seleccionarCausa(causa)" [class.seleccionada]="causa === seleccionCausa" class="item animado"
+          [style.backgroundColor]="colores[causa] || ''">
+          {{ causa }}
+        </div>
+      </div>
 
 
     </div>
 
     <div class="columna columna-efecto">
       <h3>Efectos</h3>
-    <div *ngFor="let efecto of efectos">
-  <div
-    *ngIf="!efectosUsados.includes(efecto)"
-    [@desaparecer]="desapareciendo.has(efecto) ? 'oculto' : 'visible'"
-    (click)="seleccionarEfecto(efecto)"
-    [class.seleccionado]="efecto === seleccionEfecto"
-    class="item animado"
-    [style.backgroundColor]="colores[efecto] || ''">
-    {{ efecto }}
-  </div>
-</div>
+      <div *ngFor="let efecto of efectos">
+        <div *ngIf="!efectosUsados.includes(efecto)" [@desaparecer]="desapareciendo.has(efecto) ? 'oculto' : 'visible'"
+          (click)="seleccionarEfecto(efecto)" [class.seleccionado]="efecto === seleccionEfecto" class="item animado"
+          [style.backgroundColor]="colores[efecto] || ''">
+          {{ efecto }}
+        </div>
+      </div>
 
 
     </div>
@@ -54,4 +46,24 @@
     <span class="resultado-total">5</span>
   </div>
   <button class="volver" routerLink="/prin-lectura">Volver al inicio</button>
+</div>
+<button class="imagen-boton" (click)="abrirModal()">
+  <img src="assets/Images/pensando.png" alt="Abrir modal" class="imagen-esquina">
+  <img src="assets/Images/PenAyuda.png" alt="Ayuda" class="imagen-hover">
+</button>
+<button class="btn-volver" routerLink="/prin-lectura">Volver</button>
+
+<!-- Modal -->
+<div class="modal-fondo" *ngIf="modalAbierto">
+  <div class="modal-contenido" data-aos="zoom-in">
+    <span class="cerrar" (click)="cerrarModal()">&times;</span>
+    <h2>🔗 ¿Cómo jugar "Relación causa y efecto"?</h2>
+    <ul>
+      <li>🖱️ Primero haz clic en una <strong>causa</strong> (lado izquierdo).</li>
+      <li>👉 Luego haz clic en su <strong>efecto</strong> (lado derecho).</li>
+      <li>😊 Intenta encontrar las parejas correctas.</li>
+      <li>🎯 Sigue jugando hasta emparejar todas.</li>
+    </ul>
+    <p>💡 <strong>Consejo:</strong> Piensa: ¿qué pasó primero? ¿Qué sucedió después?</p>
+  </div>
 </div>
