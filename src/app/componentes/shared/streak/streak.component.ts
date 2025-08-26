@@ -1,32 +1,30 @@
+// DIJU/src/app/componentes/shared/streak/streak.component.ts
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StreakService } from '../../../servicios/streak.service';
 import { Subscription, Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { TranslateModule } from '@ngx-translate/core'; // Asumiendo que usas ngx-translate
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-streak',
   standalone: true,
-  imports: [CommonModule, TranslateModule], // Asegúrate de importar CommonModule y TranslateModule
+  imports: [CommonModule, TranslateModule],
   templateUrl: './streak.component.html',
   styleUrls: ['./streak.component.css']
 })
 export class StreakComponent implements OnInit, OnDestroy {
   currentStreak: number = 0;
-  isStreakActive: boolean = false;
-  isTodayCompleted: boolean = false; // Indica si la actividad de hoy ya se completó
-  
-  // Bandera para controlar cuándo mostrar la imagen de "Racha-On" y aplicar la animación
+  isTodayCompleted: boolean = false;
   showStreakOnAnimation: boolean = false;
 
   private subscriptions: Subscription = new Subscription();
-  private destroy$ = new Subject<void>(); // Para desuscribirse de todos los observables al destruir el componente
+  private destroy$ = new Subject<void>();
 
   constructor(private streakService: StreakService) { }
 
   ngOnInit(): void {
-    // Suscribirse a los observables del StreakService
     this.subscriptions.add(
       this.streakService.currentStreak$.subscribe(streak => {
         this.currentStreak = streak;
@@ -35,17 +33,8 @@ export class StreakComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.add(
-      this.streakService.isStreakActive$.subscribe(isActive => {
-        this.isStreakActive = isActive;
-        console.log('StreakComponent: isStreakActive actualizado a', isActive);
-      })
-    );
-
-    this.subscriptions.add(
       this.streakService.isTodayCompleted$.subscribe(isCompleted => {
-        // Cuando isTodayCompleted cambia a true y la racha está activa, disparamos la animación.
-        // Esto cubre el caso de una nueva racha o de completar la actividad diaria.
-        if (isCompleted && this.isStreakActive && !this.isTodayCompleted) { // Solo si cambia a true y no estaba ya true
+        if (isCompleted && this.currentStreak > 0 && !this.isTodayCompleted) {
           this.triggerStreakAnimation();
         }
         this.isTodayCompleted = isCompleted;
@@ -54,13 +43,15 @@ export class StreakComponent implements OnInit, OnDestroy {
     );
   }
 
-  // Este método es llamado internamente por la suscripción a isTodayCompleted$
+  isStreakActive(): boolean {
+    return this.currentStreak > 0;
+  }
+
   private triggerStreakAnimation(): void {
     this.showStreakOnAnimation = true;
     console.log('Disparando animación de racha ON.');
-    // Ocultar la imagen "On" después de un breve período (ej. 1.5 segundos)
     timer(1500).pipe(
-      takeUntil(this.destroy$) // Asegura que el timer se cancela si el componente se destruye
+      takeUntil(this.destroy$)
     ).subscribe(() => {
       this.showStreakOnAnimation = false;
       console.log('Animación de racha ON finalizada.');
@@ -68,7 +59,7 @@ export class StreakComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe(); // Desuscribirse de todos los BehaviorSubjects
+    this.subscriptions.unsubscribe();
     this.destroy$.next();
     this.destroy$.complete();
   }

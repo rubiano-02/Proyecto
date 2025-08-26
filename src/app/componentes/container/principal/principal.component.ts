@@ -9,8 +9,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 
 // --- NUEVAS IMPORTACIONES PARA LA RACHA ---
-import { StreakService } from '../../../servicios/streak.service'; // Import the streak service
-import { StreakComponent } from '../../shared/streak/streak.component'; // Import the streak component
+// Ya no necesitamos importar StreakService en este componente
+import { StreakComponent } from '../../shared/streak/streak.component'; // Importamos el componente de racha
 // ------------------------------------------
 
 @Component({
@@ -22,7 +22,7 @@ import { StreakComponent } from '../../shared/streak/streak.component'; // Impor
     CommonModule,
     TranslateModule,
     RouterModule,
-    StreakComponent // <-- ADD THIS HERE for the streak component to work!
+    StreakComponent // <-- Mantenemos el componente de racha aquí
   ]
 })
 export class PrincipalComponent implements OnInit, OnDestroy {
@@ -47,7 +47,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private router: Router,
     private resultadosService: ResultadosService,
-    private streakService: StreakService // <-- INJECT THE STREAK SERVICE HERE!
+    // Ya no inyectamos StreakService aquí, porque no lo necesitamos
   ) { }
 
   ngOnInit(): void {
@@ -159,16 +159,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
     }
   }
 
-  // --- NEW METHOD TO CALL THE STREAK SERVICE ---
-  // This method should be invoked when the user COMPLETES an exercise successfully.
-  // It is crucial that you call it from the logic that confirms the completion of an activity.
-  // For example, when submitting a final correct answer, or finishing a lesson.
-  public completarEjercicioYActualizarRacha(): void {
-    console.log('Exercise completion detected. Updating streak...');
-    this.streakService.completeActivity(); // This updates the streak in the service
-    // The StreakComponent will automatically react and animate.
-  }
-
-  // You can add a temporary button in your HTML to test this function:
-  // <button (click)="completarEjercicioYActualizarRacha()">Completar Ejercicio</button>
+  // Se elimina la función `completarEjercicioYActualizarRacha()`
+  // Ahora, esta lógica se maneja directamente en los componentes de ejercicio
+  // y el `resultados.service.ts`.
 }

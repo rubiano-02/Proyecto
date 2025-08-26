@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const moment = require('moment-timezone');
 
+
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -56,9 +57,88 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// =================================================================
+// FUNCIÓN CENTRAL PARA ACTUALIZAR LA RACHA DEL USUARIO
+// =================================================================
+function actualizarRacha(idUsuario, callback) {
+    const today = moment().tz('America/Bogota').format('YYYY-MM-DD');
+    console.log(` 🔎 DEBUG: Iniciando actualizarRacha para usuario ${idUsuario}`);
+
+    // 1. Obtener la racha actual del usuario
+    const checkRacha = `SELECT dias_consecutivos, fecha_ultima_actualizacion FROM racha_usuarios WHERE id_usuario = ?`;
+    connection.query(checkRacha, [idUsuario], (err, rachaResult) => {
+        if (err) {
+            console.error(' ❌  Error al verificar la racha:', err);
+            return callback(err);
+        }
+        
+        console.log(` 🔎 DEBUG: Resultado de la consulta de racha:`, rachaResult);
+
+        let nueva_racha = 1;
+        let updateQuery = '';
+        let updateValues = [];
+        let rachaInfo = { dias_consecutivos: 1, is_today_completed: false };
+
+        if (rachaResult.length > 0) {
+            // Se encontró un registro de racha, verificamos si es consecutiva
+            const lastUpdate = moment(rachaResult[0].fecha_ultima_actualizacion).tz('America/Bogota').format('YYYY-MM-DD');
+            const yesterday = moment().tz('America/Bogota').subtract(1, 'days').format('YYYY-MM-DD');
+            const currentStreak = rachaResult[0].dias_consecutivos;
+            
+            if (lastUpdate === today) {
+                // La racha ya se actualizó hoy
+                console.log(` 👏  La racha ya se actualizó hoy para el usuario ${idUsuario}.`);
+                rachaInfo.dias_consecutivos = currentStreak;
+                rachaInfo.is_today_completed = true;
+                return callback(null, rachaInfo);
+            } else if (lastUpdate === yesterday) {
+                // La racha es consecutiva, la incrementamos
+                nueva_racha = currentStreak + 1;
+                console.log(` 👍  Racha continuada. Nueva racha para el usuario ${idUsuario}: ${nueva_racha}`);
+            } else {
+                // La racha se rompió, la reiniciamos a 1
+                console.log(` 👎  Racha reiniciada. Nueva racha para el usuario ${idUsuario}: 1`);
+            }
+            
+            // Construimos la consulta UPDATE
+            updateQuery = `
+                UPDATE racha_usuarios
+                SET dias_consecutivos = ?, fecha_ultima_actualizacion = ?
+                WHERE id_usuario = ?
+            `;
+            updateValues.push(nueva_racha, today, idUsuario);
+            console.log(" 🔎 DEBUG: Se ejecutará UPDATE con valores:", updateValues);
+
+        } else {
+            // No se encontró un registro de racha, creamos uno nuevo
+            console.log(` 🔎 DEBUG: No se encontró racha previa. Se ejecutará INSERT.`);
+            updateQuery = `
+                INSERT INTO racha_usuarios (id_usuario, dias_consecutivos, fecha_ultima_actualizacion)
+                VALUES (?, ?, ?)
+            `;
+            updateValues.push(idUsuario, nueva_racha, today);
+            console.log(" 🔎 DEBUG: Se ejecutará INSERT con valores:", updateValues);
+        }
+
+        // Ejecutamos la consulta final
+        connection.query(updateQuery, updateValues, (err, rachaUpdateResult) => {
+            if (err) {
+                console.error(' ❌  Error al ejecutar la consulta de racha:', err);
+                return callback(err);
+            }
+            console.log(' ✅  Racha actualizada en la base de datos con éxito.');
+            rachaInfo.dias_consecutivos = nueva_racha;
+            callback(null, rachaInfo);
+        });
+    });
+}
+
+
 // ------------------------------------------------------------------
 // *** FUNCIÓN CENTRAL DE ACTUALIZACIÓN DE PROGRESO DE DESAFÍOS ***
 // ------------------------------------------------------------------
+// DIJU/backend/index.js
+
 function actualizarProgresoDesafios(idUsuario, tipoEvento, datosEvento = {}, callback) {
     connection.query(
         "SELECT id_desafio, nombre, metrica_seguimiento, valor_objetivo, recompensa_tipo, recompensa_valor, activo FROM desafios WHERE activo = TRUE",
@@ -69,18 +149,13 @@ function actualizarProgresoDesafios(idUsuario, tipoEvento, datosEvento = {}, cal
                 return;
             }
 
-            // console.log(`[Desafíos] - Tipo de evento recibido: ${tipoEvento}`);
-            // console.log(`[Desafíos] - Desafíos activos encontrados:`, desafiosActivos.map(d => `${d.nombre} (${d.metrica_seguimiento})`));
-
             if (desafiosActivos.length === 0) {
-                // console.log('No hay desafíos activos para procesar.');
                 if (callback) callback(null);
                 return;
             }
 
             let processedCount = 0;
             const totalToProcess = desafiosActivos.length;
-
             const checkAllProcessed = () => {
                 processedCount++;
                 if (processedCount === totalToProcess) {
@@ -90,19 +165,19 @@ function actualizarProgresoDesafios(idUsuario, tipoEvento, datosEvento = {}, cal
 
             desafiosActivos.forEach(desafio => {
                 let debeActualizar = false;
-
                 if (tipoEvento === 'ejercicio_completado') {
                     const calificacionEjercicio = datosEvento.calificacion;
-
                     if (desafio.metrica_seguimiento === 'ejercicios_completados_total') {
                         debeActualizar = true;
                     }
                     if (desafio.metrica_seguimiento === 'calificacion_90_plus' && calificacionEjercicio >= 90) {
                         debeActualizar = true;
                     }
-                } else if (tipoEvento === 'inicio_sesion') {
-                    debeActualizar = (desafio.metrica_seguimiento === 'dias_consecutivos');
                 }
+                // *** SECCIÓN ELIMINADA: La lógica de la racha ya no se procesa aquí. ***
+                // else if (tipoEvento === 'inicio_sesion') {
+                //     debeActualizar = (desafio.metrica_seguimiento === 'dias_consecutivos');
+                // }
 
                 if (debeActualizar) {
                     connection.query(
@@ -114,9 +189,7 @@ function actualizarProgresoDesafios(idUsuario, tipoEvento, datosEvento = {}, cal
                                 checkAllProcessed();
                                 return;
                             }
-
                             let progresoUsuario = progresoUsuarioResult[0];
-
                             const processUpdate = (currentProgreso) => {
                                 if (currentProgreso.completado) {
                                     checkAllProcessed();
@@ -126,88 +199,58 @@ function actualizarProgresoDesafios(idUsuario, tipoEvento, datosEvento = {}, cal
                                 let nuevoProgreso = currentProgreso.progreso_actual;
                                 let nuevaFechaUltimaActividad = currentProgreso.fecha_ultima_actividad;
 
+                                // Lógica de actualización de progreso para otros desafíos
                                 if (desafio.metrica_seguimiento === 'ejercicios_completados_total' ||
                                     desafio.metrica_seguimiento === 'calificacion_90_plus') {
                                     nuevoProgreso++;
-                                } else if (desafio.metrica_seguimiento === 'dias_consecutivos') {
-                                    const hoy = moment().tz("America/Bogota").startOf('day');
-                                    const ultimaActividadMoment = currentProgreso.fecha_ultima_actividad ?
-                                        moment(currentProgreso.fecha_ultima_actividad).tz("America/Bogota").startOf('day') : null;
-
-                                    if (!ultimaActividadMoment || !ultimaActividadMoment.isValid()) {
-                                        nuevoProgreso = 1;
-                                    } else {
-                                        const diffDays = hoy.diff(ultimaActividadMoment, 'days');
-                                        if (diffDays === 1) {
-                                            nuevoProgreso++;
-                                        } else if (diffDays > 1) {
-                                            nuevoProgreso = 1;
-                                        }
-                                    }
-                                    nuevaFechaUltimaActividad = moment().tz("America/Bogota").toDate();
                                 }
 
-                                const esCompletado = (nuevoProgreso >= desafio.valor_objetivo);
-                                const fechaCompletado = esCompletado ? moment().tz("America/Bogota").toDate() : null;
-
-                                connection.query(
-                                    "UPDATE progreso_desafios_usuario SET progreso_actual = ?, completado = ?, fecha_completado = ?, fecha_ultima_actividad = ? WHERE id_usuario = ? AND id_desafio = ?",
-                                    [nuevoProgreso, esCompletado, fechaCompletado, nuevaFechaUltimaActividad, idUsuario, desafio.id_desafio],
-                                    (errUpdate) => {
-                                        if (errUpdate) {
-                                            console.error('❌ Error al actualizar progreso de desafío:', errUpdate);
-                                            checkAllProcessed();
-                                            return;
+                                if (nuevoProgreso >= desafio.valor_objetivo && !currentProgreso.completado) {
+                                    const updateQuery = `
+                                        UPDATE progreso_desafios_usuario
+                                        SET progreso_actual = ?, completado = TRUE, fecha_completado = NOW()
+                                        WHERE id_progreso_desafio_usuario = ?
+                                    `;
+                                    connection.query(updateQuery, [nuevoProgreso, currentProgreso.id_progreso_desafio_usuario], (updateErr) => {
+                                        if (updateErr) {
+                                            console.error('❌ Error al actualizar desafío como completado:', updateErr);
                                         }
-
-                                        if (esCompletado && !currentProgreso.completado) {
-                                            console.log(`🎉 ¡Desafío completado para usuario ${idUsuario}: ${desafio.nombre}!`);
-                                            if (desafio.recompensa_tipo === 'xp' && desafio.recompensa_valor > 0) {
-                                                connection.query(
-                                                    "UPDATE progreso_usuarios SET puntaje_promedio = puntaje_promedio + ? WHERE id_usuario = ?",
-                                                    [desafio.recompensa_valor, idUsuario],
-                                                    (errXP) => {
-                                                        if (errXP) console.error(`❌ Error al dar XP por desafío ${desafio.nombre}:`, errXP);
-                                                        checkAllProcessed();
-                                                    }
-                                                );
-                                            } else {
-                                                checkAllProcessed();
-                                            }
+                                        console.log(`🎉 Desafío "${desafio.nombre}" completado por el usuario ${idUsuario}.`);
+                                        checkAllProcessed();
+                                    });
+                                } else {
+                                    const updateQuery = `
+                                        UPDATE progreso_desafios_usuario
+                                        SET progreso_actual = ?, fecha_ultima_actividad = ?
+                                        WHERE id_progreso_desafio_usuario = ?
+                                    `;
+                                    connection.query(updateQuery, [nuevoProgreso, nuevaFechaUltimaActividad, currentProgreso.id_progreso_desafio_usuario], (updateErr) => {
+                                        if (updateErr) {
+                                            console.error('❌ Error al actualizar progreso de desafío:', updateErr);
                                         } else {
-                                            checkAllProcessed();
+                                            // console.log(`👍 Progreso de desafío "${desafio.nombre}" actualizado para el usuario ${idUsuario}. Nuevo progreso: ${nuevoProgreso}`);
                                         }
-                                    }
-                                );
+                                        checkAllProcessed();
+                                    });
+                                }
                             };
 
-                            if (!progresoUsuario) {
-                                connection.query(
-                                    "INSERT INTO progreso_desafios_usuario (id_usuario, id_desafio, progreso_actual, completado, fecha_ultima_actividad) VALUES (?, ?, 0, FALSE, NULL)",
-                                    [idUsuario, desafio.id_desafio],
-                                    (errInsert, insertResult) => {
-                                        if (errInsert) {
-                                            console.error('❌ Error al insertar progreso de desafío nuevo:', errInsert);
-                                            checkAllProcessed();
-                                            return;
-                                        }
-                                        // Después de insertar, obtener el registro para procesar la actualización
-                                        connection.query(
-                                            "SELECT id_progreso_desafio_usuario, progreso_actual, completado, fecha_ultima_actividad FROM progreso_desafios_usuario WHERE id_usuario = ? AND id_desafio = ?",
-                                            [idUsuario, desafio.id_desafio],
-                                            (errSelectAgain, insertedProgreso) => {
-                                                if (errSelectAgain) {
-                                                    console.error('❌ Error al re-seleccionar progreso de desafío nuevo:', errSelectAgain);
-                                                    checkAllProcessed();
-                                                    return;
-                                                }
-                                                processUpdate(insertedProgreso[0]);
-                                            }
-                                        );
-                                    }
-                                );
-                            } else {
+                            if (progresoUsuario) {
                                 processUpdate(progresoUsuario);
+                            } else {
+                                const insertQuery = `
+                                    INSERT INTO progreso_desafios_usuario (id_usuario, id_desafio, progreso_actual, fecha_ultima_actividad)
+                                    VALUES (?, ?, ?, NOW())
+                                `;
+                                const progresoInicial = (desafio.metrica_seguimiento === 'dias_consecutivos') ? 1 : 1;
+                                connection.query(insertQuery, [idUsuario, desafio.id_desafio, progresoInicial], (insertErr) => {
+                                    if (insertErr) {
+                                        console.error('❌ Error al insertar progreso inicial del desafío:', insertErr);
+                                    } else {
+                                        // console.log(`⭐ Progreso inicial del desafío "${desafio.nombre}" creado para el usuario ${idUsuario}.`);
+                                    }
+                                    checkAllProcessed();
+                                });
                             }
                         }
                     );
@@ -218,7 +261,6 @@ function actualizarProgresoDesafios(idUsuario, tipoEvento, datosEvento = {}, cal
         }
     );
 }
-
 /**
  * Actualiza el progreso de los logros de un usuario basado en una acción.
  * Adaptado para usar callbacks.
@@ -228,139 +270,97 @@ function actualizarProgresoDesafios(idUsuario, tipoEvento, datosEvento = {}, cal
  * @param {number} [calificacionEjercicio=null] - La calificación obtenida en el ejercicio.
  * @param {function} callback - Callback para indicar finalización o error.
  */
-function actualizarProgresoLogros(userId, metrica, valorIncremento = 1, calificacionEjercicio = null, callback) {
-    connection.query(
-        `SELECT id_logro, nombre, metrica_seguimiento, valor_objetivo, recompensa_xp
-         FROM logros
-         WHERE metrica_seguimiento = ? AND activo = TRUE`,
-        [metrica],
-        (err, logros) => {
-            if (err) {
-                console.error('❌ Error al obtener logros activos:', err);
-                return callback(err);
-            }
 
-            if (logros.length === 0) {
-                // console.log(`No hay logros activos para la métrica: ${metrica}`);
-                return callback(null);
-            }
 
-            let processedLogros = 0;
-            const totalLogros = logros.length;
 
-            const checkAllLogrosProcessed = () => {
-                processedLogros++;
-                if (processedLogros === totalLogros) {
-                    callback(null);
-                }
-            };
+function actualizarProgresoLogros(id_usuario, tipo_metrica, valor_incremento, calificacion_ejercicio, callback) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-            logros.forEach(logro => {
-                connection.query(
-                    `SELECT id_progreso_logro_usuario, progreso_actual, completado
-                     FROM progreso_logros_usuario
-                     WHERE id_usuario = ? AND id_logro = ?`,
-                    [userId, logro.id_logro],
-                    (err, progresoResult) => {
-                        if (err) {
-                            console.error('❌ Error al obtener progreso de usuario para logro:', err);
-                            checkAllLogrosProcessed();
-                            return;
-                        }
+    const query = `
+        SELECT p.*, l.metrica_seguimiento
+        FROM progreso_logros_usuario p
+        JOIN logros l ON p.id_logro = l.id_logro  -- ¡CORRECCIÓN AQUÍ!
+        WHERE p.id_usuario = ? AND l.metrica_seguimiento = ?
+    `;
 
-                        let progresoUsuario = progresoResult[0];
-
-                        const processLogroUpdate = (currentProgreso) => {
-                            if (currentProgreso.completado) {
-                                checkAllLogrosProcessed();
-                                return;
-                            }
-
-                            let nuevoProgreso = currentProgreso.progreso_actual;
-
-                            if (metrica === 'ejercicios_completados_total' ||
-                                metrica === 'ejercicios_completados_lectura' ||
-                                metrica === 'ejercicios_completados_matematicas') {
-                                nuevoProgreso += valorIncremento;
-                            } else if (metrica === 'calificacion_90_plus') {
-                                if (calificacionEjercicio !== null && calificacionEjercicio >= 90) {
-                                    nuevoProgreso += valorIncremento;
-                                }
-                            } else if (metrica === 'dias_consecutivos') {
-                                // Lógica de racha más compleja, por ahora solo incrementa
-                                nuevoProgreso += valorIncremento;
-                            }
-
-                            const logroCompletadoAhora = nuevoProgreso >= logro.valor_objetivo;
-                            const fechaCompletado = logroCompletadoAhora ? new Date() : null;
-
-                            connection.query(
-                                `UPDATE progreso_logros_usuario
-                                 SET progreso_actual = ?, completado = ?, fecha_completado = ?
-                                 WHERE id_progreso_logro_usuario = ?`,
-                                [nuevoProgreso, logroCompletadoAhora, fechaCompletado, currentProgreso.id_progreso_logro_usuario],
-                                (errUpdate) => {
-                                    if (errUpdate) {
-                                        console.error('❌ Error al actualizar progreso de logro:', errUpdate);
-                                        checkAllLogrosProcessed();
-                                        return;
-                                    }
-
-                                    if (logroCompletadoAhora && !currentProgreso.completado) {
-                                        console.log(`🎉 Logro "${logro.nombre}" completado por el usuario ${userId}!`);
-                                        connection.query(
-                                            `UPDATE progreso_usuarios SET puntaje_promedio = puntaje_promedio + ? WHERE id_usuario = ?`,
-                                            [logro.recompensa_xp, userId],
-                                            (errXP) => {
-                                                if (errXP) console.error(`❌ Error al dar XP por logro ${logro.nombre}:`, errXP);
-                                                checkAllLogrosProcessed();
-                                            }
-                                        );
-                                    } else {
-                                        checkAllLogrosProcessed();
-                                    }
-                                }
-                            );
-                        };
-
-                        if (!progresoUsuario) {
-                            // Si no hay progreso, insertarlo primero
-                            connection.query(
-                                `INSERT INTO progreso_logros_usuario (id_usuario, id_logro, progreso_actual, completado, fecha_ultima_actividad)
-                                 VALUES (?, ?, 0, FALSE, NOW())`,
-                                [userId, logro.id_logro],
-                                (errInsert, insertResult) => {
-                                    if (errInsert) {
-                                        console.error('❌ Error al insertar progreso de logro nuevo:', errInsert);
-                                        checkAllLogrosProcessed();
-                                        return;
-                                    }
-                                    // Re-seleccionar el progreso recién insertado para obtener su ID y continuar
-                                    connection.query(
-                                        `SELECT id_progreso_logro_usuario, progreso_actual, completado, fecha_ultima_actividad
-                                         FROM progreso_logros_usuario WHERE id_usuario = ? AND id_logro = ?`,
-                                        [userId, logro.id_logro],
-                                        (errSelectAgain, insertedProgreso) => {
-                                            if (errSelectAgain) {
-                                                console.error('❌ Error al re-seleccionar progreso de logro nuevo:', errSelectAgain);
-                                                checkAllLogrosProcessed();
-                                                return;
-                                            }
-                                            processLogroUpdate(insertedProgreso[0]);
-                                        }
-                                    );
-                                }
-                            );
-                        } else {
-                            processLogroUpdate(progresoUsuario);
-                        }
-                    }
-                );
-            });
+    connection.query(query, [id_usuario, tipo_metrica], (err, results) => {
+        if (err) {
+            console.error('❌ Error al obtener el progreso del logro:', err);
+            return callback(err);
         }
-    );
-}
 
+        if (tipo_metrica === 'dias_consecutivos') {
+            const rachaExistente = results.length > 0 ? results[0] : null;
+
+            if (rachaExistente) {
+                // Caso: El usuario ya tiene una entrada de racha
+                const fechaUltimaActualizacion = new Date(rachaExistente.fecha_ultima_actualizacion);
+                fechaUltimaActualizacion.setHours(0, 0, 0, 0);
+
+                // Compara si la última actualización fue hoy
+                if (fechaUltimaActualizacion.getTime() === today.getTime()) {
+                    console.log('⚠️ Racha ya actualizada hoy. No se hicieron cambios.');
+                    return callback(null, { message: 'No se necesita actualizar la racha' });
+                }
+
+                // Verifica si fue ayer para continuar la racha
+                const yesterday = new Date(today);
+                yesterday.setDate(today.getDate() - 1);
+
+                let nueva_racha = 1;
+                if (fechaUltimaActualizacion.getTime() === yesterday.getTime()) {
+                    nueva_racha = rachaExistente.progreso_actual + 1;
+                    console.log(`👍 Racha continuada. Nueva racha para el usuario ${id_usuario}: ${nueva_racha}`);
+                } else {
+                    console.log(`👎 Racha reiniciada. Nueva racha para el usuario ${id_usuario}: 1`);
+                }
+
+                // Ejecuta la actualización en la base de datos
+                const updateQuery = `
+                    UPDATE progreso_logros_usuario
+                    SET progreso_actual = ?, fecha_ultima_actualizacion = ?
+                    WHERE id_usuario = ? AND id_logro = ?
+                `;
+                connection.query(updateQuery, [nueva_racha, today, id_usuario, rachaExistente.id_logro], (updateErr) => {
+                    if (updateErr) {
+                        console.error('❌ Error al actualizar la racha:', updateErr);
+                        return callback(updateErr);
+                    }
+                    console.log('✅ Racha actualizada en la base de datos con éxito.');
+                    callback(null, { message: 'Racha actualizada' });
+                });
+
+            } else {
+                // Caso: El usuario no tiene una entrada de racha. Es la primera vez.
+                const queryLogroId = 'SELECT id_logro FROM logros WHERE metrica_seguimiento = ?'; // ¡CORRECCIÓN AQUÍ!
+                connection.query(queryLogroId, [tipo_metrica], (logroErr, logroResults) => {
+                    if (logroErr || logroResults.length === 0) {
+                        console.error('❌ Error al obtener el ID del logro para racha:', logroErr);
+                        return callback(logroErr || new Error('No se encontró el logro de racha.'));
+                    }
+
+                    const id_logro = logroResults[0].id_logro;
+                    const insertQuery = `
+                        INSERT INTO progreso_logros_usuario (id_usuario, id_logro, progreso_actual, fecha_ultima_actualizacion)
+                        VALUES (?, ?, ?, ?)
+                    `;
+                    connection.query(insertQuery, [id_usuario, id_logro, 1, today], (insertErr) => {
+                        if (insertErr) {
+                            console.error('❌ Error al insertar la racha inicial:', insertErr);
+                            return callback(insertErr);
+                        }
+                        console.log(`🎉 Racha inicial creada para el usuario ${id_usuario}: 1`);
+                        callback(null, { message: 'Racha inicial creada' });
+                    });
+                });
+            }
+        } else { 
+            // Lógica para otras métricas de logros
+            callback(null, { message: 'Métrica no relacionada con racha' });
+        }
+    });
+}
 
 // RUTA PARA OBTENER TODOS LOS DESAFÍOS ACTIVOS Y EL PROGRESO DEL USUARIO
 app.get('/desafios-progreso/:id_usuario', (req, res) => {
@@ -426,7 +426,6 @@ app.get('/api/logros/usuario/:id_usuario', (req, res) => {
     });
 });
 
-
 // RUTA DE PRUEBA (obtener todos los usuarios)
 app.get('/usuarios', (req, res) => {
     const sql = 'SELECT * FROM usuarios';
@@ -484,7 +483,6 @@ app.post('/usuarios', (req, res) => {
     });
 });
 
-
 // RUTA PARA INICIAR SESIÓN
 app.post('/login', (req, res) => {
     const { usuario, contrasena } = req.body;
@@ -505,33 +503,26 @@ app.post('/login', (req, res) => {
         const user = results[0];
 
         bcrypt.compare(contrasena, user.contraseña, (err, isMatch) => {
-            if (err) {
-                return res.status(500).json({ success: false, error: 'Error interno' });
-            }
+            // ...
             if (isMatch) {
-                // LLAMADA A LA FUNCIÓN DE DESAFÍOS AQUÍ
+                // El login ya no actualiza la racha.
+                // Puedes dejar la llamada a actualizarProgresoDesafios si tienes desafíos
+                // que se activan al inicio de sesión (aunque esto es redundante).
                 actualizarProgresoDesafios(user.id_usuario, 'inicio_sesion', {}, (desafiosErr) => {
                     if (desafiosErr) {
                         console.error('Error al actualizar desafíos después del login:', desafiosErr);
                     }
-                    // LLAMADA A LA FUNCIÓN DE LOGROS AQUÍ (para métricas de inicio de sesión, ej. racha)
-                    actualizarProgresoLogros(user.id_usuario, 'dias_consecutivos', 1, null, (logrosErr) => {
-                        if (logrosErr) {
-                            console.error('Error al actualizar logros después del login:', logrosErr);
-                        }
-                        return res.json({
-                            success: true,
-                            userId: user.id_usuario,
-                            tipo_ejercicio_preferido: user.tipo_ejercicio_preferido
-                        });
+                    return res.json({
+                        success: true,
+                        userId: user.id_usuario,
+                        tipo_ejercicio_preferido: user.tipo_ejercicio_preferido
                     });
                 });
-            } else {
-                return res.json({ success: false, error: 'Contraseña incorrecta' });
             }
         });
     });
 });
+
 
 // RUTA PARA OBTENER LOS DATOS DE UN USUARIO POR ID
 app.get('/usuarios/:id', (req, res) => {
@@ -649,77 +640,6 @@ app.get('/estadisticas/:id', (req, res) => {
     });
 });
 
-// RUTA PARA GUARDAR RESULTADOS DE EJERCICIOS
-app.post('/resultados', (req, res) => {
-    const { id_usuario, calificacion, tiempo_dedicado } = req.body;
-
-    if (!id_usuario || calificacion == null || tiempo_dedicado == null) {
-        return res.status(400).json({ mensaje: 'Faltan datos obligatorios (id_usuario, calificacion, tiempo_dedicado).' });
-    }
-
-    const sql = 'INSERT INTO resultados (id_usuario, calificacion, tiempo_dedicado) VALUES (?, ?, ?)';
-    connection.query(sql, [id_usuario, calificacion, tiempo_dedicado], (err, result) => {
-        if (err) {
-            console.error('Error al insertar resultado:', err);
-            return res.status(500).json({ mensaje: 'Error al guardar el resultado' });
-        }
-
-        // --- Lógica para actualizar DESAFIOS ---
-        actualizarProgresoDesafios(id_usuario, 'ejercicio_completado', {
-            calificacion: calificacion
-        }, (desafiosErr) => {
-            if (desafiosErr) {
-                console.error('Error al actualizar desafíos después de completar ejercicio:', desafiosErr);
-            }
-
-            // --- ¡LÓGICA PARA ACTUALIZAR LOGROS! ---
-            // Llama a actualizarProgresoLogros para cada métrica relevante
-            actualizarProgresoLogros(id_usuario, 'ejercicios_completados_total', 1, null, (logrosErr1) => {
-                if (logrosErr1) {
-                    console.error('Error al actualizar logro "ejercicios_completados_total":', logrosErr1);
-                }
-
-                // Logro: Excelencia Precisa (calificacion_90_plus)
-                actualizarProgresoLogros(id_usuario, 'calificacion_90_plus', 1, calificacion, (logrosErr2) => {
-                    if (logrosErr2) {
-                        console.error('Error al actualizar logro "calificacion_90_plus":', logrosErr2);
-                    }
-
-                    // Actualizar el progreso general del usuario (ya lo tienes)
-                    const updateSql = `
-                        UPDATE progreso_usuarios
-                        JOIN (
-                            SELECT
-                                id_usuario,
-                                COUNT(*) AS ejercicios_realizados,
-                                AVG(calificacion) AS puntaje_promedio,
-                                SUM(tiempo_dedicado) AS tiempo_total
-                            FROM resultados
-                            WHERE id_usuario = ?
-                            GROUP BY id_usuario
-                        ) AS r ON progreso_usuarios.id_usuario = r.id_usuario
-                        SET
-                            progreso_usuarios.ejercicios_realizados = r.ejercicios_realizados,
-                            progreso_usuarios.puntaje_promedio = ROUND(r.puntaje_promedio),
-                            progreso_usuarios.tiempo_total = r.tiempo_total,
-                            progreso_usuarios.fecha_ultima_actividad = NOW(),
-                            progreso_usuarios.progreso_general = LEAST(100, FLOOR((r.ejercicios_realizados / 50) * 100))
-                        WHERE progreso_usuarios.id_usuario = ?
-                    `; // Añadido WHERE para asegurar la actualización del usuario correcto
-
-                    connection.query(updateSql, [id_usuario, id_usuario], (err2) => {
-                        if (err2) {
-                            console.error('Error al actualizar progreso general:', err2);
-                            return res.status(500).json({ mensaje: 'Resultado guardado pero error en progreso general' });
-                        }
-                        return res.status(200).json({ mensaje: 'Resultado y progreso actualizados correctamente' });
-                    });
-                });
-            });
-        });
-    });
-});
-
 
 app.get('/progreso/:id_usuario', (req, res) => {
     const { id_usuario } = req.params;
@@ -810,7 +730,219 @@ app.post('/foro/calificar', (req, res) => {
     });
 });
 
+// ... (Tus importaciones y conexiones de la base de datos)
+
+// --- FUNCIÓN CENTRAL PARA ACTUALIZAR LA RACHA DEL USUARIO ---
+// ... (Tu función 'actualizarRacha' tal como la tenías)
+
+// --- FUNCIÓN CENTRAL DE ACTUALIZACIÓN DE PROGRESO DE DESAFÍOS ---
+// ... (Tu función 'actualizarProgresoDesafios' tal como la tenías)
+
+
+// =================================================================
+// RUTA PRINCIPAL DE RESULTADOS - UNIFICADA Y CORREGIDA
+// Esta ruta guarda el resultado, actualiza la racha y el progreso de desafíos
+// =================================================================
+app.post('/resultados', (req, res) => {
+    const { id_usuario, calificacion, tiempo_dedicado } = req.body;
+    if (!id_usuario || calificacion === undefined || tiempo_dedicado === undefined) {
+        return res.status(400).json({ success: false, message: 'Faltan campos obligatorios' });
+    }
+
+    const resultado = { id_usuario, calificacion, tiempo_dedicado, fecha_realizado: new Date() };
+    const insertQuery = 'INSERT INTO resultados SET ?';
+
+    // 1. Guardar el resultado del ejercicio
+    connection.query(insertQuery, resultado, (err, result) => {
+        if (err) {
+            console.error(' ❌  Error al guardar el resultado:', err);
+            return res.status(500).json({ success: false, message: 'Error en el servidor al guardar el resultado' });
+        }
+        console.log(' ✅  Resultado del ejercicio guardado correctamente.');
+
+        // 2. Actualizar la racha del usuario, esperando el callback
+        actualizarRacha(id_usuario, (rachaErr, rachaInfo) => {
+            if (rachaErr) {
+                console.error(' ❌  Error al actualizar la racha:', rachaErr);
+                // No detenemos el flujo, pero notificamos el error
+            }
+            console.log(' ✅  Racha procesada. Información de la racha:', rachaInfo);
+
+            // 3. Actualizar el progreso de los desafíos, esperando el callback
+            actualizarProgresoDesafios(id_usuario, 'ejercicio_completado', { calificacion }, (desafioErr) => {
+                if (desafioErr) {
+                    console.error(' ❌  Error al actualizar desafíos:', desafioErr);
+                    // No detenemos el flujo, pero notificamos el error
+                }
+                console.log(' ✅  Progreso de desafíos procesado.');
+
+                // 4. Enviar la respuesta FINAL al frontend con la información completa
+                const responseData = {
+                    success: true,
+                    message: 'Resultado, racha y desafíos actualizados correctamente',
+                    racha: rachaInfo,
+                };
+                res.status(200).json(responseData);
+            });
+        });
+    });
+});
+
+
+// DIJU/backend/index.js
+// ... (al final de tus rutas)
+
+// RUTA PARA OBTENER LA RACHA DE UN USUARIO
+app.get('/api/racha-usuario/:id_usuario', (req, res) => {
+    const { id_usuario } = req.params;
+
+    const query = `
+        SELECT dias_consecutivos, fecha_ultima_actualizacion
+        FROM racha_usuarios
+        WHERE id_usuario = ?
+    `;
+
+    connection.query(query, [id_usuario], (err, results) => {
+        if (err) {
+            console.error('❌ Error al obtener la racha del usuario:', err);
+            return res.status(500).json({ success: false, error: 'Error en la base de datos' });
+        }
+        if (results.length > 0) {
+            const racha = results[0];
+            const today = new Date();
+            const fechaUltimaActualizacion = new Date(racha.fecha_ultima_actualizacion);
+            const isTodayCompleted = fechaUltimaActualizacion.toDateString() === today.toDateString();
+            return res.json({
+                success: true,
+                racha: {
+                    dias_consecutivos: racha.dias_consecutivos,
+                    is_today_completed: isTodayCompleted
+                }
+            });
+        } else {
+            return res.json({ success: true, racha: null });
+        }
+    });
+});
+
+
+// DIJU/backend/index.js
+
+// NUEVA FUNCIÓN para actualizar la racha en la tabla dedicada
+function actualizarRachaUsuario(id_usuario, callback) {
+    // Obtenemos la fecha de hoy, sin la hora, para comparar solo el día
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Buscamos la racha existente para el usuario
+    const query = `
+        SELECT dias_consecutivos, fecha_ultima_actualizacion
+        FROM racha_usuarios
+        WHERE id_usuario = ?
+    `;
+
+    connection.query(query, [id_usuario], (err, results) => {
+        if (err) {
+            console.error('❌ Error al obtener la racha del usuario:', err);
+            return callback(err);
+        }
+
+        let nueva_racha = 1;
+        let updateQuery = '';
+        const updateValues = [];
+
+        if (results.length > 0) {
+            // Caso 1: El usuario ya tiene un registro de racha
+            const rachaExistente = results[0];
+            const fechaUltimaActualizacion = new Date(rachaExistente.fecha_ultima_actualizacion);
+            fechaUltimaActualizacion.setHours(0, 0, 0, 0);
+
+            // Si la racha ya se actualizó hoy, no hacemos nada
+            if (fechaUltimaActualizacion.getTime() === today.getTime()) {
+                console.log('⚠️ Racha ya actualizada hoy. No se hicieron cambios.');
+                return callback(null, { message: 'No se necesita actualizar la racha' });
+            }
+
+            // Verificamos si la última actualización fue ayer
+            const yesterday = new Date(today);
+            yesterday.setDate(today.getDate() - 1);
+
+            if (fechaUltimaActualizacion.getTime() === yesterday.getTime()) {
+                // Si fue ayer, la racha continúa
+                nueva_racha = rachaExistente.dias_consecutivos + 1;
+                console.log(`👍 Racha continuada. Nueva racha para el usuario ${id_usuario}: ${nueva_racha}`);
+            } else {
+                // Si no fue ayer, la racha se reinicia
+                console.log(`👎 Racha reiniciada. Nueva racha para el usuario ${id_usuario}: 1`);
+            }
+
+            // Preparamos la consulta para actualizar la racha
+            updateQuery = `
+                UPDATE racha_usuarios
+                SET dias_consecutivos = ?, fecha_ultima_actualizacion = ?
+                WHERE id_usuario = ?
+            `;
+            updateValues.push(nueva_racha, today, id_usuario);
+
+        } else {
+            // Caso 2: El usuario no tiene un registro de racha. Es la primera vez.
+            console.log(`🎉 Racha inicial creada para el usuario ${id_usuario}: 1`);
+            updateQuery = `
+                INSERT INTO racha_usuarios (id_usuario, dias_consecutivos, fecha_ultima_actualizacion)
+                VALUES (?, ?, ?)
+            `;
+            updateValues.push(id_usuario, 1, today);
+        }
+
+        // Ejecutamos la consulta (INSERT o UPDATE)
+        connection.query(updateQuery, updateValues, (updateErr) => {
+            if (updateErr) {
+                console.error('❌ Error al actualizar/crear la racha:', updateErr);
+                return callback(updateErr);
+            }
+            console.log('✅ Racha actualizada en la base de datos con éxito.');
+            callback(null, { message: 'Racha actualizada' });
+        });
+    });
+}
+
+
+// DIJU/backend/index.js
+// ... (al final de tus rutas)
+
+// NUEVA RUTA: Actualiza la racha cuando un ejercicio es completado
+app.post('/api/ejercicio-completado', (req, res) => {
+    const { userId, tipoEjercicio } = req.body;
+
+    if (!userId) {
+        return res.status(400).json({ success: false, message: 'ID de usuario es requerido.' });
+    }
+
+    // Llama a la nueva función para actualizar la racha en su propia tabla
+    actualizarRachaUsuario(userId, (rachaErr) => {
+        if (rachaErr) {
+            console.error('Error al actualizar la racha después del ejercicio:', rachaErr);
+        }
+        
+        // Aquí puedes seguir llamando a la función de logros si necesitas actualizar otros logros
+        // Por ejemplo, para el total de ejercicios completados
+        actualizarProgresoLogros(userId, 'ejercicios_completados_total', 1, null, (logrosErr1) => {
+             if (logrosErr1) {
+                console.error('Error al actualizar "ejercicios_completados_total":', logrosErr1);
+             }
+        });
+        
+        // El cliente siempre recibe una respuesta exitosa si la racha se procesó
+        res.json({ success: true, message: 'Progreso de ejercicio y racha actualizados.' });
+    });
+});
+
+
+
+
+
 // Iniciar servidor
 app.listen(PORT, () => {
     console.log(`🚀 Servidor backend en http://localhost:${PORT}`);
 });
+

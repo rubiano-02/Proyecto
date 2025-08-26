@@ -8,14 +8,11 @@ import { Subscription, interval } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 
-// --- ¡NUEVAS IMPORTACIONES PARA LA RACHA! ---
-import { StreakService } from '../../../servicios/streak.service'; // Importa el servicio de racha
-import { StreakComponent } from '../../shared/streak/streak.component'; // Importa el componente de racha
-// ------------------------------------------
+// Ya no necesitamos importar StreakService en este componente
+import { StreakComponent } from '../../shared/streak/streak.component'; // Importamos el componente de racha
 
 @Component({
-  selector: 'app-principal', // Nota: El selector es 'app-principal' aquí, pero el nombre de la clase es PrinLecturaComponent.
-                            // Asegúrate de que esto sea consistente con cómo lo usas en tu app-routing.module.ts.
+  selector: 'app-principal',
   standalone: true,
   templateUrl: './prin-lectura.component.html',
   styleUrls: ['./prin-lectura.component.css'],
@@ -23,7 +20,7 @@ import { StreakComponent } from '../../shared/streak/streak.component'; // Impor
     CommonModule,
     TranslateModule,
     RouterModule,
-    StreakComponent // <-- ¡AÑADE ESTO AQUÍ para que el componente de racha funcione!
+    StreakComponent
   ]
 })
 export class PrinLecturaComponent implements OnInit, OnDestroy {
@@ -48,7 +45,7 @@ export class PrinLecturaComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private router: Router,
     private resultadosService: ResultadosService,
-    private streakService: StreakService // <-- ¡INYECTA EL SERVICIO DE RACHA AQUÍ!
+    // Ya no inyectamos StreakService aquí
   ) { }
 
   ngOnInit(): void {
@@ -160,16 +157,7 @@ export class PrinLecturaComponent implements OnInit, OnDestroy {
     }
   }
 
-  // --- NUEVO MÉTODO PARA LLAMAR AL SERVICIO DE RACHA ---
-  // Este método debe ser invocado cuando el usuario COMPLETA un ejercicio con éxito.
-  // Es crucial que lo llames desde la lógica que confirma la finalización de una actividad.
-  // Por ejemplo, al enviar una respuesta correcta final, o al terminar una lección.
-  public completarEjercicioYActualizarRacha(): void {
-    console.log('Detectada finalización de ejercicio. Actualizando racha...');
-    this.streakService.completeActivity(); // Esto actualiza la racha en el servicio
-    // El StreakComponent se encargará automáticamente de reaccionar y animarse.
-  }
-
-  // Puedes añadir un botón temporal en tu HTML para probar esta función:
-  // <button (click)="completarEjercicioYActualizarRacha()">Completar Ejercicio</button>
+  // La función `completarEjercicioYActualizarRacha()` ha sido eliminada.
+  // La lógica para guardar el resultado y actualizar la racha ahora se maneja
+  // en el servicio de resultados.
 }
