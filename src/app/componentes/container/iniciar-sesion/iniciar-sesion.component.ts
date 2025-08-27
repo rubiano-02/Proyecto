@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import AOS from 'aos';
+import { StreakService } from '../../../servicios/streak.service'; // Importa el StreakService
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -13,7 +14,8 @@ export class IniciarSesionComponent implements OnInit {
   email: string = '';
   contrasena: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  // Inyecta el StreakService en el constructor
+  constructor(private http: HttpClient, private router: Router, private streakService: StreakService) { }
 
   ngOnInit(): void {
     AOS.init({
@@ -35,6 +37,9 @@ export class IniciarSesionComponent implements OnInit {
           if (response.userId) {
             localStorage.setItem('user_id', response.userId);
             console.log('ID de usuario logueado guardado en localStorage:', response.userId);
+
+            // Llama al StreakService con el ID del usuario para obtener la racha
+            this.streakService.getStreak(response.userId);
           } else {
             console.warn('Backend no devolvió userId en la respuesta de login.');
           }

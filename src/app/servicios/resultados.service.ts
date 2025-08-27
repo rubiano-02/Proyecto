@@ -14,6 +14,13 @@ export class ResultadosService {
   // Inyectamos StreakService en el constructor
   constructor(private http: HttpClient, private streakService: StreakService) { }
 
+  /**
+   * Guarda el resultado de una actividad en el backend y notifica al StreakService.
+   * @param id_usuario El ID del usuario.
+   * @param calificacion La calificación obtenida en la actividad.
+   * @param tiempo_dedicado El tiempo dedicado en la actividad.
+   * @returns Un Observable con la respuesta del backend.
+   */
   guardarResultado(id_usuario: number, calificacion: number, tiempo_dedicado: number): Observable<any> {
     const resultado = {
       id_usuario,
@@ -29,16 +36,21 @@ export class ResultadosService {
         tap(response => {
           if (response && response.racha) {
             console.log('✅ Resultado guardado correctamente. Racha recibida:', response.racha);
-            // Llamamos al nuevo método 'notifyActivityCompleted'
-            // para notificar al StreakService y pasarle los datos de la racha
+            // Llamamos al método 'notifyActivityCompleted' del StreakService
+            // para pasarle los datos de la racha
             this.streakService.notifyActivityCompleted(response.racha.dias_consecutivos, response.racha.is_today_completed);
           } else {
-             console.log('✅ Resultado guardado, pero no se recibió la racha.');
+            console.log('✅ Resultado guardado, pero no se recibió la racha.');
           }
         })
       );
   }
 
+  /**
+   * Obtiene el progreso del usuario desde el backend.
+   * @param id_usuario El ID del usuario.
+   * @returns Un Observable con el progreso del usuario.
+   */
   getProgresoUsuario(id_usuario: number): Observable<any> {
     return this.http.get<any>(`http://localhost:3000/progreso/${id_usuario}`);
   }

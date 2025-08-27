@@ -225,7 +225,7 @@ body {
     display: flex;
     width: calc(100% - 40px);
     flex-grow: 1;
-    padding-top: 20px;
+    padding-top: px;
     position: relative;
     z-index: 1;
 }
@@ -340,7 +340,7 @@ body {
 }
 
 .icono-logro {
-    width: 35px; /* Tamaño del icono */
+    width: 60px; /* Tamaño del icono */
     height: auto;
     flex-shrink: 0; /* Evita que el icono se encoja */
     margin-top: 2px; /* Pequeño ajuste vertical */

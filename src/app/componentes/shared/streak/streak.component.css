@@ -9,6 +9,7 @@
   margin-top: 10px;
   justify-content: center;
   min-width: 220px;
+  /* Eliminamos el gap ya que no es suficiente */
 }
 
 /* Ícono de la racha */
@@ -23,14 +24,19 @@
 .streak-text {
   font-size: 3em;
   font-weight: bold;
-  color: #b5b5b5; /* Color gris por defecto */
+  color: #b5b5b5;
+  /* Color gris por defecto */
   white-space: nowrap;
-  transition: color 0.3s ease-in-out; /* Transición para un cambio de color suave */
+  transition: color 0.3s ease-in-out;
+  /* Transición para un cambio de color suave */
+  /* Añadimos un margen izquierdo negativo para acercar el texto al icono */
+  margin-left: -15px;
 }
 
 /* Clase para el estado activo de la racha */
 .streak-text.active {
-  color: #ffa500; /* Color naranja que coincide con el ícono */
+  color: #ffa500;
+  /* Color naranja que coincide con el ícono */
 }
 
 /* Animación para cuando la racha se "enciende" */
@@ -43,10 +49,12 @@
     transform: scale(0.8);
     opacity: 0.5;
   }
+
   50% {
     transform: scale(1.2);
     opacity: 1;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;

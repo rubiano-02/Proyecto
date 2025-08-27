@@ -43,8 +43,12 @@ export class StreakComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   * Determina si la racha debe mostrarse como 'activa' o 'encendida'.
+   * Esto es solo si hay una racha y el usuario ya ha completado la actividad de hoy.
+   */
   isStreakActive(): boolean {
-    return this.currentStreak > 0;
+    return this.currentStreak > 0 && this.isTodayCompleted;
   }
 
   private triggerStreakAnimation(): void {
