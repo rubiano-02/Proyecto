@@ -1,0 +1,261 @@
+[33mcommit ebc0734dc0b2179bcb8d69e8459ae5a478ce8155[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Wed Aug 27 21:55:59 2025 -0500
+
+    Imagenes Ejer-Mate
+
+[33mcommit 706bef60cf0ad8739d1d02ca6184556a010b495d[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Wed Aug 27 12:18:30 2025 -0500
+
+    Arreglo Racha V2
+
+[33mcommit 7c82b7451a6ce3a1a12392c8e0fd2645ca8ca914[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Tue Aug 26 18:48:25 2025 -0500
+
+    Borrar Boton De Simulación (Racha)
+
+[33mcommit 3b8123674615c0d3bdab504e5db9b363d03b31f3[m
+Merge: 8f03531 51c5f76
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Tue Aug 26 17:49:37 2025 -0500
+
+    Merge branch 'main' of https://github.com/rubiano-02/Proyecto
+
+[33mcommit 8f035312f1682a248ad9fb84acb11f54d61edde0[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Tue Aug 26 17:43:03 2025 -0500
+
+    Arreglo Racha
+
+[33mcommit 51c5f7608114efcad1a58c2239efdfaa53e00dc1[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Mon Aug 18 20:39:14 2025 -0500
+
+    Arreglo principal
+
+[33mcommit 98543383cffb21fd1387e378cc38c475b6ccb354[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Wed Aug 13 12:42:08 2025 -0500
+
+    Arreglos finales
+
+[33mcommit 80678858b63010afc7098c525e0886c5fc0fd663[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Wed Jul 30 23:25:37 2025 -0500
+
+    Ajustes Ejercicios
+
+[33mcommit 5df748922d1383b741c08c87394c4950cf4f723c[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Thu Jul 17 14:07:13 2025 -0500
+
+    Racha
+
+[33mcommit b9b405e7b3d7ba4418d56162e9cb1b42b6ebc7f1[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Wed Jul 16 14:45:21 2025 -0500
+
+    Arreglo Animaciones
+
+[33mcommit ec0a832569b18d75916b113c1a5345851158d060[m
+Merge: 67be148 f0caebd
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Thu Jul 10 14:38:47 2025 -0500
+
+    Merge branch 'main' of https://github.com/rubiano-02/Proyecto
+
+[33mcommit 67be148f31acae97af3a9bae992998eab3834100[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Thu Jul 10 14:37:18 2025 -0500
+
+    Arreglo Foro V2
+
+[33mcommit f0caebdbfd4eae9ae51eef1e616bb006009884f1[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Thu Jul 10 12:26:10 2025 -0500
+
+    Arreglo Componente Prin - Lectura
+
+[33mcommit d3062adb615fd3cb7fee31aecb62f90b69edd975[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Wed Jul 9 14:04:15 2025 -0500
+
+    Arreglos Desafios y Logros
+
+[33mcommit f93690f175ab0e33c74789da4deab58ef5a587e8[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Wed Jul 9 11:32:30 2025 -0500
+
+    Desafios y Logros
+
+[33mcommit 71c4b01ffda6e84754212bbe0de1912c3051b279[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Wed Jul 9 00:25:10 2025 -0500
+
+    Finalizacion Ejercicios
+
+[33mcommit 24e09ccfc7b3320049d001f89655cc9f1c703c77[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Tue Jul 8 14:53:43 2025 -0500
+
+    Ejercicios Lecturas
+
+[33mcommit 856d545ae4d6e194025347a8d202c289fa680984[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Sun Jul 6 01:37:25 2025 -0500
+
+    Modo oscuro y traduccion
+
+[33mcommit 8eee6fdaa8a4049d02135e6531244d14597140e8[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Fri Jul 4 22:44:39 2025 -0500
+
+    Arreglo Preguntas Frecuentes
+
+[33mcommit 08ae46b125c464a66fda7a0e79f676745e9068a3[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Fri Jul 4 00:47:49 2025 -0500
+
+    Arreglo Calificanos
+
+[33mcommit 42e28a905bcc40e6a474d5feca617fd8aff0a999[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Fri Jul 4 00:29:12 2025 -0500
+
+    Arreglo Foro
+
+[33mcommit 5eac4b36b028bab0f598a09b9bc1e5d05a28e8ed[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Thu Jul 3 00:07:36 2025 -0500
+
+    Ejercicios Matematicas V2
+
+[33mcommit 6516d7121d113fcee21585d5ea9366d6806db449[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Mon Jun 23 20:33:32 2025 -0500
+
+    Ejercicios matematicas 1-5
+
+[33mcommit 5aaa0e2fe75f5026f1a2ec477b199cb13b7554c4[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Wed Jun 18 16:30:21 2025 -0500
+
+    Arreglo direcciones
+
+[33mcommit 7ae7b7531a5d5a1d8370aec7b6cb7eeec203b003[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Sun Jun 15 19:35:41 2025 -0500
+
+    Cambios Eleccion
+
+[33mcommit 2dcf4e569db4af564f5c40dae74de2a50b7401da[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Sun Jun 15 14:42:46 2025 -0500
+
+    Cambios eleccion V2
+
+[33mcommit 0a1858f3c8473cf0c4a0df080a7512b959111ac3[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Sun Jun 15 14:39:54 2025 -0500
+
+    Cambios eleccion
+
+[33mcommit 5b40d3a55ba18257a77e2de4df6dfc2df57c99e3[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Sun Jun 15 14:18:39 2025 -0500
+
+    Arreglo Perfil
+
+[33mcommit 73c8c3b8c2908e9723b240bf438fe2bac5fc0cfd[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Sat Jun 14 22:07:40 2025 -0500
+
+    Cambio Imagenes V2
+
+[33mcommit 1fbacfee3a501cd9bb7633a6d6ad5591f8597a77[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Sat Jun 14 21:53:46 2025 -0500
+
+    Cambio Imagenes
+
+[33mcommit 2aaf09827169ee400cecfecda9560675c4609573[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Sat Jun 14 21:43:00 2025 -0500
+
+    gitignore cambio
+
+[33mcommit c8990e6c2fa27136a41317b3ab5b10a673d5ea31[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Sat Jun 14 21:34:16 2025 -0500
+
+    Cambios Estadisticas
+
+[33mcommit 71dca929107eb072970912dc61deee643801334f[m
+Merge: 1d6de97 084f8a5
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Thu Jun 12 12:39:59 2025 -0500
+
+    Merge branch 'main' of https://github.com/rubiano-02/Proyecto
+
+[33mcommit 1d6de97e9bc997a745084f465754e8e62739b223[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Thu Jun 12 12:38:50 2025 -0500
+
+    Componente lectura
+
+[33mcommit 084f8a5dbd8bdc5cf76915ad0a0dabe38cdbfe34[m
+Merge: 44bbb07 efdb1c7
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Thu Jun 12 12:30:03 2025 -0500
+
+    Merge branch 'main' of https://github.com/rubiano-02/Proyecto
+
+[33mcommit 44bbb075ed521126e3f2cc53dd667ea1c02f16d3[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Thu Jun 12 12:26:16 2025 -0500
+
+    Cambios Perfil
+
+[33mcommit efdb1c7ee5aa05c8b5d9683486f0a63830b46ca6[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Wed Jun 11 21:52:18 2025 -0500
+
+    Guardando cambios antes del pull
+
+[33mcommit 4c820863a1a25231e188d860f5a5e797109a3a4c[m
+Author: Dilemolar <Dilemolar15@gmail.com>
+Date:   Wed Jun 11 20:16:44 2025 -0500
+
+    Arreglo Inicio De Sesión
+
+[33mcommit 299c2312c3c86f19071f0cdc754875e5066afa34[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Wed Jun 11 12:21:22 2025 -0500
+
+    Actualización del Proyecto
+
+[33mcommit 1979e4bc4805a8eb4996515dbf564778dc8e323b[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Sun Jun 8 11:50:40 2025 -0500
+
+    Actualización importante del proyecto Angular: componentes y archivos nuevos
+
+[33mcommit 9dd4b24d45b0811bff451fb2d117eb9a2cca7624[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Thu May 22 14:48:38 2025 -0500
+
+    cambios img
+
+[33mcommit 6e422f93f82777da9bfd779acb81d4f965901e54[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Wed May 21 11:55:41 2025 -0500
+
+    hola
+
+[33mcommit 55d8198cc5f170efda2e60dce3946c9276fa0935[m
+Author: rubiano-02 <ninoj6145@gmail.com>
+Date:   Wed May 14 14:14:49 2025 -0500
+
+    initial commit
